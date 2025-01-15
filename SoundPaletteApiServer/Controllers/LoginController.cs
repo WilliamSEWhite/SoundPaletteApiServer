@@ -13,15 +13,23 @@ namespace SoundPaletteApiServer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LoginUser([FromQuery] string userName, [FromQuery] string password)
+        public async Task<IActionResult> TestLogin()
         {
             return Ok();
         }
 
-        [HttpGet("register")]
-        public async Task<IActionResult> RegisterUser([FromQuery] string userName, [FromQuery] string password)
+        [HttpGet("login-user")]
+        public async Task<IActionResult> LoginUser([FromQuery] string userName, [FromQuery] string password)
         {
-            return Ok();
+            var user = await loginFacade.LoginUser(userName, password);
+            return Ok(user);
+        }
+
+        [HttpGet("register")]
+        public async Task<IActionResult> RegisterUser([FromQuery] string username, [FromQuery] string password)
+        {
+            var user = await loginFacade.RegisterUser(username, password);
+            return Ok(user);
         }
     }
 }
