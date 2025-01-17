@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using Serilog;
 using SoundPaletteApiServer.Facade;
 using SoundPaletteApiServer.DbHelpers;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace SoundPaletteApiServer
 {
@@ -58,15 +59,6 @@ namespace SoundPaletteApiServer
                 options.EnableForHttps = true;
                 options.Providers.Add<GzipCompressionProvider>();
             });
-
-            // allow files larger than 30MB to be uploaded for IIS 
-            // for ISSExpress set <requestLimits maxAllowedContentLength="524288000"/>
-            // in "web.config". It may work for both browsers!
-            services.Configure<IISServerOptions>(options =>
-            {
-                options.MaxRequestBodySize = int.MaxValue;
-            });
-
             services.Configure<FormOptions>(formOptions =>
             {
                 formOptions.MultipartBodyLengthLimit = int.MaxValue;

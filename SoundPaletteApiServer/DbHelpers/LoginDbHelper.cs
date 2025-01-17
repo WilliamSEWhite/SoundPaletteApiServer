@@ -26,18 +26,18 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task<UserModel> RegisterUser(string username, string password)
         {
-            //var user = await SPContext.tUsers.Where(o => o.Username == username).FirstOrDefaultAsync();
-            //if(user == null)
-            //{
+            var user = await SPContext.tUsers.Where(o => o.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+            {
                 var newUser = new tUser(username, password);
                 await SPContext.tUsers.AddAsync(newUser);
                 await SPContext.SaveChangesAsync();
                 return new UserModel(username, password);
-            //}
-            //else
-            //{
-            //    return null;
-            //}
+        }
+            else
+            {
+                return null;
+            }
         }
     }
 }

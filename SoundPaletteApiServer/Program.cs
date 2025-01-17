@@ -33,7 +33,7 @@ namespace SoundPaletteApiServer
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseIIS();
-                });
+                    .UseKestrel();
+                    });
     }
 }

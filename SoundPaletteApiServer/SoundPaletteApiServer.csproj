@@ -6,6 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <PublishAot>false</PublishAot>
+    <OutputType>WinExe</OutputType>
+    <AspNetCoreHostingModel>OutOfProcess
+      </AspNetCoreHostingModel>
   </PropertyGroup>
 
   <ItemGroup>
