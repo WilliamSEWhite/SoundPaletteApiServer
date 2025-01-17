@@ -3,7 +3,7 @@ using SoundPaletteApiServer.Models;
 
 namespace SoundPaletteApiServer.Facade
 {
-    public class LoginFacade
+    public class LoginFacade : FacadeBase
     {
         private readonly LoginDbHelper loginDbHelper;
 
