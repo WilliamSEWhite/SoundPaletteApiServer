@@ -1,17 +1,10 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:14509",
-      "sslPort": 0
-    }
-  },
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "Kestrel": {
+      "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:14509",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
