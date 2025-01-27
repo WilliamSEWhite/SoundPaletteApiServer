@@ -34,6 +34,6 @@ namespace SoundPaletteApiServer
                 {
                     webBuilder.UseStartup<Startup>()
                     .UseKestrel();
-                    });
+                });
     }
 }

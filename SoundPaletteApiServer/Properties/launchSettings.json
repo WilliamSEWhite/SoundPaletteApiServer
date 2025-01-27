@@ -1,11 +1,14 @@
 {
-  {
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
     "Kestrel": {
-      "Endpoints": {
-        "MyHttpEndpoint": {
-          "Url": "http://localhost:14509"
-        }
-      }
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:14509",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "nativeDebugging": true
     }
   }
 }
