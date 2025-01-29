@@ -70,6 +70,9 @@ namespace SoundPaletteApiServer
 
             services.AddScoped<LoginFacade>();
             services.AddScoped<LoginDbHelper>();
+            services.AddScoped<UserFacade>();
+            services.AddScoped<UserDbHelper>();
+
 
         }
 
