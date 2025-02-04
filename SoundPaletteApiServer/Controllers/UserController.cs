@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoundPaletteApiServer.Facade;
+using SoundPaletteApiServer.Models;
 
 namespace SoundPaletteApiServer.Controllers
 {
@@ -17,6 +18,12 @@ namespace SoundPaletteApiServer.Controllers
         {
             var user = await userFacade.getUser(id);
             return Ok(user);
+        }
+
+        [HttpPost("update-user-info")]
+        public async Task<IActionResult> UpdateUserInfo([FromBody] UserInfoModel userInfo)
+        {
+            return Ok(await userFacade.UpdateUserInfo(userInfo));
         }
     }
 }

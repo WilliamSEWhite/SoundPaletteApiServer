@@ -25,7 +25,7 @@ namespace SoundPaletteApiServer.DbHelpers
             var user = await Context.tUsers.Where(o => o.Username == username).FirstOrDefaultAsync();
             if (user.Password == password)
             {
-                return new UserModel(user.Id, user.Username, user.Password);
+                return new UserModel(user.UserId, user.Username, user.Password);
             }
             else return null;
         }
@@ -42,7 +42,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 Context.tUsers.Add(newUser);
                 await Context.SaveChangesAsync();
                 user = await Context.tUsers.Where(o => o.Username == username).FirstOrDefaultAsync();
-                return new UserModel(user.Id, user.Username, user.Password);
+                return new UserModel(user.UserId, user.Username, user.Password);
             }
             else
             {
