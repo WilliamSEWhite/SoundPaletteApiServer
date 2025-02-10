@@ -20,6 +20,7 @@ namespace SoundPaletteApiServer.DbHelpers
             var user = await Context.tUsers.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserModel(user.UserId, user.Username, user.Password);
         }
+
         public async Task<UserInfoModel> UpdateUserInfo(UserInfoModel userInfo)
         {
             var existingInfo = await Context.tUserInfos.Where(o => o.UserId == userInfo.UserId).FirstOrDefaultAsync();

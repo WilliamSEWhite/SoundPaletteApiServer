@@ -1,4 +1,6 @@
-﻿namespace SoundPaletteApiServer.Models
+﻿using SoundPaletteApiServer.DataModels;
+
+namespace SoundPaletteApiServer.Models
 {
     public class LocationModel
     {
@@ -10,6 +12,10 @@
             LocationId = locationId;
             LocationName = locationName;
         }
-
+        public LocationModel(tLocation location)
+        {
+            LocationId = location.LocationId;
+            LocationName = location.LocationName;
+        }
     }
 }

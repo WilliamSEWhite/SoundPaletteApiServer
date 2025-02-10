@@ -139,6 +139,19 @@ CREATE NONCLUSTERED INDEX [IX_tLocations_LocationName] ON [dbo].[tLocations]
 	[LocationName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+INSERT [dbo].[tLocations]
+([LocationName])
+VALUES
+	('Canada'),
+	('United States'),
+	('Mexico'),
+	('United Kingdom'),
+	('France'),
+	('Japan'),
+	('Brazil'),
+	('Spain'),
+	('India')
+
 
 CREATE TABLE [dbo].[tUserInfos](
 	[UserInfoId] int IDENTITY(1,1) NOT NULL,

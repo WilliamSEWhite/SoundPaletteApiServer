@@ -16,7 +16,7 @@ namespace SoundPaletteApiServer.Controllers
         [HttpGet("get-user/{id}")]
         public async Task<IActionResult> LoginUser(int id)
         {
-            var user = await userFacade.getUser(id);
+            var user = await userFacade.GetUser(id);
             return Ok(user);
         }
 
