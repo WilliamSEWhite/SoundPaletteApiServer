@@ -3,7 +3,7 @@ using SoundPaletteApiServer.Facade;
 
 namespace SoundPaletteApiServer.Controllers
 {
-    public class LocationController : ControllerBase
+    public class LocationController : BaseApiController
     {
         private readonly LocationFacade locationFacade;
 

@@ -37,11 +37,11 @@ namespace SoundPaletteApiServer.Data
                     .HasAnnotation("ProductVersion", "0.0.1")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
                     .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-            modelBuilder.Entity<tUser>()
-                .HasOne(u => u.UserProfile)
-                .WithOne(p => p.User)
-                .HasForeignKey<tUserProfile>(p => p.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                modelBuilder.Entity<tUser>()
+                    .HasOne(u => u.UserProfile)
+                    .WithOne(p => p.User)
+                    .HasForeignKey<tUserProfile>(p => p.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
                 modelBuilder.Entity<tUser>().ToTable("tUsers");
                 modelBuilder.Entity<tTag>().ToTable("tTags");
                 modelBuilder.Entity<tLocation>().ToTable("tLocations");
