@@ -31,5 +31,7 @@ namespace SoundPaletteApiServer.DataModels
             CreatedDate = createdDate;
             PublishDate = publishDate;
         }
+
+        public tPost() { }
     }
 }

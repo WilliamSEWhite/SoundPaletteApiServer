@@ -10,7 +10,6 @@ namespace SoundPaletteApiServer.DataModels
         public tUser User { get; } = null!;
         public string Bio { get; set; }
         public string Picture { get; set; }
-
         public tUserProfile(int userId, string bio, string picture)
         {
             UserId = userId;

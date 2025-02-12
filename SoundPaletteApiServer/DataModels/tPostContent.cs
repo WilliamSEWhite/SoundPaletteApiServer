@@ -17,5 +17,7 @@ namespace SoundPaletteApiServer.DataModels
             PostContent = postContent;
             S3Token = s3Token;
         }
+
+        public tPostContent() { }
     }
 }
