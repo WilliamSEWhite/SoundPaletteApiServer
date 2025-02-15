@@ -6,9 +6,11 @@ namespace SoundPaletteApiServer.Models
     {
         public int UserInfoId { get; set; }
         public int UserId { get; set; }
-        public UserModel User { get; } = null!;
+        //public UserModel User { get; } = null!;
+        public UserModel? User { get; set; }
         //public int LocationId { get; set; }
-        public LocationModel Location { get; } = null!;
+        //public LocationModel Location { get; } = null!;
+        public LocationModel? Location { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public DateTime DOB { get; set; }
@@ -34,5 +36,7 @@ namespace SoundPaletteApiServer.Models
             DOB = userInfo.DOB;
             DateCreated = userInfo.DateCreated;
         }
+
+        public UserInfoModel() { }
     }
 }

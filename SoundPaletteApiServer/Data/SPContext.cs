@@ -46,7 +46,7 @@ namespace SoundPaletteApiServer.Data
                 modelBuilder.Entity<tTag>().ToTable("tTags");
                 modelBuilder.Entity<tLocation>().ToTable("tLocations");
                 modelBuilder.Entity<tUserTag>().ToTable("tUserTags");
-                modelBuilder.Entity<tUserInfo>().ToTable("tUserInfos");
+                modelBuilder.Entity<tUserInfo>().ToTable("tUserInfo");
                 modelBuilder.Entity<tUserProfile>().ToTable("tUserProfile");
                 modelBuilder.Entity<tPostType>().ToTable("tPostTypes");
                 modelBuilder.Entity<tPost>().ToTable("tPosts");
