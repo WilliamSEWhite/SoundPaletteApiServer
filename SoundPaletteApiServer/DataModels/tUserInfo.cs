@@ -7,7 +7,7 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int UserInfoId { get; set; }
         public int UserId { get; set; }
-        public tUser User { get; } = null!;
+        public tUser User { get; set; } = null!;
         public int? LocationId { get; set; }
         public tLocation Location { get; } = null!;
         public string Email { get; set; }

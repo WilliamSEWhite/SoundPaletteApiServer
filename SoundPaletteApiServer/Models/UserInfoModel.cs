@@ -8,7 +8,7 @@ namespace SoundPaletteApiServer.Models
         public int UserId { get; set; }
         //public UserModel User { get; } = null!;
         public UserModel? User { get; set; }
-        //public int LocationId { get; set; }
+        public int LocationId { get; set; }
         //public LocationModel Location { get; } = null!;
         public LocationModel? Location { get; set; }
         public string Email { get; set; }
@@ -16,11 +16,11 @@ namespace SoundPaletteApiServer.Models
         public DateTime DOB { get; set; }
         public DateTime DateCreated { get; set; }
 
-        public UserInfoModel(int userInfoId, int userId, string email, string phone, DateTime dOB, DateTime dateCreated)
+        public UserInfoModel(int userInfoId, int userId, int locationId, string email, string phone, DateTime dOB, DateTime dateCreated)
         {
             UserInfoId = userInfoId;
             UserId = userId;
-            //LocationId = locationId;
+            LocationId = locationId;
             Email = email;
             Phone = phone;
             DOB = dOB;
@@ -30,7 +30,7 @@ namespace SoundPaletteApiServer.Models
         {
             UserInfoId = userInfo.UserInfoId;
             UserId = userInfo.UserId;
-            //LocationId = locationId;
+            LocationId = userInfo.LocationId ?? default(int);
             Email = userInfo.Email;
             Phone = userInfo.Phone;
             DOB = userInfo.DOB;
