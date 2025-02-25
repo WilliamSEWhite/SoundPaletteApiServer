@@ -1,17 +1,36 @@
-﻿namespace SoundPaletteApiServer.Models
+﻿using SoundPaletteApiServer.DataModels;
+
+namespace SoundPaletteApiServer.Models
 {
     public class UserModel
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public UserModel(int id, string username, string password)
+        public UserInfoModel UserInfo { get; set; }
+
+        public UserModel(int userId, string username, string password, UserInfoModel userInfo)
         {
-            Id = id;
+            UserId = userId;
             Username = username;
             Password = password;
+            UserInfo = userInfo;
         }
-
+        public UserModel(int userId, string username, string password)
+        {
+            UserId = userId;
+            Username = username;
+            Password = password;
+            UserInfo = null;
+        }
+        public UserModel(tUser user)
+        {
+            UserId = user.UserId;
+            Username = user.Username;
+            Password = user.Password;
+            UserInfo = new UserInfoModel(user.tUserInfo);
+        }
     }
-}
+    }
+

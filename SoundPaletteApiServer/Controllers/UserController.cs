@@ -20,10 +20,10 @@ namespace SoundPaletteApiServer.Controllers
             return Ok(user);
         }
 
-        [HttpPost("update-user-info")]
-        public async Task<IActionResult> UpdateUserInfo([FromBody] UserInfoModel userInfo)
+        [HttpPost("update-user-info/{id}")]
+        public async Task<IActionResult> UpdateUserInfo(int id, [FromBody] UserInfoModel userInfo)
         {
-            return Ok(await userFacade.UpdateUserInfo(userInfo));
+            return Ok(await userFacade.UpdateUserInfo(id, userInfo));
         }
     }
 }

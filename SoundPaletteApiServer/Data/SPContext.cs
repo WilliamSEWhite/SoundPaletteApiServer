@@ -37,19 +37,27 @@ namespace SoundPaletteApiServer.Data
                     .HasAnnotation("ProductVersion", "0.0.1")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
                     .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-                modelBuilder.Entity<tUser>()
-                    .HasOne(u => u.UserProfile)
-                    .WithOne(p => p.User)
+            modelBuilder.Entity<tUser>()
+                .HasOne(u => u.tUserInfo)
+                .WithOne(p => p.tUser)
+                .HasForeignKey<tUserInfo>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tUser>()
+                    .HasOne(u => u.tUserProfile)
+                    .WithOne(p => p.tUser)
                     .HasForeignKey<tUserProfile>(p => p.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
                 modelBuilder.Entity<tUser>().ToTable("tUsers");
-                modelBuilder.Entity<tTag>().ToTable("tTags");
+            modelBuilder.Entity<tUserInfo>().ToTable("tUserInfo");
+            modelBuilder.Entity<tUserProfile>().ToTable("tUserProfile");
+
+
+            modelBuilder.Entity<tTag>().ToTable("tTags");
                 modelBuilder.Entity<tLocation>().ToTable("tLocations");
                 modelBuilder.Entity<tUserTag>().ToTable("tUserTags");
-                modelBuilder.Entity<tUserInfo>().ToTable("tUserInfo");
-                modelBuilder.Entity<tUserProfile>().ToTable("tUserProfile");
                 modelBuilder.Entity<tPostType>().ToTable("tPostTypes");
                 modelBuilder.Entity<tPost>().ToTable("tPosts");
+
                 modelBuilder.Entity<tPostTag>().ToTable("tPostTags");
                 modelBuilder.Entity<tPostContent>().ToTable("tPostContents");
 

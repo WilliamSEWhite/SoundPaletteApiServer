@@ -7,13 +7,13 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostContentId { get; set; }
         public int PostId { get; set; }
-        public tPost Post { get; } = null!;
+        public tPost tPost { get; } = null!;
         public string PostContent { get; set; }
         public string S3Token { get; set; }
-        public tPostContent(int postId, tPost post, string postContent, string s3Token)
+        public tPostContent(int postId, tPost tpost, string postContent, string s3Token)
         {
             PostId = postId;
-            Post = post;
+            tPost = tpost;
             PostContent = postContent;
             S3Token = s3Token;
         }

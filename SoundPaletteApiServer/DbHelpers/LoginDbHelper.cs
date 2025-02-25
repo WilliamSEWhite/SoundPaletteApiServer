@@ -22,12 +22,19 @@ namespace SoundPaletteApiServer.DbHelpers
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = await Context.tUsers.Where(o => o.Username == username).FirstOrDefaultAsync();
-            if (user.Password == password)
+            var user = await Context.tUsers.Where(o => o.Username == username).Include(o => o.tUserInfo).FirstOrDefaultAsync();
+            if(user != null)
             {
-                return new UserModel(user.UserId, user.Username, user.Password);
+                if (user.Password == password)
+                {
+                    if(user.tUserInfo == null)
+                        return new UserModel(user.UserId, user.Username, user.Password);
+                    else
+                        return new UserModel(user.UserId, user.Username, user.Password, new UserInfoModel(user.tUserInfo));
+
+                }
             }
-            else return null;
+            return null;
         }
 
         public async Task<UserModel> RegisterUser(string username, string password)

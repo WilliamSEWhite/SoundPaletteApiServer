@@ -1,12 +1,15 @@
 USE [master]
 GO
-DROP DATABASE [SP];
+IF EXISTS (SELECT name FROM master.sys.databases WHERE name = N'SP')
+BEGIN
+	DROP DATABASE [SP];
+END
 CREATE DATABASE [SP]
 CONTAINMENT = NONE 
  ON  PRIMARY 
-( NAME = N'[SP]', FILENAME = N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'[SP]', FILENAME = N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
 LOG ON 
-( NAME = N'SP_log', FILENAME = N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'SP_log', FILENAME = N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
 GO
@@ -124,6 +127,18 @@ CREATE NONCLUSTERED INDEX [IX_tTags_TagName] ON [dbo].[tTags]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
+INSERT [dbo].[tTags]
+([TagName])
+VALUES
+	('Music'),
+	('Vocals'),
+	('Digital Art'),
+	('Painting'),
+	('Drawing'),
+	('Rock'),
+	('Alternative')
+
+
 CREATE TABLE [dbo].[tLocations](
 	[LocationId] int IDENTITY(1,1) NOT NULL,
 	[LocationName] nvarchar(50) NOT NULL,
@@ -240,6 +255,13 @@ CREATE NONCLUSTERED INDEX [IX_tPostTypes_PostTypeName] ON [dbo].[tPostTypes]
 	[PostTypeName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+
+INSERT [dbo].[tPostTypes]
+([PostTypeName])
+VALUES
+	('Text'),
+	('Audio'),
+	('Image')
 
 CREATE TABLE [dbo].[tPosts](
 	[PostId] int IDENTITY(1,1) NOT NULL,
