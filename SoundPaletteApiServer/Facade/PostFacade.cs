@@ -9,7 +9,7 @@ namespace SoundPaletteApiServer.Facade
 
         public PostFacade(PostDbHelper _postDbHelper)
         {
-            postDbHelper = postDbHelper;
+            postDbHelper = _postDbHelper;
         }
 
         public async Task CreatePost(NewPostModel newPost)

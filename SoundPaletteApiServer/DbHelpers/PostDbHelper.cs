@@ -25,7 +25,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 Caption = newPost.Caption,
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
-                IsDeleted = newPost.IsDeleted,
+                IsDeleted = false,
                 tPostTags = newPost.PostTags.Select(o => new tPostTag(0, o.TagId)).ToList(),
                 tPostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
@@ -41,7 +41,7 @@ namespace SoundPaletteApiServer.DbHelpers
             switch (newPost.PostTypeId)
             {
                 case 1:
-                    content.PostContent = newPost.PostTextContent;
+                    content.PostTextContent = newPost.PostTextContent;
                         break;
             }
             return content;

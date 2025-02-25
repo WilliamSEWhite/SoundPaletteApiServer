@@ -17,5 +17,8 @@ namespace SoundPaletteApiServer.Models
             TagId = tag.TagId;
             TagName = tag.TagName;
         }
+        public TagModel()
+        {
+        }
     }
 }

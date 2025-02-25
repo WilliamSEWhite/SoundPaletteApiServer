@@ -56,7 +56,13 @@ namespace SoundPaletteApiServer.Data
                 modelBuilder.Entity<tLocation>().ToTable("tLocations");
                 modelBuilder.Entity<tUserTag>().ToTable("tUserTags");
                 modelBuilder.Entity<tPostType>().ToTable("tPostTypes");
-                modelBuilder.Entity<tPost>().ToTable("tPosts");
+            modelBuilder.Entity<tPost>()
+        .HasOne(u => u.tPostContent)
+        .WithOne(p => p.tPost)
+        .HasForeignKey<tPostContent>(p => p.PostId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<tPost>().ToTable("tPosts");
 
                 modelBuilder.Entity<tPostTag>().ToTable("tPostTags");
                 modelBuilder.Entity<tPostContent>().ToTable("tPostContents");
