@@ -7,11 +7,11 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostCommentId { get; set; }
         public int PostId { get; set; }
-        public tPost? post { get; set; } = null;
+        public tPost? Post { get; set; } = null;
         public int UserId { get; set; }
         public tUser? User { get; set; } = null;
 
-        string CommentContent { get; set; }
+        public string CommentContent { get; set; }
 
         public tPostComment(int postId, int userId, string commentContent)
         {

@@ -267,7 +267,7 @@ CREATE TABLE [dbo].[tPosts](
 	[PostId] int IDENTITY(1,1) NOT NULL,
 	[UserId] int NOT NULL,
 	[PostTypeId] int NOT NULL,
-	[Caption] nvarchar NULL,
+	[Caption] nvarchar(MAX) NULL,
 	[IsPremium] bit NOT NULL default 0,
 	[IsMature] bit NOT NULL default 0,
 	[IsDeleted] bit NOT NULL default 0,

@@ -22,7 +22,7 @@ namespace SoundPaletteApiServer.Data
         public DbSet<tPost> tPosts { get; set; } = null!;
         public DbSet<tPostTag> tPostTags { get; set; } = null!;
         public DbSet<tPostContent> tPostContents { get; set; } = null!;
-        public DbSet<tPostContent> tPostComments { get; set; } = null!;
+        public DbSet<tPostComment> tPostComments { get; set; } = null!;
 
 
         public SPContext(DbContextOptions<SPContext> options)

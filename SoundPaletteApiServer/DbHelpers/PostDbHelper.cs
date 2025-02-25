@@ -26,7 +26,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
                 IsDeleted = false,
-                //tPostTags = newPost.PostTags.Select(o => new tPostTag(0, o.TagId)).ToList(),
+                tPostTags = newPost.PostTags.Select(o => new tPostTag(0, o.TagId)).ToList(),
                 tPostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
                 PublishDate = newPost.PublishDate
