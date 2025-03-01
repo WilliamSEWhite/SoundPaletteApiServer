@@ -40,7 +40,7 @@ namespace SoundPaletteApiServer.Data
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
             modelBuilder.Entity<tUser>()
                 .HasOne(u => u.tUserInfo)
-                .WithOne(p => p.tUser)
+                .WithOne(p => p.User)
                 .HasForeignKey<tUserInfo>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tUser>()

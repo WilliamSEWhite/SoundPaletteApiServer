@@ -41,9 +41,9 @@ namespace SoundPaletteApiServer.Controllers
         }
 
         [HttpPost("update-user-profile")]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UserProfileModel userProfile)
+        public async Task<IActionResult> UpdateUserProfileInfo([FromBody] UserProfileModel userProfile)
         {
-            return Ok(await userFacade.UpdateUserProfile(userProfile));
+            return Ok(await userFacade.UpdateUserProfileInfo(userProfile));
         }
     }
 }

@@ -11,11 +11,17 @@ namespace SoundPaletteApiServer.Facade
         {
             userDbHelper = _userDbHelper;
         }
+        
+        /** logon user */
         public async Task<UserModel> GetUser(int id)
         {
             return await userDbHelper.GetUser(id);
-
         }
+        public async Task<UserModel> GetUserProfile(int id)
+        {
+            return await userDbHelper.GetUserProfile(id);
+        }
+        /** user info */
         public async Task<UserModel> UpdateUserInfo(int id, UserInfoModel userInfo)
         {
             await userDbHelper.UpdateUserInfo(userInfo);
@@ -26,13 +32,14 @@ namespace SoundPaletteApiServer.Facade
         {
             return await userDbHelper.GetUserInfo(id);
         }
-        public async Task<UserProfileModel> GetUserProfile(int id)
+        /** user profile */
+        public async Task<UserProfileModel> GetUserProfileInfo(int id)
         {
-            return await userDbHelper.GetUserProfile(id);
+            return await userDbHelper.GetUserProfileInfo(id);
         }
-        public async Task<UserProfileModel> UpdateUserProfile(UserProfileModel userProfile)
+        public async Task<UserProfileModel> UpdateUserProfileInfo(UserProfileModel userProfile)
         {
-            return await userDbHelper.UpdateUserProfile(userProfile);
+            return await userDbHelper.UpdateUserProfileInfo(userProfile);
         }
     }
 }

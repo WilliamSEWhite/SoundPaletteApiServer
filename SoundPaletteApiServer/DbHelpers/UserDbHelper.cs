@@ -21,7 +21,7 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             return new UserModel(await Context.tUsers.Where(o => o.UserId == id).Include(o => o.tUserInfo).FirstOrDefaultAsync());
         }
-
+        
         public async Task<UserModel> GetUserProfile(int id)
         {
             var user = await Context.tUsers.Where(o => o.UserId == id).FirstOrDefaultAsync();
@@ -50,6 +50,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 // update user information to database
                 Context.tUserInfo.Update(existingInfo);
                 await Context.SaveChangesAsync();
+                return new UserInfoModel(existingInfo.UserId, existingInfo.LocationId, existingInfo.Email, existingInfo.Phone, existingInfo.DOB);
             }
             // else create new entry by user id
             else
@@ -57,16 +58,17 @@ namespace SoundPaletteApiServer.DbHelpers
                 var newUserInfo = new tUserInfo(userInfo.UserId, userInfo.LocationId, userInfo.Email, userInfo.Phone, userInfo.DOB, DateTime.Now);
                 Context.tUserInfo.Add(newUserInfo);
                 await Context.SaveChangesAsync();
+                return new UserInfoModel(newUserInfo.UserId, newUserInfo.LocationId, newUserInfo.Email, newUserInfo.Phone, newUserInfo.DOB);
             }
         }
 
         /** UserProfile */
-        public async Task<UserProfileModel> GetUserProfile(int id)
+        public async Task<UserProfileModel> GetUserProfileInfo(int id)
         {
             var userProfile = await Context.tUserProfile.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserProfileModel(userProfile.UserId, userProfile.Bio, userProfile.Picture);
         }
-        public async Task<UserProfileModel> UpdateUserProfile(UserProfileModel userProfile)
+        public async Task<UserProfileModel> UpdateUserProfileInfo(UserProfileModel userProfile)
         {
             var existingInfo = await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync();
             // if user profile exists, update profile
