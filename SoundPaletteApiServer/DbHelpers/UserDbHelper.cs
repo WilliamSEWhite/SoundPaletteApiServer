@@ -19,6 +19,11 @@ namespace SoundPaletteApiServer.DbHelpers
         /** User */
         public async Task<UserModel> GetUser(int id)
         {
+            return new UserModel(await Context.tUsers.Where(o => o.UserId == id).Include(o => o.tUserInfo).FirstOrDefaultAsync());
+        }
+
+        public async Task<UserModel> GetUserProfile(int id)
+        {
             var user = await Context.tUsers.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserModel(user.UserId, user.Username, user.Password);
         }
@@ -45,7 +50,6 @@ namespace SoundPaletteApiServer.DbHelpers
                 // update user information to database
                 Context.tUserInfo.Update(existingInfo);
                 await Context.SaveChangesAsync();
-                return new UserInfoModel(existingInfo);
             }
             // else create new entry by user id
             else
@@ -53,7 +57,6 @@ namespace SoundPaletteApiServer.DbHelpers
                 var newUserInfo = new tUserInfo(userInfo.UserId, userInfo.LocationId, userInfo.Email, userInfo.Phone, userInfo.DOB, DateTime.Now);
                 Context.tUserInfo.Add(newUserInfo);
                 await Context.SaveChangesAsync();
-                return new UserInfoModel(await Context.tUserInfo.Where(o => o.UserId == userInfo.UserId).FirstOrDefaultAsync());
             }
         }
 

@@ -74,7 +74,10 @@ namespace SoundPaletteApiServer
             services.AddScoped<UserDbHelper>();
             services.AddScoped<LocationFacade>();
             services.AddScoped<LocationDbHelper>();
-
+            services.AddScoped<PostFacade>();
+            services.AddScoped<PostDbHelper>();
+            services.AddScoped<TagFacade>();
+            services.AddScoped<TagDbHelper>();
         }
 
         public void Configure(IApplicationBuilder app)

@@ -1,12 +1,15 @@
 USE [master]
 GO
---DROP DATABASE [SP];
+IF EXISTS (SELECT name FROM master.sys.databases WHERE name = N'SP')
+BEGIN
+	DROP DATABASE [SP];
+END
 CREATE DATABASE [SP]
 CONTAINMENT = NONE 
  ON  PRIMARY 
-( NAME = N'[SP]', FILENAME = N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'[SP]', FILENAME = N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
 LOG ON 
-( NAME = N'SP_log', FILENAME = N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'SP_log', FILENAME = N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
 GO
@@ -94,7 +97,7 @@ GO
 
 CREATE TABLE [dbo].[tUsers](
 	[UserId] int IDENTITY(1,1) NOT NULL,
-	[Username] nvarchar(50) NOT NULL,
+	[Username] nvarchar(50) UNIQUE NOT NULL,
 	[Password] nvarchar(50) NOT NULL,
 
 CONSTRAINT [PK_tUsers] PRIMARY KEY CLUSTERED 
@@ -124,6 +127,18 @@ CREATE NONCLUSTERED INDEX [IX_tTags_TagName] ON [dbo].[tTags]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
+INSERT [dbo].[tTags]
+([TagName])
+VALUES
+	('Music'),
+	('Vocals'),
+	('Digital Art'),
+	('Painting'),
+	('Drawing'),
+	('Rock'),
+	('Alternative')
+
+
 CREATE TABLE [dbo].[tLocations](
 	[LocationId] int IDENTITY(1,1) NOT NULL,
 	[LocationName] nvarchar(50) NOT NULL,
@@ -151,7 +166,43 @@ VALUES
 	('Brazil'),
 	('Spain'),
 	('India')
+USE [SP]
+UPDATE tLocations 
+SET LocationName = 'Brazil' 
+WHERE LocationId = '1';
 
+UPDATE tLocations 
+SET LocationName = 'Canada' 
+WHERE LocationId = '2';
+
+UPDATE tLocations 
+SET LocationName = 'France' 
+WHERE LocationId = '3';
+
+UPDATE tLocations 
+SET LocationName = 'India' 
+WHERE LocationId = '4';
+
+UPDATE tLocations 
+SET LocationName = 'Japan' 
+WHERE LocationId = '5';
+
+UPDATE tLocations 
+SET LocationName = 'Mexico' 
+WHERE LocationId = '6';
+
+UPDATE tLocations 
+SET LocationName = 'Spain' 
+WHERE LocationId = '7';
+
+UPDATE tLocations 
+SET LocationName = 'United Kingdom' 
+WHERE LocationId = '8';
+
+UPDATE tLocations 
+SET LocationName = 'United States' 
+WHERE LocationId = '9';
+GO
 
 CREATE TABLE [dbo].[tUserInfo](
 	[UserInfoId] int IDENTITY(1,1) NOT NULL,
@@ -241,11 +292,18 @@ CREATE NONCLUSTERED INDEX [IX_tPostTypes_PostTypeName] ON [dbo].[tPostTypes]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
+INSERT [dbo].[tPostTypes]
+([PostTypeName])
+VALUES
+	('Text'),
+	('Audio'),
+	('Image')
+
 CREATE TABLE [dbo].[tPosts](
 	[PostId] int IDENTITY(1,1) NOT NULL,
 	[UserId] int NOT NULL,
 	[PostTypeId] int NOT NULL,
-	[Caption] nvarchar NULL,
+	[Caption] nvarchar(MAX) NULL,
 	[IsPremium] bit NOT NULL default 0,
 	[IsMature] bit NOT NULL default 0,
 	[IsDeleted] bit NOT NULL default 0,
@@ -321,5 +379,26 @@ CREATE NONCLUSTERED INDEX [IX_tPostContents_PostId] ON [dbo].[tPostContents]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[tPostContents] WITH CHECK ADD CONSTRAINT [FK_tPostContents_tPosts_PostId] FOREIGN KEY([PostId])
+REFERENCES [dbo].[tPosts] ([PostId])
+GO
+
+CREATE TABLE [dbo].[tPostComments](
+	[PostCommentId] int IDENTITY(1,1) NOT NULL,
+	[PostId] int NOT NULL,
+	[UserId] int NOT NULL,
+	[CommentContent] nvarchar(MAX) NULL,
+
+CONSTRAINT [PK_tPostComments] PRIMARY KEY CLUSTERED 
+(
+	[PostCommentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tPostComments_PostId] ON [dbo].[tPostComments]
+(
+	[PostId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[tPostComments] WITH CHECK ADD CONSTRAINT [FK_tPostComments_tPosts_PostId] FOREIGN KEY([PostId])
 REFERENCES [dbo].[tPosts] ([PostId])
 GO

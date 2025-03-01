@@ -7,23 +7,23 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostId { get; set; }
         public int UserId { get; set; }
-        public tUser User { get; } = null!;
+        public tUser tUser { get; } = null!;
         public int PostTypeId { get; set; }
-        public tPostType PostType { get; } = null!;
+        public tPostType tPostType { get; } = null!;
         public string Caption { get; set; }
         public bool IsPremium { get; set; }
         public bool IsMature { get; set; }
         public bool IsDeleted { get; set; }
-        public List<tPostTag> PostTags { get; } = new List<tPostTag>();
-        public tPostContent PostContent { get; set; }
+        public List<tPostTag> tPostTags { get; set; } = new List<tPostTag>();
+        public tPostContent tPostContent { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime PublishDate { get; set; }
-        public tPost(int userId, tUser user, int postTypeId, tPostType postType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate)
+        public tPost(int userId, tUser tuser, int postTypeId, tPostType tpostType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate)
         {
             UserId = userId;
-            User = user;
+            tUser = tuser;
             PostTypeId = postTypeId;
-            PostType = postType;
+            tPostType = tpostType;
             Caption = caption;
             IsPremium = isPremium;
             IsMature = isMature;

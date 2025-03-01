@@ -8,8 +8,8 @@ namespace SoundPaletteApiServer.DataModels
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public tUserInfo User { get; } = null!;
-        public tUserProfile? UserProfile { get; set; }
+        public tUserInfo? tUserInfo { get; } = null!;
+        public tUserProfile? tUserProfile { get; set; }
 
         public tUser(string username, string password)
         {

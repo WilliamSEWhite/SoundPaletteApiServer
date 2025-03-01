@@ -7,10 +7,9 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostTagId { get; set; }
         public int PostId { get; set; }
-        public tPost Post { get; } = null!;
+        public tPost post { get; set; } = null;
         public int TagId { get; set; }
-        public tTag Tag { get; } = null!;
-
+        
         public tPostTag(int postId, int tagId)
         {
             PostId = postId;
