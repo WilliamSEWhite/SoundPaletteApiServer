@@ -15,5 +15,14 @@ namespace SoundPaletteApiServer.Models
             Bio = bio;
             Picture = picture;
         }
+
+        public UserProfileModel(tUserProfile existingInfo)
+        {
+            UserId = existingInfo.UserId;
+            Bio = existingInfo.Bio;
+            Picture = existingInfo.Picture;
+        }
+        public UserProfileModel() { }
     }
+
 }

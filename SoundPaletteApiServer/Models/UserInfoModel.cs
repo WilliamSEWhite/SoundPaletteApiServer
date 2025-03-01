@@ -30,13 +30,21 @@ namespace SoundPaletteApiServer.Models
         {
             UserInfoId = userInfo.UserInfoId;
             UserId = userInfo.UserId;
-            LocationId = userInfo.LocationId ?? default(int);
+            LocationId = userInfo.LocationId;
             Email = userInfo.Email;
             Phone = userInfo.Phone;
             DOB = userInfo.DOB;
             DateCreated = userInfo.DateCreated;
         }
 
+        public UserInfoModel(int userId, int locationId, string email, string phone, DateTime dOB)
+        {
+            UserId = userId;
+            LocationId = locationId;
+            Email = email;
+            Phone = phone;
+            DOB = dOB;
+        }
         public UserInfoModel() { }
     }
 }

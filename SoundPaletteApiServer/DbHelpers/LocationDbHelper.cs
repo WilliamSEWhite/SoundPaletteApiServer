@@ -16,7 +16,11 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task<List<LocationModel>> GetLocations()
         {
-            return await Context.tLocations.Select(o => new LocationModel(o)).ToListAsync();
+            // get locations and return them in order by name
+            return await Context.tLocations
+                .OrderBy(o => o.LocationName)
+                .Select(o => new LocationModel(o))
+                .ToListAsync();
         }
     }
 }

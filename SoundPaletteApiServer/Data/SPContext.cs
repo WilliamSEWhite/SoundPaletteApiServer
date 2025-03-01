@@ -17,7 +17,7 @@ namespace SoundPaletteApiServer.Data
             public DbSet<tLocation> tLocations { get; set; } = null!;
             public DbSet<tUserTag> tUserTags { get; set; } = null!;
             public DbSet<tUserInfo> tUserInfo { get; set; } = null!;
-            public DbSet<tUserProfile> tUserProfiles { get; set; } = null!;
+            public DbSet<tUserProfile> tUserProfile { get; set; } = null!;
             public DbSet<tPostType> tPostTypes { get; set; } = null!;
             public DbSet<tPost> tPosts { get; set; } = null!;
             public DbSet<tPostTag> tPostTags { get; set; } = null!;

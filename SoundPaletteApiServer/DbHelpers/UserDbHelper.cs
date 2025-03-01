@@ -16,12 +16,19 @@ namespace SoundPaletteApiServer.DbHelpers
             _configuration = configuration;
         }
 
+        /** User */
         public async Task<UserModel> GetUser(int id)
         {
             var user = await Context.tUsers.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserModel(user.UserId, user.Username, user.Password);
         }
 
+        /** UserInfo */
+        public async Task<UserInfoModel> GetUserInfo(int id)
+        {
+            var userInfo = await Context.tUserInfo.Where(o => o.UserId == id).FirstOrDefaultAsync();
+            return new UserInfoModel(userInfo.UserId, userInfo.LocationId, userInfo.Email, userInfo.Phone, userInfo.DOB);
+        }
         public async Task<UserInfoModel> UpdateUserInfo(UserInfoModel userInfo)
         {
             var existingInfo = await Context.tUserInfo.Where(o => o.UserId == userInfo.UserId).FirstOrDefaultAsync();
@@ -35,6 +42,7 @@ namespace SoundPaletteApiServer.DbHelpers
 
                 // mark the entity as modified
                 Context.Entry(existingInfo).State = EntityState.Modified;
+                // update user information to database
                 Context.tUserInfo.Update(existingInfo);
                 await Context.SaveChangesAsync();
                 return new UserInfoModel(existingInfo);
@@ -46,6 +54,37 @@ namespace SoundPaletteApiServer.DbHelpers
                 Context.tUserInfo.Add(newUserInfo);
                 await Context.SaveChangesAsync();
                 return new UserInfoModel(await Context.tUserInfo.Where(o => o.UserId == userInfo.UserId).FirstOrDefaultAsync());
+            }
+        }
+
+        /** UserProfile */
+        public async Task<UserProfileModel> GetUserProfile(int id)
+        {
+            var userProfile = await Context.tUserProfile.Where(o => o.UserId == id).FirstOrDefaultAsync();
+            return new UserProfileModel(userProfile.UserId, userProfile.Bio, userProfile.Picture);
+        }
+        public async Task<UserProfileModel> UpdateUserProfile(UserProfileModel userProfile)
+        {
+            var existingInfo = await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync();
+            // if user profile exists, update profile
+            if (existingInfo != null)
+            {
+                existingInfo.Bio = userProfile.Bio;
+                existingInfo.Picture = userProfile.Picture;
+                // mark the entitiy as modified
+                Context.Entry(existingInfo).State = EntityState.Modified;
+                // update user profile in database
+                Context.tUserProfile.Update(existingInfo);
+                await Context.SaveChangesAsync();
+                return new UserProfileModel(existingInfo);
+            }
+            // else create new profile
+            else
+            {
+                var newUserProfile = new tUserProfile(userProfile.UserId, userProfile.Bio, userProfile.Picture);
+                Context.tUserProfile.Add(newUserProfile);
+                await Context.SaveChangesAsync();
+                return new UserProfileModel(await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync());
             }
         }
     }
