@@ -308,7 +308,9 @@ CREATE TABLE [dbo].[tPosts](
 	[IsMature] bit NOT NULL default 0,
 	[IsDeleted] bit NOT NULL default 0,
 	[CreatedDate] date NOT NULL,
-	[PublishDate] date NOT NULL
+	[PublishDate] date NOT NULL,
+	[CommentCount] int NOT NULL default 0,
+	[LikeCount] int NOT NULL default 0
 
 CONSTRAINT [PK_tPosts] PRIMARY KEY CLUSTERED 
 (
@@ -387,6 +389,8 @@ CREATE TABLE [dbo].[tPostComments](
 	[PostId] int NOT NULL,
 	[UserId] int NOT NULL,
 	[CommentContent] nvarchar(MAX) NULL,
+	[CreatedDate] date NOT NULL,
+
 
 CONSTRAINT [PK_tPostComments] PRIMARY KEY CLUSTERED 
 (
@@ -401,4 +405,86 @@ CREATE NONCLUSTERED INDEX [IX_tPostComments_PostId] ON [dbo].[tPostComments]
 GO
 ALTER TABLE [dbo].[tPostComments] WITH CHECK ADD CONSTRAINT [FK_tPostComments_tPosts_PostId] FOREIGN KEY([PostId])
 REFERENCES [dbo].[tPosts] ([PostId])
+GO
+ALTER TABLE [dbo].[tPostComments] WITH CHECK ADD CONSTRAINT [FK_tPostComments_tUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[tUsers] ([UserId])
+GO
+
+CREATE TRIGGER Increment_Post_Comments
+ON tPostComments
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tPosts
+    SET CommentCount = CommentCount + 1
+    FROM tPosts
+    INNER JOIN inserted i ON tPosts.PostId = i.PostId;
+END;
+GO
+
+CREATE TRIGGER Decrement_Post_Comments
+ON tPostComments
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tPosts
+    SET CommentCount = CommentCount - 1
+    FROM tPosts
+    INNER JOIN deleted d ON tPosts.PostId = d.PostId;
+END;
+GO
+
+CREATE TABLE [dbo].[tPostLikes](
+	[PostCommentId] int IDENTITY(1,1) NOT NULL,
+	[PostId] int NOT NULL,
+	[UserId] int NOT NULL,
+
+CONSTRAINT [PK_tPostComments] PRIMARY KEY CLUSTERED 
+(
+	[PostCommentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tPostComments_PostId] ON [dbo].[tPostComments]
+(
+	[PostId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[tPostLikes] WITH CHECK ADD CONSTRAINT [FK_tPostLikes_tPosts_PostId] FOREIGN KEY([PostId])
+REFERENCES [dbo].[tPosts] ([PostId])
+GO
+ALTER TABLE [dbo].[tPostLikes] WITH CHECK ADD CONSTRAINT [FK_tPostLikes_tUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[tUsers] ([UserId])
+GO
+
+CREATE TRIGGER Increment_Post_Likes
+ON tPostLikes
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tPosts
+    SET LikeCount = LikeCount + 1
+    FROM tPosts
+    INNER JOIN inserted i ON tPosts.PostId = i.PostId;
+END;
+GO
+
+CREATE TRIGGER Decrement_Post_Likes
+ON tPostLikes
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tPosts
+    SET LikeCount = LikeCount - 1
+    FROM tPosts
+    INNER JOIN deleted d ON tPosts.PostId = d.PostId;
+END;
 GO

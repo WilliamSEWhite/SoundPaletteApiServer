@@ -2,24 +2,20 @@
 
 namespace SoundPaletteApiServer.DataModels
 {
-    public class tPostComment
+    public class tPostLike
     {
         [Key]
         public int PostCommentId { get; set; }
         public int PostId { get; set; }
         public tPost? Post { get; set; } = null;
         public int UserId { get; set; }
-        public tUser? User { get; set; } = null;
-        public DateTime CreatedDate { get; set; }
+        public tPost? User { get; set; } = null;
 
-        public string CommentContent { get; set; }
-
-        public tPostComment(int postId, int userId, string commentContent, DateTime createdDate)
+        public tPostLike(int postId, int userId)
         {
             PostId = postId;
             UserId = userId;
-            CommentContent = commentContent;
-            CreatedDate = createdDate;
         }
+        public tPostLike(){}
     }
 }
