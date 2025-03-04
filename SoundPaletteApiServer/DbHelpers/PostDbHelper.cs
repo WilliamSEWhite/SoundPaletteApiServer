@@ -46,5 +46,16 @@ namespace SoundPaletteApiServer.DbHelpers
             }
             return content;
         }
+
+        public async Task DeletePost(int postId, int userId)
+        {
+            var postToDelete = Context.tPosts.Where(o => o.PostId == postId).FirstOrDefault();
+            if(postToDelete != null && userId == postToDelete.UserId)
+            {
+                postToDelete.IsDeleted = true;
+                await Context.SaveChangesAsync();
+            }
+        }
+
     }
 }

@@ -18,7 +18,9 @@ namespace SoundPaletteApiServer.DataModels
         public tPostContent tPostContent { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime PublishDate { get; set; }
-        public tPost(int userId, tUser tuser, int postTypeId, tPostType tpostType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate)
+        public int CommentCount { get; set; }
+        public int LikeCount { get; set; }
+        public tPost(int userId, tUser tuser, int postTypeId, tPostType tpostType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int commentCount, int likeCount)
         {
             UserId = userId;
             tUser = tuser;
@@ -30,6 +32,8 @@ namespace SoundPaletteApiServer.DataModels
             IsDeleted = isDeleted;
             CreatedDate = createdDate;
             PublishDate = publishDate;
+            CommentCount = commentCount;
+            LikeCount = likeCount;
         }
 
         public tPost() { }

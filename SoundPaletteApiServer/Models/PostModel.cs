@@ -9,12 +9,13 @@
         public DateTime CreatedDate { get; set; }
         public string CreatedByUsername { get; set; }
         public int PostType { get; set; }
-
+        public int CommentCount { get; set; }
+        public int LikeCount { get; set; }
         public PostModel()
         {
 
         }
-        public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType)
+        public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType, int commentCount, int likeCount)
         {
             PostId = postId;
             PostCaption = postCaption;
@@ -23,6 +24,8 @@
             CreatedDate = createdDate;
             CreatedByUsername = createdByUsername;
             PostType = postType;
+            CommentCount = commentCount;
+            LikeCount = likeCount;
         }
     }
 }

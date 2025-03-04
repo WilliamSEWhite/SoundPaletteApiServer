@@ -28,6 +28,14 @@ namespace SoundPaletteApiServer.Controllers
             await postFacade.CreatePost(newPost);
             return Ok();
         }
+
+        [HttpGet("delete-post")]
+        public async Task<IActionResult> DeletePost([FromQuery] int postId, [FromQuery] int userId)
+        {
+            await postFacade.DeletePost(postId, userId);
+            return Ok();
+        }
+
         public async Task<IActionResult> UpdatePost()
         {
 

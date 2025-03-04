@@ -23,6 +23,7 @@ namespace SoundPaletteApiServer.Data
             public DbSet<tPostTag> tPostTags { get; set; } = null!;
             public DbSet<tPostContent> tPostContents { get; set; } = null!;
         public DbSet<tPostComment> tPostComments { get; set; } = null!;
+        public DbSet<tPostLike> tPostLikes { get; set; } = null!;
 
 
         public SPContext(DbContextOptions<SPContext> options)
@@ -69,6 +70,7 @@ namespace SoundPaletteApiServer.Data
             modelBuilder.Entity<tPostTag>().ToTable("tPostTags");
             modelBuilder.Entity<tPostContent>().ToTable("tPostContents");
             modelBuilder.Entity<tPostComment>().ToTable("tPostComments");
+            modelBuilder.Entity<tPostLike>().ToTable("tPostLikes");
 
         }
     }
