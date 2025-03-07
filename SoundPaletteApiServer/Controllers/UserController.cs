@@ -13,6 +13,7 @@ namespace SoundPaletteApiServer.Controllers
             userFacade = _userFacade;
         }
 
+        /** user */
         [HttpGet("get-user/{id}")]
         public async Task<IActionResult> LoginUser(int id)
         {
@@ -20,6 +21,7 @@ namespace SoundPaletteApiServer.Controllers
             return Ok(user);
         }
 
+        /** user info */
         [HttpPost("update-user-info/{id}")]
         public async Task<IActionResult> UpdateUserInfo(int id, [FromBody] UserInfoModel userInfo)
         {
@@ -32,11 +34,12 @@ namespace SoundPaletteApiServer.Controllers
             var userInfo = await userFacade.getUserInfo(id);
             return Ok(userInfo);
         }
-
+        
+        /** user profile */
         [HttpGet("get-user-profile/{id}")]
         public async Task<IActionResult> GetUserProfile(int id)
         {
-            var userProfile = await userFacade.GetUserProfile(id);
+            var userProfile = await userFacade.GetUserProfileInfo(id);
             return Ok(userProfile);
         }
 
