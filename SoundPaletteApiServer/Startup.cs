@@ -78,6 +78,8 @@ namespace SoundPaletteApiServer
             services.AddScoped<PostDbHelper>();
             services.AddScoped<TagFacade>();
             services.AddScoped<TagDbHelper>();
+            services.AddScoped<PostInteractionFacade>();
+            services.AddScoped<PostInteractionDbHelper>();
         }
 
         public void Configure(IApplicationBuilder app)

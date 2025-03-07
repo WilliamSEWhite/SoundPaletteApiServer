@@ -31,7 +31,7 @@ namespace SoundPaletteApiServer.DbHelpers
         public async Task LikePost([FromQuery] int postId, [FromQuery] int userId)
         {
             var like = new tPostLike(postId, userId);
-            await Context.AddAsync(like);
+            await Context.tPostLikes.AddAsync(like);
             await Context.SaveChangesAsync();
         }
 

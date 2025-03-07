@@ -11,11 +11,12 @@
         public int PostType { get; set; }
         public int CommentCount { get; set; }
         public int LikeCount { get; set; }
+        public bool IsLiked { get; set; }
         public PostModel()
         {
 
         }
-        public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType, int commentCount, int likeCount)
+        public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType, int commentCount, int likeCount, bool isLiked)
         {
             PostId = postId;
             PostCaption = postCaption;
@@ -26,6 +27,7 @@
             PostType = postType;
             CommentCount = commentCount;
             LikeCount = likeCount;
+            IsLiked = isLiked;
         }
     }
 }

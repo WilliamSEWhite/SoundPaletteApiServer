@@ -64,7 +64,8 @@ namespace SoundPaletteApiServer.DbHelpers
             var posts = await
                 (
                     from post in Context.tPosts.Include(o => o.tPostContent).Include(o => o.tPostTags).ThenInclude(o => o.tTag).Include(o => o.tUser)
-                    select new PostModel(post.PostId, post.Caption, post.tPostTags.Select(o => new TagModel(o.tTag)).ToList(), new PostContentModel(post.tPostContent), post.CreatedDate, post.tUser.Username, post.PostTypeId, post.CommentCount, post.LikeCount)
+                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                    select new PostModel(post.PostId, post.Caption, post.tPostTags.Select(o => new TagModel(o.tTag)).ToList(), new PostContentModel(post.tPostContent), post.CreatedDate, post.tUser.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked)
                 ).ToListAsync();
             return posts;
         }
