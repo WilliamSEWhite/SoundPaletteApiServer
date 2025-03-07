@@ -7,7 +7,7 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostId { get; set; }
         public int UserId { get; set; }
-        public tUser tUser { get; } = null!;
+        public tUser tUser { get; } = new tUser();
         public int PostTypeId { get; set; }
         public tPostType tPostType { get; } = null!;
         public string Caption { get; set; }
@@ -15,7 +15,7 @@ namespace SoundPaletteApiServer.DataModels
         public bool IsMature { get; set; }
         public bool IsDeleted { get; set; }
         public List<tPostTag> tPostTags { get; set; } = new List<tPostTag>();
-        public tPostContent tPostContent { get; set; }
+        public tPostContent tPostContent { get; set; } = new tPostContent();
         public DateTime CreatedDate { get; set; }
         public DateTime PublishDate { get; set; }
         public int CommentCount { get; set; }

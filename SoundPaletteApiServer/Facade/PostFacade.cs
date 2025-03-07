@@ -17,6 +17,10 @@ namespace SoundPaletteApiServer.Facade
         {
             await postDbHelper.CreatePost(newPost);
         }
+        public async Task<List<PostModel>> GetPostsForFeed(int userId)
+        {
+            return await postDbHelper.GetPostsForFeed(userId);
+        }
         public async Task DeletePost(int postId, int userId)
         {
             await postDbHelper.DeletePost(postId, userId);

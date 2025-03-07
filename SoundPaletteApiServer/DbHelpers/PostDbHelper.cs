@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using SoundPaletteApiServer.Data;
 using SoundPaletteApiServer.DataModels;
 using SoundPaletteApiServer.Models;
@@ -26,7 +28,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
                 IsDeleted = false,
-                tPostTags = newPost.PostTags.Select(o => new tPostTag(0, o.TagId)).ToList(),
+                tPostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
                 tPostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
                 PublishDate = newPost.PublishDate
@@ -56,6 +58,15 @@ namespace SoundPaletteApiServer.DbHelpers
                 await Context.SaveChangesAsync();
             }
         }
-
+        public async Task<List<PostModel>> GetPostsForFeed(int userId)
+        {
+            //
+            var posts = await
+                (
+                    from post in Context.tPosts.Include(o => o.tPostContent).Include(o => o.tPostTags).ThenInclude(o => o.tTag).Include(o => o.tUser)
+                    select new PostModel(post.PostId, post.Caption, post.tPostTags.Select(o => new TagModel(o.tTag)).ToList(), new PostContentModel(post.tPostContent), post.CreatedDate, post.tUser.Username, post.PostTypeId, post.CommentCount, post.LikeCount)
+                ).ToListAsync();
+            return posts;
+        }
     }
 }

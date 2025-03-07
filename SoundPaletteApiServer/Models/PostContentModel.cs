@@ -1,4 +1,6 @@
-﻿namespace SoundPaletteApiServer.Models
+﻿using SoundPaletteApiServer.DataModels;
+
+namespace SoundPaletteApiServer.Models
 {
     public class PostContentModel
     {
@@ -11,6 +13,10 @@
         public PostContentModel(string postTextContent)
         {
             PostTextContent = postTextContent;
+        }
+        public PostContentModel(tPostContent content)
+        {
+            PostTextContent = content.PostTextContent;
         }
     }
 }

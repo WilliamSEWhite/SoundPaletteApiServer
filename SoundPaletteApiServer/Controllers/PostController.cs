@@ -13,12 +13,14 @@ namespace SoundPaletteApiServer.Controllers
             postFacade = _postFacade;
         }
 
-        public async Task<IActionResult> GetPosts()
+        [HttpGet("get-feed")]
+        public async Task<IActionResult> GetPostsForFeed([FromQuery] int userId)
         {
-            return Ok();
+            return Ok(await postFacade.GetPostsForFeed(userId));
         }
         public async Task<IActionResult> SearchPosts()
         {
+
             return Ok();
         }
 
