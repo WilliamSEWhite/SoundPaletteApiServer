@@ -22,8 +22,8 @@ namespace SoundPaletteApiServer.Controllers
         [HttpGet("get-post-comments")]
         public async Task<IActionResult> GetCommentsForPost([FromQuery] int postId)
         {
-            await postInterationFacade.GetCommentsForPost(postId);
-            return Ok();
+            var comments = await postInterationFacade.GetCommentsForPost(postId);
+            return Ok(comments);
         }
         [HttpGet("like-post")]
         public async Task<IActionResult> LikePost([FromQuery] int postId, [FromQuery] int userId)

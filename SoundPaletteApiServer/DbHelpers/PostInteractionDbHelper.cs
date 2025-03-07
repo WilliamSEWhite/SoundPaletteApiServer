@@ -24,7 +24,7 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task<List<CommentModel>> GetCommentsForPost([FromQuery] int postId)
         {
-            var comments = await Context.tPostComments.Include(o => o.User).Where(o => o.PostId == postId).Select(o => new CommentModel(o)).ToListAsync();
+            var comments = await Context.tPostComments.Include(o => o.tUser).Where(o => o.PostId == postId).Select(o => new CommentModel(o)).ToListAsync();
             return comments;
         }
 

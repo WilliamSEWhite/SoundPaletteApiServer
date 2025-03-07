@@ -51,10 +51,15 @@ namespace SoundPaletteApiServer.Data
                 .HasForeignKey<tUserProfile>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tUser>()
-.HasMany(u => u.tPosts)
-.WithOne(p => p.tUser)
-.HasForeignKey(p => p.UserId)
-.OnDelete(DeleteBehavior.Cascade);
+                .HasMany(u => u.tPosts)
+                .WithOne(p => p.tUser)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tUser>()
+                .HasMany(u => u.tPostComments)
+                .WithOne(p => p.tUser)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tUser>().ToTable("tUsers");
             modelBuilder.Entity<tUserInfo>().ToTable("tUserInfo");
             modelBuilder.Entity<tUserProfile>().ToTable("tUserProfile");
@@ -75,7 +80,12 @@ namespace SoundPaletteApiServer.Data
                 .HasMany(e => e.tPostTags)
                 .WithOne(e => e.tPost)
                 .HasForeignKey(e => e.PostId)
-                .IsRequired(); 
+                .IsRequired();
+            modelBuilder.Entity<tPost>()
+                .HasMany(e => e.tPostComments)
+                .WithOne(e => e.tPost)
+                .HasForeignKey(e => e.PostId)
+                .IsRequired();
             modelBuilder.Entity<tPost>().ToTable("tPosts");
             modelBuilder.Entity<tPostTag>()
                 .HasOne(u => u.tTag)
