@@ -11,6 +11,8 @@ namespace SoundPaletteApiServer.DataModels
         public tUserInfo? tUserInfo { get; } = null!;
         public tUserProfile? tUserProfile { get; set; }
         public List<tPost> tPosts { get; } = new List<tPost>();
+        public List<tPostComment> tPostComments { get; } = new List<tPostComment>();
+
         public tUser(string username, string password)
         {
             Username = username;

@@ -20,6 +20,8 @@ namespace SoundPaletteApiServer.DataModels
         public DateTime PublishDate { get; set; }
         public int CommentCount { get; set; }
         public int LikeCount { get; set; }
+        public List<tPostComment> tPostComments { get; set; } = new List<tPostComment>();
+
         public tPost(int userId, tUser tuser, int postTypeId, tPostType tpostType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int commentCount, int likeCount)
         {
             UserId = userId;
