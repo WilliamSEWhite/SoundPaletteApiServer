@@ -12,9 +12,20 @@ namespace SoundPaletteApiServer.Facade
             tagDbHelper = _tagDbHelper;
         }
 
+        /** global tag list */
         public async Task<List<TagModel>> GetTags()
         {
             return await tagDbHelper.GetTags();
+        }
+
+        /** user tags */
+        public async Task<List<TagModel>> GetUserTags(int id)
+        {
+            return await tagDbHelper.GetUserTags(id);
+        }
+        public async Task<List<TagModel>> UpdateUserTags(int id, List<TagModel> userTags)
+        {
+            return await tagDbHelper.UpdateUserTags(id, userTags);
         }
     }
 }

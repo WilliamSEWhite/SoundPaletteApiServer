@@ -16,6 +16,7 @@ namespace SoundPaletteApiServer.DataModels
             UserId = userId;
             TagId = tagId;
         }
+        public tUserTag() { }
 
     }
 }

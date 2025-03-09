@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using SoundPaletteApiServer.Data;
+using SoundPaletteApiServer.DataModels;
 using SoundPaletteApiServer.Models;
 
 namespace SoundPaletteApiServer.DbHelpers
@@ -15,10 +17,46 @@ namespace SoundPaletteApiServer.DbHelpers
 
         }
 
+        /** global tag list */
         public async Task<List<TagModel>> GetTags()
         {
             return await Context.tTags.Select(o => new TagModel(o)).ToListAsync(); 
         }
 
+        /** user tags */
+        public async Task<List<TagModel>> GetUserTags(int id)
+        {
+            return await Context.tUserTags
+                .Where(ut => ut.UserId == id)
+                .Join(Context.tTags, ut => ut.TagId, t => t.TagId,
+                    (ut, t) => new TagModel(t))
+                .ToListAsync();
+        }
+        public async Task<List<TagModel>> UpdateUserTags(int userId, List<TagModel> userTags)
+        {
+            // get exisiting tags
+            var existingTags = await Context.tUserTags.Where(ut => ut.UserId == userId).ToListAsync();
+
+            // remove existing tags not in this new list
+            Context.tUserTags.RemoveRange(existingTags.Where(et => !userTags.Any(ut => ut.TagId == et.TagId)));
+
+            // add new tags
+            foreach (var tag in userTags)
+            {
+                if(!existingTags.Any(et => et.TagId == tag.TagId))
+                {
+                    Context.tUserTags.Add(new tUserTag
+                    {
+                        UserId = userId,TagId = tag.TagId
+                    }); 
+                }
+            }
+
+            // save changes to database and return updated list
+            await Context.SaveChangesAsync();
+            return await Context.tUserTags.Where(ut => ut.UserId == userId)
+                .Select(ut => new TagModel { TagId = ut.TagId})
+                .ToListAsync();
+        }
     }
 }
