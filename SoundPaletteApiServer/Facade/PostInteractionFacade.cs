@@ -13,26 +13,36 @@ namespace SoundPaletteApiServer.Facade
             postInteractionDbHelper = _postInteractionDbHelper;
         }
 
-        public async Task CreateComment([FromBody] NewPostCommentModel newComment)
+        public async Task CreateComment(NewPostCommentModel newComment)
         {
             await postInteractionDbHelper.CreateComment(newComment);
         }
 
-        public async Task<List<CommentModel>> GetCommentsForPost([FromQuery] int postId)
+        public async Task<List<CommentModel>> GetCommentsForPost(int postId)
         {
             var comments = await postInteractionDbHelper.GetCommentsForPost(postId);
             return comments;
         }
 
-        public async Task LikePost([FromQuery] int postId, [FromQuery] int userId)
+        public async Task LikePost(int postId, int userId)
         {
             await postInteractionDbHelper.LikePost(postId, userId);
         }
 
 
-        public async Task UnlikePost([FromQuery] int postId, [FromQuery] int userId)
+        public async Task UnlikePost(int postId, int userId)
         {
             await postInteractionDbHelper.UnlikePost(postId, userId);
+        }
+        public async Task SavePost(int postId, int userId)
+        {
+            await postInteractionDbHelper.SavePost(postId, userId);
+        }
+
+
+        public async Task UnsavePost(int postId, int userId)
+        {
+            await postInteractionDbHelper.UnsavePost(postId, userId);
         }
     }
 }

@@ -28,8 +28,8 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
                 IsDeleted = false,
-                tPostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
-                tPostContent = CreatePostContent(newPost),
+                PostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
+                PostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
                 PublishDate = newPost.PublishDate
             };
@@ -60,12 +60,12 @@ namespace SoundPaletteApiServer.DbHelpers
         }
         public async Task<List<PostModel>> GetPostsForFeed(int userId)
         {
-            //
             var posts = await
                 (
-                    from post in Context.tPosts.Include(o => o.tPostContent).Include(o => o.tPostTags).ThenInclude(o => o.tTag).Include(o => o.tUser)
+                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User)
                     let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    select new PostModel(post.PostId, post.Caption, post.tPostTags.Select(o => new TagModel(o.tTag)).ToList(), new PostContentModel(post.tPostContent), post.CreatedDate, post.tUser.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked)
+                    where post.UserId != userId
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked)
                 ).ToListAsync();
             return posts;
         }

@@ -18,7 +18,7 @@ namespace SoundPaletteApiServer.Models
         {
             CommentText = comment.CommentContent;
             CommentDate = comment.CreatedDate;
-            CommentUsername = comment.tUser.Username;
+            CommentUsername = comment.User.Username;
         }  
 
     }

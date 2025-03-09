@@ -41,5 +41,16 @@ namespace SoundPaletteApiServer.Facade
         {
             return await userDbHelper.UpdateUserProfileInfo(userProfile);
         }
+
+        public async Task FollowUser(int followerId, string followingUsername)
+        {
+            await userDbHelper.FollowUser(followerId, followingUsername);
+        }
+
+
+        public async Task UnfollowUser(int followerId, string followingUsername)
+        {
+            await userDbHelper.UnfollowUser(followerId, followingUsername);
+        }
     }
 }

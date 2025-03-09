@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SoundPaletteApiServer.Data;
 using SoundPaletteApiServer.DataModels;
@@ -19,7 +20,7 @@ namespace SoundPaletteApiServer.DbHelpers
         /** User */
         public async Task<UserModel> GetUser(int id)
         {
-            return new UserModel(await Context.tUsers.Where(o => o.UserId == id).Include(o => o.tUserInfo).FirstOrDefaultAsync());
+            return new UserModel(await Context.tUsers.Where(o => o.UserId == id).Include(o => o.UserInfo).FirstOrDefaultAsync());
         }
         
         public async Task<UserModel> GetUserProfile(int id)
@@ -68,6 +69,7 @@ namespace SoundPaletteApiServer.DbHelpers
             var userProfile = await Context.tUserProfile.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserProfileModel(userProfile.UserId, userProfile.Bio, userProfile.Picture);
         }
+
         public async Task<UserProfileModel> UpdateUserProfileInfo(UserProfileModel userProfile)
         {
             var existingInfo = await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync();
@@ -92,5 +94,25 @@ namespace SoundPaletteApiServer.DbHelpers
                 return new UserProfileModel(await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync());
             }
         }
+
+        public async Task FollowUser(int followerId, string followingUsername)
+        {
+            int followingId = await Context.tUsers.Where(o => o.Username == followingUsername).Select(o => o.UserId).FirstOrDefaultAsync();
+            var follow = new tUserFollower(followerId, followingId);
+            await Context.tUserFollowers.AddAsync(follow);
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task UnfollowUser(int followerId, string followingUsername)
+        {
+            int followingId = await Context.tUsers.Where(o => o.Username == followingUsername).Select(o => o.UserId).FirstOrDefaultAsync();
+            var follow = await Context.tUserFollowers.Where(o => o.FollowerId == followerId && o.FollowingId == followingId).FirstOrDefaultAsync();
+            if (follow != null)
+            {
+                Context.tUserFollowers.Remove(follow);
+                await Context.SaveChangesAsync();
+            }
+        }
+
     }
 }

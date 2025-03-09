@@ -7,9 +7,9 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostCommentId { get; set; }
         public int PostId { get; set; }
-        public tPost? tPost { get; set; } = null!;
+        public virtual tPost? Post { get; set; } = null!;
         public int UserId { get; set; }
-        public tUser? tUser { get; set; } = null!;
+        public virtual tUser? User { get; set; } = null!;
         public DateTime CreatedDate { get; set; }
 
         public string CommentContent { get; set; }

@@ -7,27 +7,28 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostId { get; set; }
         public int UserId { get; set; }
-        public tUser tUser { get; } = new tUser();
+        public virtual tUser User { get; } = null!;
         public int PostTypeId { get; set; }
-        public tPostType tPostType { get; } = null!;
+        public virtual tPostType PostType { get; } = null!;
         public string Caption { get; set; }
         public bool IsPremium { get; set; }
         public bool IsMature { get; set; }
         public bool IsDeleted { get; set; }
-        public List<tPostTag> tPostTags { get; set; } = new List<tPostTag>();
-        public tPostContent tPostContent { get; set; } = new tPostContent();
+        public virtual List<tPostTag> PostTags { get; set; } = new List<tPostTag>();
+        public virtual tPostContent PostContent { get; set; } = null!;
         public DateTime CreatedDate { get; set; }
         public DateTime PublishDate { get; set; }
         public int CommentCount { get; set; }
         public int LikeCount { get; set; }
-        public List<tPostComment> tPostComments { get; set; } = new List<tPostComment>();
+        public virtual List<tPostComment> PostComments { get; set; } = new List<tPostComment>();
+        public virtual List<tPostSave> PostSaves { get; set; } = new List<tPostSave>();
 
-        public tPost(int userId, tUser tuser, int postTypeId, tPostType tpostType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int commentCount, int likeCount)
+        public tPost(int userId, tUser user, int postTypeId, tPostType postType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int commentCount, int likeCount)
         {
             UserId = userId;
-            tUser = tuser;
+            User = user;
             PostTypeId = postTypeId;
-            tPostType = tpostType;
+            PostType = postType;
             Caption = caption;
             IsPremium = isPremium;
             IsMature = isMature;

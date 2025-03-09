@@ -48,5 +48,19 @@ namespace SoundPaletteApiServer.Controllers
         {
             return Ok(await userFacade.UpdateUserProfileInfo(userProfile));
         }
+
+        [HttpGet("follow-user")]
+        public async Task<IActionResult> FollowUser([FromQuery] int followerId, [FromQuery] string followingUsername)
+        {
+            await userFacade.FollowUser(followerId, followingUsername);
+            return Ok();
+        }
+
+        [HttpGet("unfollow-user")]
+        public async Task<IActionResult> UnfollowUser([FromQuery] int followerId, [FromQuery] string followingUsername)
+        {
+            await userFacade.UnfollowUser(followerId, followingUsername);
+            return Ok();
+        }
     }
 }

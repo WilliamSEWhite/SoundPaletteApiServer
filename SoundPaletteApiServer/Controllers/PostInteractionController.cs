@@ -38,5 +38,19 @@ namespace SoundPaletteApiServer.Controllers
             await postInterationFacade.UnlikePost(postId, userId);
             return Ok();
         }
+
+        [HttpGet("save-post")]
+        public async Task<IActionResult> SavePost([FromQuery] int postId, [FromQuery] int userId)
+        {
+            await postInterationFacade.SavePost(postId, userId);
+            return Ok();
+        }
+
+        [HttpGet("unsave-post")]
+        public async Task<IActionResult> UnsavePost([FromQuery] int postId, [FromQuery] int userId)
+        {
+            await postInterationFacade.UnsavePost(postId, userId);
+            return Ok();
+        }
     }
 }

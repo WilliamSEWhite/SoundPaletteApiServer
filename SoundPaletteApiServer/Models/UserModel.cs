@@ -29,7 +29,7 @@ namespace SoundPaletteApiServer.Models
             UserId = user.UserId;
             Username = user.Username;
             Password = user.Password;
-            UserInfo = new UserInfoModel(user.tUserInfo);
+            UserInfo = new UserInfoModel(user.UserInfo);
         }
     }
     }
