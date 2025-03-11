@@ -42,7 +42,13 @@ namespace SoundPaletteApiServer.Controllers
             var userProfile = await userFacade.GetUserProfileInfo(id);
             return Ok(userProfile);
         }
-
+        /** user profile */
+        [HttpGet("get-user-profile-by-username/{username}")]
+        public async Task<IActionResult> GetUserProfileByUsername(string username)
+        {
+            var userProfile = await userFacade.GetUserProfileByUsername(username);
+            return Ok(userProfile);
+        }
         [HttpPost("update-user-profile")]
         public async Task<IActionResult> UpdateUserProfileInfo([FromBody] UserProfileModel userProfile)
         {

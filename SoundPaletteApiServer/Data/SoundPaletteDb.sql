@@ -237,6 +237,9 @@ CREATE TABLE [dbo].[tUserProfiles](
 	[UserId] int NOT NULL,
 	[Bio] nvarchar(200) NULL,
 	[Picture] nvarchar(MAX) NULL,
+	[FollowerCount] int NOT NULL default 0,
+	[FollowingCount] int NOT NULL default 0,
+
 CONSTRAINT [PK_tUserProfiles] PRIMARY KEY CLUSTERED 
 (
 	[UserProfileId] ASC

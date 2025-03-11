@@ -26,25 +26,25 @@ SELECT * FROM dbo.tUsers;
 
 
 /* ----- USER INFO ----- */
-SELECT * FROM dbo.tUserInfo;
-INSERT INTO dbo.tUserInfo (userId, locationId, email, phone, dOB, dateCreated) VALUES
+SELECT * FROM dbo.tUserInfos;
+INSERT INTO dbo.tUserInfos (userId, locationId, email, phone, dOB, dateCreated) VALUES
    (1, 1, 'user1@example.com', '123-456-7890', '1995-05-10', GETUTCDATE()),
    (2, 1, 'user2@example.com', '234-567-8901', '1992-08-22', GETUTCDATE()),
    (3, 1, 'user3@example.com', '345-678-9012', '2000-02-15', GETUTCDATE()),
    (4, 1, 'user4@example.com', '456-789-0123', '1988-11-30', GETUTCDATE());
-SELECT * FROM dbo.tUserInfo;
+SELECT * FROM dbo.tUserInfos;
 
 
 /* ----- USER PROFILE ----- */
 -- DELETE FROM dbo.tUserProfile;
 -- DBCC CHECKIDENT ('dbo.tUserProfile', RESEED, 0);
-SELECT * FROM dbo.tUserProfile;
-INSERT INTO dbo.tUserProfile (userId, bio, picture) VALUES
+SELECT * FROM dbo.tUserProfiles;
+INSERT INTO dbo.tUserProfiles (userId, bio, picture) VALUES
     (1, 'Painter | Digital Artist | Creator. Capturing moments through color & texture. Commissions open','/my/profilePic.jpg'),
     (2, 'Words are my canvas. Sharing stories, thoughts, and raw emotions','/my/profilePic.jpg'),
     (3, 'Beatmaker | Producer | Mixer. Turning ideas into tracks. Always down for collabs – hit me up!','/my/profilePic.jpg'),
     (4, 'Sharing my soul through sound. New single out now!','/my/profilePic.jpg');
-SELECT * FROM dbo.tUserProfile;
+SELECT * FROM dbo.tUserProfiles;
 
 
 /* ----- TAGS ----- */
@@ -73,7 +73,7 @@ SELECT * FROM dbo.tUserTags;
 -- DELETE FROM dbo.tPosts;
 -- DBCC CHECKIDENT ('dbo.tPosts', RESEED, 0);
 SELECT * FROM dbo.tPosts;
-INSERT INTO dbo.tPosts (userId, postTypeId, caption, isPremium, isMature, isDeleted, createdDate, publishDate, commentCount, likeCount) VALUES
+INSERT INTO dbo.tPosts (userId, postTypeId, caption, isPremium, isMature, isDeleted, createdDate, publishDate, CommentCount, LikeCount) VALUES
     (1, 1, 'Exploring new sounds!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE), 3, 2),
     (2, 3, 'new lyrics in the works! just need some good vocals...', 1, 0, 0, GETUTCDATE(), GETUTCDATE(), 9, 123),
     (4, 1, 'Finished my latest track!', 0, 0, 0, GETUTCDATE(), GETUTCDATE(), 1, 33),

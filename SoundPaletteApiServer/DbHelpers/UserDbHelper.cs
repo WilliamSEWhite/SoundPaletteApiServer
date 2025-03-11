@@ -69,7 +69,11 @@ namespace SoundPaletteApiServer.DbHelpers
             var userProfile = await Context.tUserProfile.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserProfileModel(userProfile.UserId, userProfile.Bio, userProfile.Picture);
         }
-
+        public async Task<UserProfileModel> GetUserProfileByUsername(string username)
+        {
+            var userProfile = await Context.tUserProfile.Include(o => o.User).Where(o => o.User.Username == username).FirstOrDefaultAsync();
+            return new UserProfileModel(userProfile.UserId, userProfile.Bio, userProfile.Picture);
+        }
         public async Task<UserProfileModel> UpdateUserProfileInfo(UserProfileModel userProfile)
         {
             var existingInfo = await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync();
