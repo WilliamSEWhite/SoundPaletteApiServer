@@ -68,7 +68,7 @@ namespace SoundPaletteApiServer.Data
                 .HasForeignKey(p => p.FollowerId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tUser>()
-                .HasMany(u => u.UserFollowers)
+                .HasMany(u => u.UserFollowings)
                 .WithOne(p => p.Following)
                 .HasForeignKey(p => p.FollowingId)
                 .OnDelete(DeleteBehavior.Cascade);

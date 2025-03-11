@@ -7,9 +7,9 @@ namespace SoundPaletteApiServer.DataModels
         [Key]
         public int PostTagId { get; set; }
         public int PostId { get; set; }
-        public virtual tPost Post { get; } = new tPost();
+        public virtual tPost Post { get; } = null!;
         public int TagId { get; set; }
-        public virtual tTag Tag { get; } = new tTag();
+        public virtual tTag Tag { get; } = null!;
 
         public tPostTag(int postId, int tagId)
         {
