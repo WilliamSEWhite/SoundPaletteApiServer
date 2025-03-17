@@ -37,6 +37,11 @@ namespace SoundPaletteApiServer.Facade
         {
             return await userDbHelper.GetUserProfileInfo(id);
         }
+        public async Task<UserProfileModel> GetUserProfileByUsername(string username)
+        {
+            return await userDbHelper.GetUserProfileByUsername(username);
+        }
+
         public async Task<UserProfileModel> UpdateUserProfileInfo(UserProfileModel userProfile)
         {
             return await userDbHelper.UpdateUserProfileInfo(userProfile);

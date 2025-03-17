@@ -18,6 +18,22 @@ namespace SoundPaletteApiServer.Controllers
         {
             return Ok(await postFacade.GetPostsForFeed(userId));
         }
+        [HttpGet("get-user-posts")]
+        public async Task<IActionResult> GetPostsForUser([FromQuery] int userId)
+        {
+            return Ok(await postFacade.GetPostsForUser(userId));
+        }
+        [HttpGet("get-username-posts")]
+        public async Task<IActionResult> GetPostsForUsername([FromQuery] int userId, [FromQuery] string username)
+        {
+            return Ok(await postFacade.GetPostsForUsername(userId, username));
+        }
+        [HttpGet("get-user-saved-posts")]
+        public async Task<IActionResult> GetSavedPostsForUser([FromQuery] int userId)
+        {
+            return Ok(await postFacade.GetSavedPostsForUser(userId));
+        }
+
         public async Task<IActionResult> SearchPosts()
         {
 
