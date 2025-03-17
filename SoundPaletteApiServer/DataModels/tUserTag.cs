@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace SoundPaletteApiServer.DataModels
-{ 
+{
     public class tUserTag
     {
         [Key]
