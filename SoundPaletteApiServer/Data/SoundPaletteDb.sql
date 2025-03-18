@@ -6,10 +6,10 @@ BEGIN
 END
 CREATE DATABASE [SP]
 CONTAINMENT = NONE 
- ON  PRIMARY 
-( NAME = N'[SP]', FILENAME =	N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
-LOG ON 
-( NAME = N'SP_log', FILENAME =  N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--ON  PRIMARY 
+--( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--LOG ON 
+--( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
 GO
@@ -237,9 +237,6 @@ CREATE TABLE [dbo].[tUserProfiles](
 	[UserId] int NOT NULL,
 	[Bio] nvarchar(200) NULL,
 	[Picture] nvarchar(MAX) NULL,
-	[FollowerCount] int NOT NULL default 0,
-	[FollowingCount] int NOT NULL default 0,
-
 CONSTRAINT [PK_tUserProfiles] PRIMARY KEY CLUSTERED 
 (
 	[UserProfileId] ASC
