@@ -11,7 +11,7 @@ namespace SoundPaletteApiServer.DataModels
         public string Bio { get; set; }
         public string Picture { get; set; }
         public int FollowerCount { get; set; }
-        public int FollowingCount {get;set;}
+        public int FollowingCount { get; set; }
         public tUserProfile(int userId, string bio, string picture)
         {
             UserId = userId;

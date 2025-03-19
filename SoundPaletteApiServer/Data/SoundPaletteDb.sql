@@ -7,9 +7,9 @@ END
 CREATE DATABASE [SP]
 CONTAINMENT = NONE 
  ON  PRIMARY 
-( NAME = N'[SP]', FILENAME =	N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
 LOG ON 
-( NAME = N'SP_log', FILENAME =  N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
 GO
@@ -545,4 +545,60 @@ REFERENCES [dbo].[tUsers] ([UserId])
 GO
 ALTER TABLE [dbo].[tUserFollowers] WITH CHECK ADD CONSTRAINT [FK_tUserFollowers_tUsers_FollowingId] FOREIGN KEY([FollowingId])
 REFERENCES [dbo].[tUsers] ([UserId])
+GO
+
+CREATE TRIGGER Increment_User_Followers
+ON tUserFollowers
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfile
+    SET FollowerCount = FollowerCount + 1
+    FROM tUserProfile
+    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowerId;
+END;
+GO
+
+CREATE TRIGGER Decrement_User_Followers
+ON tUserFollowers
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfile
+    SET FollowerCount = FollowerCount - 1
+    FROM tUserProfile
+    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowerId;
+END;
+GO
+
+CREATE TRIGGER Increment_User_Following
+ON tUserFollowers
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfile
+    SET FollowingCount = FollowingCount + 1
+    FROM tUserProfile
+    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowingId;
+END;
+GO
+
+CREATE TRIGGER Decrement_User_Following
+ON tUserFollowers
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfile
+    SET FollowingCount = FollowingCount - 1
+    FROM tUserProfile
+    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowingId;
+END;
 GO
