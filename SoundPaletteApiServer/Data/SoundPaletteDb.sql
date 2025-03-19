@@ -543,3 +543,6 @@ GO
 ALTER TABLE [dbo].[tUserFollowers] WITH CHECK ADD CONSTRAINT [FK_tUserFollowers_tUsers_FollowingId] FOREIGN KEY([FollowingId])
 REFERENCES [dbo].[tUsers] ([UserId])
 GO
+ALTER TABLE tUserProfiles ADD FollowerCount INT NOT NULL DEFAULT 0;
+ALTER TABLE tUserProfiles ADD FollowingCount INT NOT NULL DEFAULT 0;
+GO
