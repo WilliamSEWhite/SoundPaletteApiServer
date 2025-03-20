@@ -33,7 +33,11 @@ namespace SoundPaletteApiServer.Controllers
         {
             return Ok(await postFacade.GetSavedPostsForUser(userId));
         }
-
+        [HttpGet("get-following-posts")]
+        public async Task<IActionResult> GetFollowingPosts([FromQuery] int userId)
+        {
+            return Ok(await postFacade.GetFollowingPosts(userId));
+        }
         public async Task<IActionResult> SearchPosts()
         {
 
