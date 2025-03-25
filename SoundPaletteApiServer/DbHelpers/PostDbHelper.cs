@@ -68,7 +68,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
 
                     where post.UserId != userId  && !post.IsDeleted
-                    orderby post.CreatedDate descending
+                    orderby post.PostId descending
                     select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved)
                 ).ToListAsync();
             return posts;
@@ -82,7 +82,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
 
                     where post.UserId == userId && !post.IsDeleted
-                    orderby post.CreatedDate descending
+                    orderby post.PostId descending
                     select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved)
                 ).ToListAsync();
             return posts;
@@ -97,7 +97,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User)
                     let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    orderby post.CreatedDate descending
+                    orderby post.PostId descending
                     where post.User.Username == username && !post.IsDeleted
 
                     select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved)
@@ -130,7 +130,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     where !post.IsDeleted
-                    orderby post.CreatedDate descending
+                    orderby post.PostId descending
                     select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved)
                 ).ToListAsync();
             return posts;

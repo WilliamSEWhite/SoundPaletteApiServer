@@ -27,6 +27,9 @@ namespace SoundPaletteApiServer.Data
         public DbSet<tPostLike> tPostLikes { get; set; } = null!;
         public DbSet<tPostSave> tPostSaves { get; set; } = null!;
         public DbSet<tUserFollower> tUserFollowers { get; set; } = null!;
+        public DbSet<tChatroom> tChatrooms { get; set; } = null!;
+        public DbSet<tChatroomMember> tChatroomMembers { get; set; } = null!;
+        public DbSet<tMessage> tMessages { get; set; } = null!;
 
 
         public SPContext(DbContextOptions<SPContext> options)
@@ -77,6 +80,11 @@ namespace SoundPaletteApiServer.Data
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tUser>()
+                .HasMany(u => u.ChatroomMembers)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tUser>().ToTable("tUsers");
             modelBuilder.Entity<tUserInfo>().ToTable("tUserInfos");
             modelBuilder.Entity<tUserProfile>().ToTable("tUserProfiles");
@@ -116,6 +124,20 @@ namespace SoundPaletteApiServer.Data
             modelBuilder.Entity<tPostLike>().ToTable("tPostLikes");
             modelBuilder.Entity<tPostSave>().ToTable("tPostSaves");
             modelBuilder.Entity<tUserFollower>().ToTable("tUserFollowers");
+            modelBuilder.Entity<tChatroom>()
+                .HasMany(u => u.ChatroomMembers)
+                .WithOne(p => p.Chatroom)
+                .HasForeignKey(p => p.ChatroomId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tChatroom>().ToTable("tChatrooms");
+            modelBuilder.Entity<tChatroomMember>()
+                .HasMany(u => u.Messages)
+                .WithOne(p => p.ChatroomMember)
+                .HasForeignKey(p => p.ChatroomMemberId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tChatroomMember>().ToTable("tChatroomMembers");
+            modelBuilder.Entity<tMessage>().ToTable("tMessages");
+
         }
     }
 
