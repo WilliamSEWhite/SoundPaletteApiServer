@@ -80,6 +80,9 @@ namespace SoundPaletteApiServer
             services.AddScoped<TagDbHelper>();
             services.AddScoped<PostInteractionFacade>();
             services.AddScoped<PostInteractionDbHelper>();
+            services.AddScoped<ChatFacade>();
+            services.AddScoped<ChatDbHelper>();
+
         }
 
         public void Configure(IApplicationBuilder app)

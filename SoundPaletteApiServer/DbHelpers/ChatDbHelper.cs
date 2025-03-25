@@ -28,8 +28,9 @@ namespace SoundPaletteApiServer.DbHelpers
                         let name =  string.IsNullOrEmpty(chatroom.ChatroomName) ? string.Join(", ", chatroom.ChatroomMembers.Where(o => o.UserId != userId).Select(o => o.User.Username))
                                                                                 : chatroom.ChatroomName
                         select new ChatroomModel(chatroom.ChatroomId, name, 
-                                                 lastMessage != null ? lastMessage.Message : string.Empty, 
-                                                 lastMessage.SentDate, lastMessage.ChatroomMember.User.Username,
+                                                 lastMessage != null ? lastMessage.Message : string.Empty,
+                                                 lastMessage != null ? lastMessage.SentDate : chatroom.CreatedDate, 
+                                                 lastMessage != null ? lastMessage.ChatroomMember.User.Username : string.Empty,
                                                  chatroom.IsGroupChat)
 
                 ).ToListAsync();
@@ -64,7 +65,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 Context.tChatrooms.Add(privateChatroom);
                 await Context.SaveChangesAsync();
             }
-            return new ChatroomModelLite(privateChatroom.ChatroomId, string.IsNullOrEmpty(privateChatroom.ChatroomName) ? privateChatroom.ChatroomName : username);
+            return new ChatroomModelLite(privateChatroom.ChatroomId, string.IsNullOrEmpty(privateChatroom.ChatroomName) ? username: privateChatroom.ChatroomName);
             
         }
 
