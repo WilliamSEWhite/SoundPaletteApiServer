@@ -389,14 +389,14 @@ VALUES
     ('John said hes down to join the listening party', GETUTCDATE(),2, 0),
     ('He wants to know if he should bring something???', GETUTCDATE(),2, 0),
     
-    ('Okay so, how many tracks are we aiming for on the album?', GETUTCDATE(), 1, 0),
-    ('I think 10 is a solid number. Keeps it tight.', GETUTCDATE(), 2, 0),
-    ('Agreed. Quality over quantity.', GETUTCDATE(), 4, 0),
-    ('What about the genre mix? Are we sticking to R&B?', GETUTCDATE(), 1, 0),
-    ('Mostly R&B, but maybe experiment with some lo-fi vibes?', GETUTCDATE(), 2, 0),
-    ('Yes!! That would give the interludes a unique touch.', GETUTCDATE(), 4, 0),
-    ('Also, we need a title. Something that hits emotionally.', GETUTCDATE(), 1, 0),
-    ('How about *Midnight Letters*?', GETUTCDATE(), 4, 0),
-    ('Oooh that’s poetic. I love it.', GETUTCDATE(), 2, 0),
-    ('Alright, *Midnight Letters* it is! Let’s get to writing 🎶', GETUTCDATE(), 1, 0);
+    ('Okay so, how many tracks are we aiming for on the album?', GETUTCDATE(), 3, 0),
+    ('I think 10 is a solid number. Keeps it tight.', GETUTCDATE(), 4, 0),
+    ('Agreed. Quality over quantity.', GETUTCDATE(), 5, 0),
+    ('What about the genre mix? Are we sticking to R&B?', GETUTCDATE(), 3, 0),
+    ('Mostly R&B, but maybe experiment with some lo-fi vibes?', GETUTCDATE(), 4, 0),
+    ('Yes!! That would give the interludes a unique touch.', GETUTCDATE(), 5, 0),
+    ('Also, we need a title. Something that hits emotionally.', GETUTCDATE(), 3, 0),
+    ('How about *Midnight Letters*?', GETUTCDATE(), 5, 0),
+    ('Oooh that’s poetic. I love it.', GETUTCDATE(), 4, 0),
+    ('Alright, *Midnight Letters* it is! Let’s get to writing 🎶', GETUTCDATE(), 3, 0);
 SELECT * FROM dbo.tMessages;
