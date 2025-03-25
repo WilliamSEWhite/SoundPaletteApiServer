@@ -554,10 +554,10 @@ AS
 BEGIN
     SET NOCOUNT ON; 
 
-    UPDATE tUserProfile
+    UPDATE tUserProfiles
     SET FollowerCount = FollowerCount + 1
-    FROM tUserProfile
-    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowerId;
+    FROM tUserProfiles
+    INNER JOIN inserted i ON tUserProfiles.UserId = i.FollowingId;
 END;
 GO
 
@@ -568,10 +568,10 @@ AS
 BEGIN
     SET NOCOUNT ON; 
 
-    UPDATE tUserProfile
+    UPDATE tUserProfiles
     SET FollowerCount = FollowerCount - 1
-    FROM tUserProfile
-    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowerId;
+    FROM tUserProfiles
+    INNER JOIN deleted i ON tUserProfiles.UserId = i.FollowingId;
 END;
 GO
 
@@ -582,10 +582,10 @@ AS
 BEGIN
     SET NOCOUNT ON; 
 
-    UPDATE tUserProfile
+    UPDATE tUserProfiles
     SET FollowingCount = FollowingCount + 1
-    FROM tUserProfile
-    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowingId;
+    FROM tUserProfiles
+    INNER JOIN inserted i ON tUserProfiles.UserId = i.FollowerId;
 END;
 GO
 
@@ -596,10 +596,10 @@ AS
 BEGIN
     SET NOCOUNT ON; 
 
-    UPDATE tUserProfile
+    UPDATE tUserProfiles
     SET FollowingCount = FollowingCount - 1
-    FROM tUserProfile
-    INNER JOIN inserted i ON tUserProfile.UserId = i.FollowingId;
+    FROM tUserProfiles
+    INNER JOIN deleted i ON tUserProfiles.UserId = i.FollowerId;
 END;
 GO
 
@@ -657,7 +657,7 @@ GO
 
 CREATE TABLE [dbo].[tMessages](
 	[MessageId] int IDENTITY(1,1) NOT NULL,
-	[Message] nvarchar(100) NOT NULL,
+	[Message] nvarchar(max) NOT NULL,
 	[SentDate] date NOT NULL,
 	[ChatroomMemberId] int NOT NULL,
 	[IsDeleted] bit NOT NULL
