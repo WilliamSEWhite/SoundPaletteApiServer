@@ -6,11 +6,34 @@ BEGIN
 END
 CREATE DATABASE [SP]
 CONTAINMENT = NONE 
-ON  PRIMARY 
-( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
-LOG ON 
-( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
-GO
+/*
+WILL'S PATH
+*/
+--ON  PRIMARY 
+--( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--LOG ON 
+--( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--GO
+
+/*
+JAMES'S PATH
+*/
+--ON  PRIMARY 
+--( NAME = N'[SP]', FILENAME =	N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--LOG ON 
+--( NAME = N'SP_log', FILENAME =  N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--GO
+
+/*
+PARTH'S PATH
+*/
+--ON  PRIMARY 
+--( NAME = N'[SP]', FILENAME =	N'D:\documents\Final year\Winter\COSC 4P02\Database\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--LOG ON 
+--( NAME = N'SP_log', FILENAME =  N'D:\documents\Final year\Winter\COSC 4P02\Database\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--GO
+
+
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
 GO
 /*
