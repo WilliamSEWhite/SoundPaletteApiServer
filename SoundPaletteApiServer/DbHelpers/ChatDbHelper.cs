@@ -24,7 +24,7 @@ namespace SoundPaletteApiServer.DbHelpers
                         where chatroom.ChatroomMembers.Any(o => o.UserId == userId && o.IsActive)
                         let lastMessage = Context.tMessages.Include(o => o.ChatroomMember).ThenInclude(o => o.User)
                                                            .Where(o => o.ChatroomMember.ChatroomId == chatroom.ChatroomId)
-                                                           .OrderBy(o => o.MessageId).FirstOrDefault()
+                                                           .OrderByDescending(o => o.MessageId).FirstOrDefault()
                         let name =  string.IsNullOrEmpty(chatroom.ChatroomName) ? string.Join(", ", chatroom.ChatroomMembers.Where(o => o.UserId != userId).Select(o => o.User.Username))
                                                                                 : chatroom.ChatroomName
                         select new ChatroomModel(chatroom.ChatroomId, name, 
