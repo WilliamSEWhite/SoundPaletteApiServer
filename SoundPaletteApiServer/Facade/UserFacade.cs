@@ -57,5 +57,9 @@ namespace SoundPaletteApiServer.Facade
         {
             await userDbHelper.UnfollowUser(followerId, followingUsername);
         }
+        public async Task<List<string>> SearchUsers(string searchTerm)
+        {
+            return await userDbHelper.SearchUsers(searchTerm);
+        }
     }
 }

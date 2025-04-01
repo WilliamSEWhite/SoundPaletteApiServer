@@ -123,6 +123,12 @@ namespace SoundPaletteApiServer.DbHelpers
                 await Context.SaveChangesAsync();
             }
         }
+        
+        public async Task<List<string>> SearchUsers(string searchTerm)
+        {
+            var users = await Context.tUsers.Where(o => o.Username.ToLower().Contains(searchTerm.ToLower())).Select(o => o.Username).ToListAsync();
+            return users;
+        }
 
     }
 }
