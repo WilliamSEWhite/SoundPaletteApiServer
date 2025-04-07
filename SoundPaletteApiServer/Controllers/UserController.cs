@@ -69,9 +69,9 @@ namespace SoundPaletteApiServer.Controllers
             return Ok();
         }
         [HttpGet("search-users")]
-        public async Task<IActionResult> SearchUsers([FromQuery] string searchTerm)
+        public async Task<IActionResult> SearchUsers([FromQuery] int userId, [FromQuery] string searchTerm)
         {
-            var users = await userFacade.SearchUsers(searchTerm);
+            var users = await userFacade.SearchUsers(userId, searchTerm);
             return Ok(users);
         }
     }

@@ -47,5 +47,10 @@ namespace SoundPaletteApiServer.Facade
         {
             await chatDbHelper.AddChatroomMembers(newChatroomMembers);
         }
+
+        public async Task<ChatroomInfoModel> GetChatroomInfo(int userId, int chatroomId)
+        {
+            return await chatDbHelper.GetChatroomInfo(userId, chatroomId);
+        }
     }
 }

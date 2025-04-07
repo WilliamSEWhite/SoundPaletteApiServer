@@ -124,9 +124,9 @@ namespace SoundPaletteApiServer.DbHelpers
             }
         }
         
-        public async Task<List<string>> SearchUsers(string searchTerm)
+        public async Task<List<string>> SearchUsers(int userId, string searchTerm)
         {
-            var users = await Context.tUsers.Where(o => o.Username.ToLower().Contains(searchTerm.ToLower())).Select(o => o.Username).ToListAsync();
+            var users = await Context.tUsers.Where(o => o.UserId != userId && o.Username.ToLower().Contains(searchTerm.ToLower())).Select(o => o.Username).ToListAsync();
             return users;
         }
 
