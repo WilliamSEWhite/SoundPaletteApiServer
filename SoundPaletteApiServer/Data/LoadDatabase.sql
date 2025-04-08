@@ -152,6 +152,36 @@ VALUES
 SELECT * FROM dbo.tPostContents;
 
 
+/* ----- POST USER TAGS ----- */
+--DELETE FROM dbo.tPostUserTags;
+--DBCC CHECKIDENT ('dbo.tPostUserTags', RESEED, 0);
+SELECT * FROM dbo.tPostUserTags;
+INSERT INTO dbo.tPostUserTags (postId, userId)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 1),
+    (3, 2),
+    (3, 4),
+    (6, 1),
+    (7, 4),
+    (8, 2),
+    (9, 3),
+    (10, 1),
+    (11, 1),
+    (15, 2),
+    (15, 3),
+    (15, 4),
+    (17, 1),
+    (17, 3),
+    (22, 2),
+    (23, 3),
+    (26, 1),
+    (26, 2),
+    (26, 4);
+SELECT * FROM dbo.tPostUserTags;
+
+
 /* ----- POST TAGS -----*/
 --DELETE FROM dbo.tPostTags;
 --DBCC CHECKIDENT ('dbo.tPostTags', RESEED, 0);
