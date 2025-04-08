@@ -25,7 +25,7 @@ namespace SoundPaletteApiServer.DbHelpers
                         let lastMessage = Context.tMessages.Include(o => o.ChatroomMember).ThenInclude(o => o.User)
                                                            .Where(o => o.ChatroomMember.ChatroomId == chatroom.ChatroomId)
                                                            .OrderByDescending(o => o.MessageId).FirstOrDefault()
-                        let name =  string.IsNullOrEmpty(chatroom.ChatroomName) ? string.Join(", ", chatroom.ChatroomMembers.Where(o => o.UserId != userId).Select(o => o.User.Username))
+                        let name =  string.IsNullOrEmpty(chatroom.ChatroomName) ? string.Join(", ", chatroom.ChatroomMembers.Where(o => o.UserId != userId && o.IsActive).Select(o => o.User.Username))
                                                                                 : chatroom.ChatroomName
                         select new ChatroomModel(chatroom.ChatroomId, name, 
                                                  lastMessage != null ? lastMessage.Message : string.Empty,
@@ -56,8 +56,9 @@ namespace SoundPaletteApiServer.DbHelpers
                 ).FirstOrDefaultAsync(); 
 
             
-            if(privateChatroom == null || privateChatroom.ChatroomMembers.Any(o => !o.IsActive))
+            if(privateChatroom == null)
             {
+
                 var members = new List<tChatroomMember>() 
                 { 
                     new tChatroomMember(userId, true), 
@@ -66,6 +67,16 @@ namespace SoundPaletteApiServer.DbHelpers
                 privateChatroom = new tChatroom(members, DateTime.Now, false);
                 Context.tChatrooms.Add(privateChatroom);
                 await Context.SaveChangesAsync();
+            }
+            else if (privateChatroom.ChatroomMembers.Any(o => !o.IsActive))
+            {
+                foreach(tChatroomMember m in privateChatroom.ChatroomMembers)
+                {
+                    m.IsActive = true;
+                }
+                Context.tChatrooms.Update(privateChatroom);
+                await Context.SaveChangesAsync();
+
             }
             return new ChatroomModelLite(privateChatroom.ChatroomId, string.IsNullOrEmpty(privateChatroom.ChatroomName) ? username: privateChatroom.ChatroomName);
             
@@ -102,8 +113,22 @@ namespace SoundPaletteApiServer.DbHelpers
 
         }
 
-        public async Task AddChatroomMembers(NewChatroomModel newChatroomMembers)
+        public async Task UpdateChatroom(ChatroomUpdateModel chatroomUpdate)
         {
+            var chatroom = Context.tChatrooms.Include(o => o.ChatroomMembers).ThenInclude(o => o.User)
+                .FirstOrDefault(o => o.ChatroomId == chatroomUpdate.ChatroomId);
+            chatroom.ChatroomName = chatroomUpdate.ChatroomName;
+            foreach (tChatroomMember m in chatroom.ChatroomMembers)
+            {
+                if (chatroomUpdate.MembersToRemove.Contains(m.User.Username))
+                    m.IsActive = false;
+            }
+            var members = await Context.tUsers.Where(o => chatroomUpdate.MembersToAdd.Contains(o.Username)).Select(o => new tChatroomMember(o.UserId, true)).ToListAsync();
+            chatroom.ChatroomMembers.AddRange(members);
+            Context.tChatrooms.Update(chatroom);
+            await Context.SaveChangesAsync();
+
+
 
         }
         public async Task<ChatroomInfoModel> GetChatroomInfo(int userId, int chatroomId)
