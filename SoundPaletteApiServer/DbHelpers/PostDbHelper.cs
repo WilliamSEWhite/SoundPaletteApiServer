@@ -120,6 +120,26 @@ namespace SoundPaletteApiServer.DbHelpers
                 ).ToListAsync();
             return posts;
         }
+
+        public async Task<List<PostModel>> GetTrendingPosts(int userId, int timeSpan)
+        {
+
+            var date = DateTime.Now.AddDays(-30);
+
+            var posts = await
+                (
+                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User)
+                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
+
+                    where !post.IsDeleted && post.CreatedDate > date
+                    orderby post.LikeCount descending
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved)
+                ).ToListAsync();
+            return posts;
+        }
+
+
         public async Task<List<PostModel>> GetFollowingPosts(int userId)
         {
             var posts = await

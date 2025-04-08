@@ -44,6 +44,12 @@ namespace SoundPaletteApiServer.Controllers
             return Ok();
         }
 
+        [HttpGet("get-trending-posts")]
+        public async Task<IActionResult> GetTrendingPosts([FromQuery] int userId)
+        {
+            return Ok(await postFacade.GetTrendingPosts(userId));
+        }
+
         [HttpPost("create-post")]
         public async Task<IActionResult> CreatePost([FromBody] NewPostModel newPost)
         {
