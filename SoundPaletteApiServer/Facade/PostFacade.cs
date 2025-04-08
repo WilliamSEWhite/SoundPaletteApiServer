@@ -30,7 +30,10 @@ namespace SoundPaletteApiServer.Facade
         {
             return await postDbHelper.GetPostsForUsername(userId, username);
         }
-        
+        public async Task<List<PostModel>> GetTaggedPostsForUsername(int userId, string username)
+        {
+            return await postDbHelper.GetTaggedPostsForUsername(userId, username);
+        }
         public async Task<List<PostModel>> GetSavedPostsForUser( int userId)
         {
             return await postDbHelper.GetSavedPostsForUser(userId);

@@ -72,7 +72,6 @@ SELECT * FROM dbo.tUserTags;
 SELECT * FROM dbo.tUserFollowers;
 INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId) 
 VALUES
-    (1, 1),
     (1, 2),
     (1, 3),
     (2, 1),

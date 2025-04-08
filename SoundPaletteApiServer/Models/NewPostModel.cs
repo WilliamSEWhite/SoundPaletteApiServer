@@ -14,8 +14,9 @@
         public List<TagModel> PostTags { get; set; }
 
         public string PostTextContent { get; set; }
+        public List<string> PostUserTags { get; set; }
 
-        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, string postTextContent)
+        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, string postTextContent, List<string> postUserTags)
         {
             UserId = userId;
             PostTypeId = postTypeId;
@@ -26,6 +27,7 @@
             PublishDate = publishDate;
             PostTags = postTags;
             PostTextContent = postTextContent;
+            PostUserTags = postUserTags;
         }
         public NewPostModel() { }
 
