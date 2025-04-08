@@ -58,5 +58,11 @@ namespace SoundPaletteApiServer.DbHelpers
                 .Select(ut => new TagModel { TagId = ut.TagId})
                 .ToListAsync();
         }
+        public async Task<List<TagModel>> SearchTags(string searchTerm)
+        {
+            return await Context.tTags
+                .Where(o => o.TagName.ToLower().Contains(searchTerm.ToLower())).Select(o => new TagModel(o))
+                .ToListAsync();
+        }
     }
 }

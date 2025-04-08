@@ -32,5 +32,11 @@ namespace SoundPaletteApiServer.Controllers
         {
             return Ok(await tagFacade.UpdateUserTags(id, userTags));
         }
+
+        [HttpGet("search-tags")]
+        public async Task<IActionResult> SearchTags([FromQuery]string searchTerm)
+        {
+            return Ok(await tagFacade.GetUserTags(id));
+        }
     }
 }
