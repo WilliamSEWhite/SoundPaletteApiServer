@@ -123,34 +123,33 @@ SELECT * FROM dbo.tPosts;
 SELECT * FROM dbo.tPostContents;
 INSERT INTO dbo.tPostContents (postId, postTextContent, s3Token)
 VALUES
-    (1, 'Sharing some thoughts on my latest sound exploration.', NULL), -- text
-    (2, 'image02.png', NULL), -- image
-    (3, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', NULL), -- audio
-    (4, 'Excited to finally share this track with everyone!', NULL), -- text
-    (5, 'image07.png', NULL), -- image
-    (6, 'Trying out something new and unexpected today!', NULL), -- text
-    (7, 'image09.png', NULL), -- image
-    (8, 'Nature always inspires my melodies.', NULL), -- text
-    (9, 'image14.png', NULL), -- image
-    (10, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', NULL), -- audio
-    (11, 'A sneak peek at my upcoming album. Hope you like it!', NULL), -- image caption
-    (12, 'image18.png', NULL), -- image
-    (13, 'Looking for a vocalist to collaborate with on my next track.', NULL), -- text
-    (14, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', NULL), -- audio
-    (15, 'image19.png', NULL), -- changed from 21 to 19
-    (16, 'Blending jazz influences into my latest piece.', NULL), -- text
-    (17, 'image20.png', NULL), -- changed from 22 to 20
-    (18, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', NULL), -- audio
-    (19, 'Captured a raw, live session last night. Pure energy!', NULL), -- audio
-    (20, 'image01.png', NULL), -- changed from 25 to 01
-    (21, 'Lo-fi beats to help you focus and relax.', NULL), -- text
-    (22, 'image03.png', NULL), -- changed from 29 to 03
-    (23, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', NULL), -- audio
-    (24, 'Throwing it back to one of my earliest creations.', NULL), -- text
-    (25, 'image10.png', NULL), -- image
-    (26, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', NULL); -- audio
+    (1, 'Sharing some thoughts on my latest sound exploration.', NULL),
+    (2, 'image02.png', NULL),
+    (3, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', NULL),
+    (4, 'Excited to finally share this track with everyone!', NULL),
+    (5, 'image07.png', NULL),
+    (6, 'Trying out something new and unexpected today!', NULL),
+    (7, 'image09.png', NULL),
+    (8, 'Nature always inspires my melodies.', NULL),
+    (9, 'image14.png', NULL),
+    (10, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', NULL),
+    (11, 'image24.png', NULL),
+    (12, 'image18.png', NULL),
+    (13, 'Looking for a vocalist to collaborate with on my next track.', NULL),
+    (14, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', NULL),
+    (15, 'image19.png', NULL),
+    (16, 'Blending jazz influences into my latest piece.', NULL),
+    (17, 'image20.png', NULL),
+    (18, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', NULL),
+    (19, 'image28.png', NULL),
+    (20, 'image01.png', NULL),
+    (21, 'Lo-fi beats to help you focus and relax.', NULL),
+    (22, 'image03.png', NULL),
+    (23, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', NULL),
+    (24, 'image11.png', NULL),
+    (25, 'Throwing it back to one of my earliest creations.', NULL),
+    (26, 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', NULL);
 SELECT * FROM dbo.tPostContents;
-
 
 
 /* ----- POST TAGS -----*/
