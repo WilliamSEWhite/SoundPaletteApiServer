@@ -10,8 +10,9 @@ namespace SoundPaletteApiServer.Models
         public int FollowerCount { get; set; }
         public int FollowingCount { get; set; }
         public bool IsFollowing { get; set; }
+        public List<TagModel> UserTags { get; set; }
 
-        public UserProfileModelLite(string username, string bio, string picture, int followerCount, int followingCount, bool isFollowing)
+        public UserProfileModelLite(string username, string bio, string picture, int followerCount, int followingCount, bool isFollowing, List<TagModel> userTags)
         {
             Username = username;
             Bio = bio;
@@ -19,6 +20,7 @@ namespace SoundPaletteApiServer.Models
             FollowerCount = followerCount;
             FollowingCount = followingCount;
             IsFollowing = isFollowing;
+            UserTags = userTags;
         }
 
         public UserProfileModelLite() { }
