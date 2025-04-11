@@ -30,6 +30,8 @@ namespace SoundPaletteApiServer.Data
         public DbSet<tChatroom> tChatrooms { get; set; } = null!;
         public DbSet<tChatroomMember> tChatroomMembers { get; set; } = null!;
         public DbSet<tMessage> tMessages { get; set; } = null!;
+        public DbSet<tFileType> tFileTypes { get; set; } = null!;
+        public DbSet<tFile> tFiles { get; set; } = null!;
 
 
         public SPContext(DbContextOptions<SPContext> options)
@@ -137,7 +139,26 @@ namespace SoundPaletteApiServer.Data
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tChatroomMember>().ToTable("tChatroomMembers");
             modelBuilder.Entity<tMessage>().ToTable("tMessages");
-
+            modelBuilder.Entity<tFileType>().ToTable("tFileTypes");
+            modelBuilder.Entity<tFileType>()
+                .HasIndex(e => e.FileTypeName)
+                .HasDatabaseName("IX_tFilesTypes_FileTypeName");
+            modelBuilder.Entity<tFile>().ToTable("tFiles");
+            modelBuilder.Entity<tFile>()
+                .HasOne(e => e.FileType)
+                .WithMany()
+                .HasForeignKey(e => e.FileTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tFile>()
+                .HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tFile>(entity =>
+            {
+                entity.HasIndex(e => e.FileId).HasDatabaseName("IX_tFiles_FileId");
+                entity.HasIndex(e => e.UserId).HasDatabaseName("IX_tFiles_UserId");
+            });
         }
     }
 

@@ -6,11 +6,34 @@ BEGIN
 END
 CREATE DATABASE [SP]
 CONTAINMENT = NONE 
+/*
+WILL'S PATH
+*/
+--ON  PRIMARY 
+--( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--LOG ON 
+--( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--GO
+
+/*
+JAMES'S PATH
+*/
 ON  PRIMARY 
-( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'[SP]', FILENAME =	N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
 LOG ON 
-( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'SP_log', FILENAME =  N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
+
+/*
+PARTH'S PATH
+*/
+--ON  PRIMARY 
+--( NAME = N'[SP]', FILENAME =	N'D:\documents\Final year\Winter\COSC 4P02\Database\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--LOG ON 
+--( NAME = N'SP_log', FILENAME =  N'D:\documents\Final year\Winter\COSC 4P02\Database\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--GO
+
+
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
 GO
 /*
@@ -680,4 +703,55 @@ CREATE NONCLUSTERED INDEX [IX_tMessages_ChatroomMemberId] ON [dbo].[tMessages]
 GO
 ALTER TABLE [dbo].[tMessages] WITH CHECK ADD CONSTRAINT [FK_tMessages_tChatroomMembers_ChatroomMemberId] FOREIGN KEY([ChatroomMemberId])
 REFERENCES [dbo].[tChatroomMembers] ([ChatroomMemberId])
+GO
+
+/* ----- SETUP FILES TABLES ----- */
+CREATE TABLE [dbo].[tFileTypes] (
+	[FileTypeId]	INT		IDENTITY (1, 1) NOT NULL,
+	[FileTypeName]	VARCHAR(255)	NOT NULL,
+	CONSTRAINT [PK_tFileTypes] PRIMARY KEY CLUSTERED ([FileTypeId] ASC)
+);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tFileTypes_FileTypeName] ON [dbo].[tFileTypes] ([FileTypeName] ASC);
+GO
+
+INSERT [dbo].[tFileTypes] 
+	([FileTypeName]) 
+VALUES 
+	('Image'), 
+	('Sound')
+GO
+
+/*CREATE TABLE [dbo].[tFiles] (
+	[FileId]		INT		IDENTITY (1, 1) NOT NULL,
+	[FileTypeId]	INT		NOT NULL,
+	[UserId]		INT		NOT NULL,
+	[FileName]		VARCHAR (MAX)	NULL DEFAULT '/dev/null/',
+	[FileUrl]		VARCHAR (MAX)	NULL DEFAULT '/dev/null/',
+	[CreatedDate]	DATE	NOT NULL,
+	[PublishDate]	DATE	NOT NULL,
+	[IsActive]		BIT		DEFAULT((1))	NOT NULL,
+	CONSTRAINT	[PK_tFiles]	PRIMARY KEY CLUSTERED ([FileId] ASC),
+	CONSTRAINT	[FK_tFiles_tUsers_UserId]	FOREIGN KEY ([UserId]) REFERENCES [dbo].[tUsers] ([UserId]),
+	CONSTRAINT	[FK_tFiles_tFileTypes_FileTypeId]	FOREIGN KEY	([FileTypeId]) REFERENCES [dbo].[tFileTypes] ([FileTypeId])
+);*/
+CREATE TABLE [dbo].[tFiles] (
+    [FileId]      INT           IDENTITY (1, 1) NOT NULL,
+    [FileTypeId]  INT           NOT NULL,
+    [UserId]      INT           NOT NULL,
+    [FileName]    VARCHAR (MAX) DEFAULT ('/dev/null/') NULL,
+	[FileUrl]	  VARCHAR (MAX) DEFAULT ('/dev/null/') NULL,
+    [CreatedDate] DATE          NOT NULL,
+    [PublishDate] DATE          NOT NULL,
+    [IsActive]    BIT           DEFAULT ((1)) NOT NULL,
+    CONSTRAINT [PK_tFiles] PRIMARY KEY CLUSTERED ([FileId] ASC),
+    CONSTRAINT [FK_tFiles_tUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[tUsers] ([UserId]),
+    CONSTRAINT [FK_tFiles_tFileTypes_FileTypeId] FOREIGN KEY ([FileTypeId]) REFERENCES [dbo].[tFileTypes] ([FileTypeId])
+);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tFiles_FileId] ON [dbo].[tFiles] ([FileId] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_tFiles_UserId] ON [dbo].[tFiles] ([UserId] ASC);
 GO

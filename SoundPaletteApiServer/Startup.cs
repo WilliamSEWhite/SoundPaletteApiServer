@@ -10,7 +10,11 @@ using System.Text.Json.Serialization;
 using Serilog;
 using SoundPaletteApiServer.Facade;
 using SoundPaletteApiServer.DbHelpers;
+using SoundPaletteApiServer.Services;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Transfer;
 
 namespace SoundPaletteApiServer
 {
@@ -82,6 +86,9 @@ namespace SoundPaletteApiServer
             services.AddScoped<PostInteractionDbHelper>();
             services.AddScoped<ChatFacade>();
             services.AddScoped<ChatDbHelper>();
+            services.AddScoped<FileDbHelper>();
+            services.AddScoped<FileFacade>();
+            services.AddSingleton<S3Service>();
 
         }
 
