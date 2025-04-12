@@ -28,6 +28,13 @@ namespace SoundPaletteApiServer.Controllers
         {
             return Ok(await postFacade.GetPostsForUsername(userId, username));
         }
+
+        [HttpGet("get-tagged-username-posts")]
+        public async Task<IActionResult> GetTaggedPostsForUsername([FromQuery] int userId, [FromQuery] string username)
+        {
+            return Ok(await postFacade.GetTaggedPostsForUsername(userId, username));
+        }
+
         [HttpGet("get-user-saved-posts")]
         public async Task<IActionResult> GetSavedPostsForUser([FromQuery] int userId)
         {
@@ -42,6 +49,13 @@ namespace SoundPaletteApiServer.Controllers
         {
 
             return Ok();
+        }
+
+
+        [HttpGet("get-trending-posts")]
+        public async Task<IActionResult> GetTrendingPosts([FromQuery] int userId)
+        {
+            return Ok(await postFacade.GetTrendingPosts(userId));
         }
 
         [HttpPost("create-post")]

@@ -55,10 +55,16 @@ namespace SoundPaletteApiServer.Controllers
             return Ok();
         }
 
-        [HttpGet("add-chatroom-members")]
-        public async Task<IActionResult> AddChatroomMembers([FromBody]NewChatroomModel newChatroomMembers)
+
+        [HttpGet("get-chatroom")]
+        public async Task<IActionResult> GetChatroom([FromQuery] int userId, [FromQuery] int chatroomId)
         {
-            await chatFacade.AddChatroomMembers(newChatroomMembers);
+            return Ok(await chatFacade.GetChatroomInfo(userId, chatroomId));
+        }
+        [HttpPost("update-chatroom")]
+        public async Task<IActionResult> AddChatroomMembers([FromBody] ChatroomUpdateModel chatroomUpdate)
+        {
+            await chatFacade.UpdateChatroom(chatroomUpdate);
             return Ok();
         }
     }

@@ -27,5 +27,9 @@ namespace SoundPaletteApiServer.Facade
         {
             return await tagDbHelper.UpdateUserTags(id, userTags);
         }
+        public async Task<List<TagModel>> SearchTags(string searchTerm)
+        {
+            return await tagDbHelper.SearchTags(searchTerm);
+        }
     }
 }

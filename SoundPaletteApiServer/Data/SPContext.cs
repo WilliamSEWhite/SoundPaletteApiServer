@@ -30,8 +30,10 @@ namespace SoundPaletteApiServer.Data
         public DbSet<tChatroom> tChatrooms { get; set; } = null!;
         public DbSet<tChatroomMember> tChatroomMembers { get; set; } = null!;
         public DbSet<tMessage> tMessages { get; set; } = null!;
+        public DbSet<tPostUserTag> tPostUserTags { get; set; } = null!;
         public DbSet<tFileType> tFileTypes { get; set; } = null!;
         public DbSet<tFile> tFiles { get; set; } = null!;
+
 
 
         public SPContext(DbContextOptions<SPContext> options)
@@ -87,7 +89,11 @@ namespace SoundPaletteApiServer.Data
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<tUser>().ToTable("tUsers");
+            modelBuilder.Entity<tUser>()
+                .HasMany(u => u.PostUserTags)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade); modelBuilder.Entity<tUser>().ToTable("tUsers");
             modelBuilder.Entity<tUserInfo>().ToTable("tUserInfos");
             modelBuilder.Entity<tUserProfile>().ToTable("tUserProfiles");
             modelBuilder.Entity<tTag>().ToTable("tTags");
@@ -120,7 +126,14 @@ namespace SoundPaletteApiServer.Data
                 .WithMany(t => t.PostTags)
                 .HasForeignKey(p => p.TagId)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<tPost>()
+                .HasMany(p => p.PostUserTags)
+                .WithOne(s => s.Post)
+                .HasForeignKey(p => p.PostId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tPostTag>().ToTable("tPostTags");
+            modelBuilder.Entity<tPostUserTag>().ToTable("tPostUserTags");
+
             modelBuilder.Entity<tPostContent>().ToTable("tPostContents");
             modelBuilder.Entity<tPostComment>().ToTable("tPostComments");
             modelBuilder.Entity<tPostLike>().ToTable("tPostLikes");

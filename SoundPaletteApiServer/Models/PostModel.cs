@@ -13,12 +13,13 @@
         public int LikeCount { get; set; }
         public bool IsLiked { get; set; }
         public bool IsSaved { get; set; }
+        public List<string> PostUserTags { get; set; }
 
         public PostModel()
         {
 
         }
-        public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType, int commentCount, int likeCount, bool isLiked, bool isSaved)
+        public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType, int commentCount, int likeCount, bool isLiked, bool isSaved, List<string> postUserTags)
         {
             PostId = postId;
             PostCaption = postCaption;
@@ -31,7 +32,7 @@
             LikeCount = likeCount;
             IsLiked = isLiked;
             IsSaved = isSaved;
-
+            PostUserTags = postUserTags;
         }
     }
 }

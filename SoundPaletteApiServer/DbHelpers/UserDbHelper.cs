@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using SoundPaletteApiServer.Data;
 using SoundPaletteApiServer.DataModels;
 using SoundPaletteApiServer.Models;
@@ -73,10 +74,10 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             var userProfile = await
                 (
-                    from profile in Context.tUserProfile.Include(o => o.User).ThenInclude(o => o.UserFollowers)
+                    from profile in Context.tUserProfile.Include(o => o.User).ThenInclude(o => o.UserFollowers).Include(o => o.User).ThenInclude(o => o.UserTags).ThenInclude(o => o.Tag)
                     where profile.User.Username == username
                     let isFollowing = profile.User.UserFollowers.Where(o => o.FollowerId == userId).Any()
-                    select new UserProfileModelLite(profile.User.Username, profile.Bio, profile.Picture, profile.FollowerCount, profile.FollowingCount, isFollowing)
+                    select new UserProfileModelLite(profile.User.Username, profile.Bio, profile.Picture, profile.FollowerCount, profile.FollowingCount, isFollowing, profile.User.UserTags.Select(o => new TagModel(o.Tag)).ToList())
                 ).FirstOrDefaultAsync();
             return userProfile;
         }
@@ -122,6 +123,12 @@ namespace SoundPaletteApiServer.DbHelpers
                 Context.tUserFollowers.Remove(follow);
                 await Context.SaveChangesAsync();
             }
+        }
+        
+        public async Task<List<string>> SearchUsers(int userId, string searchTerm)
+        {
+            var users = await Context.tUsers.Where(o => o.UserId != userId && o.Username.ToLower().Contains(searchTerm.ToLower())).Select(o => o.Username).ToListAsync();
+            return users;
         }
 
     }

@@ -17,6 +17,7 @@ namespace SoundPaletteApiServer.DataModels
         public virtual List<tUserFollower>? UserFollowers { get; } = new List<tUserFollower>();
         public virtual List<tUserFollower>? UserFollowings { get; } = new List<tUserFollower>();
         public virtual List<tChatroomMember>? ChatroomMembers { get; } = new List<tChatroomMember>();
+        public virtual List<tPostUserTag>? PostUserTags { get; } = new List<tPostUserTag>();
 
         public tUser(string username, string password)
         {
