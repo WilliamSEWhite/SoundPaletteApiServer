@@ -30,7 +30,6 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
                 IsDeleted = false,
-
                 PostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
                 PostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
@@ -49,6 +48,8 @@ namespace SoundPaletteApiServer.DbHelpers
             {
                 case 1:
                     content.PostTextContent = newPost.PostTextContent;
+                    content.BackgroundColour = newPost.BackgroundColor;
+                    content.FontColour = newPost.FontColour;
                         break;
             }
             return content;

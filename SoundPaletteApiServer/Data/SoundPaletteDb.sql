@@ -426,6 +426,9 @@ CREATE TABLE [dbo].[tPostContents](
 	[PostContentId] int IDENTITY(1,1) NOT NULL,
 	[PostId] int NOT NULL,
 	[PostTextContent] nvarchar(MAX) NULL,
+	[BackgroundColour] nvarchar(100) NULL,
+	[FontColour] nvarchar(100) NULL,
+
 	[S3Token] nvarchar(MAX) NULL,
 
 CONSTRAINT [PK_tPostContents] PRIMARY KEY CLUSTERED 
@@ -784,3 +787,26 @@ CREATE NONCLUSTERED INDEX [IX_tFiles_FileId] ON [dbo].[tFiles] ([FileId] ASC);
 GO
 CREATE NONCLUSTERED INDEX [IX_tFiles_UserId] ON [dbo].[tFiles] ([UserId] ASC);
 GO
+
+--CREATE TABLE [dbo].[tUserBlocks](
+--	[UserBlockId] int IDENTITY(1,1) NOT NULL,
+--	[BlockerId] int NOT NULL,
+--	[BlockedId] int NOT NULL,
+
+--CONSTRAINT [PK_tUserBlocks] PRIMARY KEY CLUSTERED 
+--(
+--	[UserBlockId] ASC
+--)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+--) ON [PRIMARY]
+--GO
+--CREATE NONCLUSTERED INDEX [IX_tUserBlocks_UserBlockId] ON [dbo].[tUserBlocks]
+--(
+--	[UserBlockId] ASC
+--)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+--GO
+--ALTER TABLE [dbo].[tUserBlocks] WITH CHECK ADD CONSTRAINT [FK_tUserBlocks_tUsers_BlockerId] FOREIGN KEY([BlockerId])
+--REFERENCES [dbo].[tUsers] ([UserId])
+--GO
+--ALTER TABLE [dbo].[tUserBlocks] WITH CHECK ADD CONSTRAINT [FK_tUserBlocks_tUsers_BlockedId] FOREIGN KEY([BlockedId])
+--REFERENCES [dbo].[tUsers] ([UserId])
+--GO
