@@ -46,6 +46,12 @@ namespace SoundPaletteApiServer.Facade
         {
             return await postDbHelper.GetTrendingPosts(userId, 30);
         }
+
+        public async Task<List<PostModel>> GetPostsByTag(int userId, int tagId)
+        {
+            return await postDbHelper.GetPostsByTag(userId, tagId);
+        }
+
         public async Task DeletePost(int postId, int userId)
         {
             await postDbHelper.DeletePost(postId, userId);
