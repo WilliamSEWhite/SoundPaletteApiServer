@@ -23,7 +23,12 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             return new UserModel(await Context.tUsers.Where(o => o.UserId == id).Include(o => o.UserInfo).FirstOrDefaultAsync());
         }
-        
+        /** return full UserModel by name */
+        public async Task<UserModel> GetUserByName(string userName)
+        {
+            return new UserModel(await Context.tUsers.Where(o => o.Username == userName).Include(o => o.UserInfo).FirstOrDefaultAsync());
+        }
+
         public async Task<UserModel> GetUserProfile(int id)
         {
             var user = await Context.tUsers.Where(o => o.UserId == id).FirstOrDefaultAsync();

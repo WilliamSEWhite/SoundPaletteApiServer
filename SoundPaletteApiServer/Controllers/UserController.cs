@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SoundPaletteApiServer.DataModels;
 using SoundPaletteApiServer.Facade;
 using SoundPaletteApiServer.Models;
 
@@ -18,6 +19,13 @@ namespace SoundPaletteApiServer.Controllers
         public async Task<IActionResult> LoginUser(int id)
         {
             var user = await userFacade.GetUser(id);
+            return Ok(user);
+        }
+
+        [HttpGet("get-user-by-name/{userName}")]
+        public async Task<IActionResult> GetUserByName(string userName)
+        {
+            var user = await userFacade.GetUserByName(userName);
             return Ok(user);
         }
 
