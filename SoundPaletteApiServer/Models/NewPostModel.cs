@@ -13,12 +13,11 @@
 
         public List<TagModel> PostTags { get; set; }
 
-        public string PostTextContent { get; set; }
         public List<string> PostUserTags { get; set; }
-        public string BackgroundColor { get; set; }
-        public string FontColour { get; set; }
+        public PostContentModel PostContent { get; set; }
 
-        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, string postTextContent, List<string> postUserTags, string backgroundColor, string fontColour)
+
+        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, List<string> postUserTags, PostContentModel postContent)
         {
             UserId = userId;
             PostTypeId = postTypeId;
@@ -28,10 +27,8 @@
             CreatedDate = createdDate;
             PublishDate = publishDate;
             PostTags = postTags;
-            PostTextContent = postTextContent;
             PostUserTags = postUserTags;
-            BackgroundColor = backgroundColor;
-            FontColour = fontColour;
+            PostContent = postContent;
         }
         public NewPostModel() { }
 

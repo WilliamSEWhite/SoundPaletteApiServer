@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SoundPaletteApiServer.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SoundPaletteApiServer.DataModels
 {
@@ -23,5 +24,14 @@ namespace SoundPaletteApiServer.DataModels
         }
 
         public tPostContent() { }
+        public tPostContent(PostContentModel content) 
+        {
+            PostTextContent = content.PostTextContent;
+            BackgroundColour = content.BackgroundColour;
+            FontColour = content.FontColour;
+            S3Token = string.Empty;
+
+        }
+
     }
 }

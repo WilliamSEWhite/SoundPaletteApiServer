@@ -19,6 +19,18 @@ namespace SoundPaletteApiServer.Models
         //public tUser User { get; set; }
 
         public FileModel() { }
+        public FileModel(int fileId, int fileTypeId, int userId, string fileName, string fileUrl, DateTime createdDate, DateTime publishDate, bool isActive)
+        {
+            FileId = fileId;
+            FileTypeId = fileTypeId;
+            UserId = userId;
+            FileName = fileName;
+            FileUrl = fileUrl;
+            CreatedDate = createdDate;
+            PublishDate = publishDate;
+            IsActive = isActive;
+        }
+
         /*public FileModel(int fileId, int fileTypeId, int userId, string fileName, string fileUrl, DateTime createdDate, DateTime publishDate, bool isActive, tFileType fileType, tUser user)
         {
             FileId = fileId;

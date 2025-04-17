@@ -12,9 +12,11 @@ namespace SoundPaletteApiServer.Models
         {
 
         }
-        public PostContentModel(string postTextContent)
+        public PostContentModel(string postTextContent, string backgroundColour, string fontColour)
         {
             PostTextContent = postTextContent;
+            BackgroundColour = backgroundColour;
+            FontColour = fontColour;
         }
         public PostContentModel(tPostContent content)
         {

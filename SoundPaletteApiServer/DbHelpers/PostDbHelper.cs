@@ -47,9 +47,7 @@ namespace SoundPaletteApiServer.DbHelpers
             switch (newPost.PostTypeId)
             {
                 case 1:
-                    content.PostTextContent = newPost.PostTextContent;
-                    content.BackgroundColour = newPost.BackgroundColor;
-                    content.FontColour = newPost.FontColour;
+                    return new tPostContent(newPost.PostContent);
                         break;
             }
             return content;
