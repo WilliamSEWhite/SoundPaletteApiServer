@@ -52,17 +52,12 @@ namespace SoundPaletteApiServer.Controllers
             return Ok(await postFacade.GetPostsByTag(userId, tagId));
         }
 
-        public async Task<IActionResult> SearchPosts()
-        {
-
-            return Ok();
-        }
 
 
         [HttpGet("get-trending-posts")]
-        public async Task<IActionResult> GetTrendingPosts([FromQuery] int userId)
+        public async Task<IActionResult> GetTrendingPosts([FromQuery] int userId, [FromQuery] string range)
         {
-            return Ok(await postFacade.GetTrendingPosts(userId));
+            return Ok(await postFacade.GetTrendingPosts(userId, range));
         }
 
         [HttpPost("create-post")]
@@ -79,6 +74,12 @@ namespace SoundPaletteApiServer.Controllers
             return Ok();
         }
 
+        [HttpGet("search-posts")]
+        public async Task<IActionResult> SearchPosts([FromQuery] int userId, [FromQuery] string searchTerm)
+        {
+            var posts = await postFacade.SearchPosts(userId, searchTerm);
+            return Ok(posts);
+        }
         public async Task<IActionResult> UpdatePost()
         {
 

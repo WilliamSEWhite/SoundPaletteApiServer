@@ -141,10 +141,23 @@ namespace SoundPaletteApiServer.DbHelpers
             return posts;
         }
 
-        public async Task<List<PostModel>> GetTrendingPosts(int userId, int timeSpan)
+        public async Task<List<PostModel>> GetTrendingPosts(int userId, string range)
         {
+            int timespan = 0;
+            switch (range)
+            {
+                case "Past Week":
+                    timespan = 7;
+                    break;
+                case "Past Month":
+                    timespan = 30;
+                    break;
+                case "Past Year":
+                    timespan = 365;
+                    break;
+            }
 
-            var date = DateTime.Now.AddDays(-30);
+            var date = timespan == 0 ? DateTime.MinValue : DateTime.Now.AddDays(-timespan);
 
             var posts = await
                 (
@@ -188,6 +201,21 @@ namespace SoundPaletteApiServer.DbHelpers
                     select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
+        }
+
+        public async Task<List<PostModel>> SearchPosts(int userId, string searchTerm)
+        {
+            var posts = await
+            (
+                from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                where post.UserId != userId && !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
+                orderby post.PostId descending
+                select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+            ).ToListAsync();
+            return posts;
+
         }
     }
 }

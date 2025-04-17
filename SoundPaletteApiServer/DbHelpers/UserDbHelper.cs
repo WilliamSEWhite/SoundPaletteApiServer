@@ -125,11 +125,21 @@ namespace SoundPaletteApiServer.DbHelpers
             }
         }
         
-        public async Task<List<string>> SearchUsers(int userId, string searchTerm)
+        public async Task<List<string>> SearchUsersLite(int userId, string searchTerm)
         {
             var users = await Context.tUsers.Where(o => o.UserId != userId && o.Username.ToLower().Contains(searchTerm.ToLower())).Select(o => o.Username).ToListAsync();
             return users;
         }
-
+        public async Task<List<UserSearchModel>> SearchUsers(int userId, string searchTerm)
+        {
+            var userProfile = await
+                (
+                    from profile in Context.tUserProfile.Include(o => o.User).ThenInclude(o => o.UserFollowers)
+                    where profile.UserId != userId && profile.User.Username.ToLower().Contains(searchTerm.ToLower())
+                    let isFollowing = profile.User.UserFollowers.Where(o => o.FollowerId == userId).Any()
+                    select new UserSearchModel(profile.User.Username, profile.FollowerCount, isFollowing)
+                ).ToListAsync();
+            return userProfile;
+        }
     }
 }

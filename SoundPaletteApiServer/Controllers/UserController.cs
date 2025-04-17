@@ -68,6 +68,12 @@ namespace SoundPaletteApiServer.Controllers
             await userFacade.UnfollowUser(followerId, followingUsername);
             return Ok();
         }
+        [HttpGet("search-users-lite")]
+        public async Task<IActionResult> SearchUsersLite([FromQuery] int userId, [FromQuery] string searchTerm)
+        {
+            var users = await userFacade.SearchUsersLite(userId, searchTerm);
+            return Ok(users);
+        }
         [HttpGet("search-users")]
         public async Task<IActionResult> SearchUsers([FromQuery] int userId, [FromQuery] string searchTerm)
         {
