@@ -45,6 +45,13 @@ namespace SoundPaletteApiServer.Controllers
         {
             return Ok(await postFacade.GetFollowingPosts(userId));
         }
+
+        [HttpGet("get-posts-by-tag")]
+        public async Task<IActionResult> GetPostsByTag([FromQuery] int userId, [FromQuery] int tagId)
+        {
+            return Ok(await postFacade.GetPostsByTag(userId, tagId));
+        }
+
         public async Task<IActionResult> SearchPosts()
         {
 

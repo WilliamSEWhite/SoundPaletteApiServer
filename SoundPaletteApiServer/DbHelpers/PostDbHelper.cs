@@ -30,7 +30,6 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
                 IsDeleted = false,
-
                 PostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
                 PostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
@@ -49,6 +48,8 @@ namespace SoundPaletteApiServer.DbHelpers
             {
                 case 1:
                     content.PostTextContent = newPost.PostTextContent;
+                    content.BackgroundColour = newPost.BackgroundColor;
+                    content.FontColour = newPost.FontColour;
                         break;
             }
             return content;
@@ -91,8 +92,6 @@ namespace SoundPaletteApiServer.DbHelpers
                 ).ToListAsync();
             return posts;
         }
-
-
 
         public async Task<List<PostModel>> GetPostsForUsername(int userId, string username)
         {
@@ -171,6 +170,20 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     where !post.IsDeleted
+                    orderby post.PostId descending
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                ).ToListAsync();
+            return posts;
+        }
+        public async Task<List<PostModel>> GetPostsByTag(int userId, int tagId)
+        {
+            var posts = await
+                (
+                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    where post.PostTags.Any(o => o.TagId == tagId)
+                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                    where post.UserId == userId && !post.IsDeleted
                     orderby post.PostId descending
                     select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();

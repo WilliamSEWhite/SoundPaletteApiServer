@@ -15,8 +15,10 @@
 
         public string PostTextContent { get; set; }
         public List<string> PostUserTags { get; set; }
+        public string BackgroundColor { get; set; }
+        public string FontColour { get; set; }
 
-        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, string postTextContent, List<string> postUserTags)
+        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, string postTextContent, List<string> postUserTags, string backgroundColor, string fontColour)
         {
             UserId = userId;
             PostTypeId = postTypeId;
@@ -28,6 +30,8 @@
             PostTags = postTags;
             PostTextContent = postTextContent;
             PostUserTags = postUserTags;
+            BackgroundColor = backgroundColor;
+            FontColour = fontColour;
         }
         public NewPostModel() { }
 
