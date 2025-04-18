@@ -32,7 +32,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsDeleted = false,
                 PostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
                 PostContent = CreatePostContent(newPost),
-                CreatedDate = newPost.CreatedDate,
+                CreatedDate = DateTime.Now,
                 PublishDate = newPost.PublishDate,
                 PostUserTags = await Context.tUsers.Where(o => newPost.PostUserTags.Contains(o.Username)).Select(o => new tPostUserTag(o.UserId)).ToListAsync()
 
@@ -64,79 +64,75 @@ namespace SoundPaletteApiServer.DbHelpers
         }
         public async Task<List<PostModel>> GetPostsForFeed(int userId)
         {
-            var posts = await
-                (
+            var posts =                 (
                     from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-
-                    where post.UserId != userId  && !post.IsDeleted
-                    orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    where post.UserId != userId
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync();
         }
         public async Task<List<PostModel>> GetPostsForUser(int userId)
         {
-            var posts = await 
+            var posts = 
                 (
-                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-
-                    where post.UserId == userId && !post.IsDeleted
-                    orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    from post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    where post.UserId == userId
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync();
         }
 
         public async Task<List<PostModel>> GetPostsForUsername(int userId, string username)
         {
-            var posts = await
+            var posts =  
                 (
-                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    orderby post.PostId descending
-                    where post.User.Username == username && !post.IsDeleted
-
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    from post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    where post.User.Username == username
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync();
         }
 
         public async Task<List<PostModel>> GetTaggedPostsForUsername(int userId, string username)
         {
-            var posts = await
+            var posts = 
                 (
-                    from postUserTags in Context.tPostUserTags
-                    let user = Context.tUsers.FirstOrDefault(o => o.Username == username )
-                    where postUserTags.UserId == user.UserId
-                    join post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User) on postUserTags.PostId equals post.PostId
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    where !post.IsDeleted
-                    orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    from postUserTags in Context.tPostUserTags.Include(o => o.User)
+                    where postUserTags.User.Username == username
+                    join post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    on postUserTags.PostId equals post.PostId
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync();
         }
 
         public async Task<List<PostModel>> GetSavedPostsForUser(int userId)
         {
-            var posts = await
+            var posts =
                 (
                     from postSaves in Context.tPostSaves
                     where postSaves.UserId == userId
-                    join post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User) on postSaves.PostId equals post.PostId
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    where !post.IsDeleted
-                    orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    join post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    on postSaves.PostId equals post.PostId
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync(); ;
         }
 
         public async Task<List<PostModel>> GetTrendingPosts(int userId, string range)
@@ -159,13 +155,16 @@ namespace SoundPaletteApiServer.DbHelpers
 
             var posts = await
                 (
-                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    from post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    where post.CreatedDate > date && !post.IsDeleted
                     let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-
-                    where !post.IsDeleted && post.CreatedDate > date
                     orderby post.LikeCount descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post, isLiked, isSaved)
                 ).ToListAsync();
             return posts;
         }
@@ -173,45 +172,62 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task<List<PostModel>> GetFollowingPosts(int userId)
         {
-            var posts = await
+            var posts = 
                 (
                     from userFollower in Context.tUserFollowers
                     where userFollower.FollowerId == userId
-                    join post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User) on userFollower.FollowingId equals post.UserId
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    where !post.IsDeleted
-                    orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    join post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    on userFollower.FollowingId equals post.UserId
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync(); ;
         }
         public async Task<List<PostModel>> GetPostsByTag(int userId, int tagId)
         {
-            var posts = await
+            var posts =
                 (
-                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
-                    where post.PostTags.Any(o => o.TagId == tagId)
-                    let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                    where post.UserId == userId && !post.IsDeleted
-                    orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-                ).ToListAsync();
-            return posts;
+                    from post in Context.tPosts
+                        .Include(o => o.PostContent)
+                        .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                        .Include(o => o.User)
+                        .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                    where post.PostTags.Any(o => o.TagId == tagId) && post.UserId != userId
+                    select post
+                );
+            return await SelectPosts(posts, userId).ToListAsync(); ;
         }
 
         public async Task<List<PostModel>> SearchPosts(int userId, string searchTerm)
         {
-            var posts = await
+            var posts =
             (
-                from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                from post in Context.tPosts
+                    .Include(o => o.PostContent)
+                    .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                    .Include(o => o.User).Include(o => o.PostUserTags)
+                    .ThenInclude(o => o.User)
+                where post.UserId != userId && !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
+                select post
+            );
+            return await SelectPosts(posts, userId).ToListAsync(); ;
+        }
+
+        
+        private IQueryable<PostModel> SelectPosts(IQueryable<tPost> tPosts, int userId)
+        {
+            var posts =
+            (
+                from post in tPosts
+                where !post.IsDeleted
                 let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
                 let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
-                where post.UserId != userId && !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
                 orderby post.PostId descending
-                select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
-            ).ToListAsync();
+                select new PostModel(post, isLiked, isSaved)
+            );
             return posts;
 
         }
