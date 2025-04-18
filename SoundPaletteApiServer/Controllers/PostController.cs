@@ -16,58 +16,58 @@ namespace SoundPaletteApiServer.Controllers
 
         //returns a list of posts to be displayed in Home/Explore
         [HttpGet("get-feed")]
-        public async Task<IActionResult> GetPostsForFeed([FromQuery] int userId)
+        public async Task<IActionResult> GetPostsForFeed([FromQuery] int userId, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetPostsForFeed(userId));
+            return Ok(await postFacade.GetPostsForFeed(userId, page));
         }//end GetPostsForFeed
 
         //returns a list of posts that were created by the user with id userId
         [HttpGet("get-user-posts")]
-        public async Task<IActionResult> GetPostsForUser([FromQuery] int userId)
+        public async Task<IActionResult> GetPostsForUser([FromQuery] int userId, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetPostsForUser(userId));
+            return Ok(await postFacade.GetPostsForUser(userId, page));
         }//end GetPostsForUser
 
         //returns a list of posts that were created by the user with username
         [HttpGet("get-username-posts")]
-        public async Task<IActionResult> GetPostsForUsername([FromQuery] int userId, [FromQuery] string username)
+        public async Task<IActionResult> GetPostsForUsername([FromQuery] int userId, [FromQuery] string username, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetPostsForUsername(userId, username));
+            return Ok(await postFacade.GetPostsForUsername(userId, username, page));
         }//end GetPostsForUsername
 
         //returns a list of posts that a user has been tagged in
         [HttpGet("get-tagged-username-posts")]
-        public async Task<IActionResult> GetTaggedPostsForUsername([FromQuery] int userId, [FromQuery] string username)
+        public async Task<IActionResult> GetTaggedPostsForUsername([FromQuery] int userId, [FromQuery] string username, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetTaggedPostsForUsername(userId, username));
+            return Ok(await postFacade.GetTaggedPostsForUsername(userId, username, page));
         }//end GetTaggedPostsForUsername
 
         //return a list of posts that a user has saved
         [HttpGet("get-user-saved-posts")]
-        public async Task<IActionResult> GetSavedPostsForUser([FromQuery] int userId)
+        public async Task<IActionResult> GetSavedPostsForUser([FromQuery] int userId, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetSavedPostsForUser(userId));
+            return Ok(await postFacade.GetSavedPostsForUser(userId, page));
         }//end GetSavedPostsForUser
 
         //returns a list of posts from users that userId is following
         [HttpGet("get-following-posts")]
-        public async Task<IActionResult> GetFollowingPosts([FromQuery] int userId)
+        public async Task<IActionResult> GetFollowingPosts([FromQuery] int userId, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetFollowingPosts(userId));
+            return Ok(await postFacade.GetFollowingPosts(userId, page));
         }//end GetFollowingPosts
 
         //returns a list of posts that include a given tag
         [HttpGet("get-posts-by-tag")]
-        public async Task<IActionResult> GetPostsByTag([FromQuery] int userId, [FromQuery] int tagId)
+        public async Task<IActionResult> GetPostsByTag([FromQuery] int userId, [FromQuery] int tagId, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetPostsByTag(userId, tagId));
+            return Ok(await postFacade.GetPostsByTag(userId, tagId, page));
         }//end GetPostsByTag
 
         //returns a list of posts sorted by number of likes that have been created withing range
         [HttpGet("get-trending-posts")]
-        public async Task<IActionResult> GetTrendingPosts([FromQuery] int userId, [FromQuery] string range)
+        public async Task<IActionResult> GetTrendingPosts([FromQuery] int userId, [FromQuery] string range, [FromQuery] int page)
         {
-            return Ok(await postFacade.GetTrendingPosts(userId, range));
+            return Ok(await postFacade.GetTrendingPosts(userId, range, page));
         }//end GetTrendingPosts
 
         //create post in database
@@ -88,11 +88,20 @@ namespace SoundPaletteApiServer.Controllers
 
         //return list of posts whos caption contains searchTerm
         [HttpGet("search-posts")]
-        public async Task<IActionResult> SearchPosts([FromQuery] int userId, [FromQuery] string searchTerm)
+        public async Task<IActionResult> SearchPosts([FromQuery] int userId, [FromQuery] string searchTerm, [FromQuery] int page)
         {
-            var posts = await postFacade.SearchPosts(userId, searchTerm);
+            var posts = await postFacade.SearchPosts(userId, searchTerm, page);
             return Ok(posts);
         }//end SearchPosts
+
+
+        //returns post based on id
+        [HttpGet("get-post")]
+        public async Task<IActionResult> GetPost([FromQuery] int userId, [FromQuery] int postId)
+        {
+            var post = await postFacade.GetPost(userId, postId);
+            return Ok(post);
+        }//end GetPost
 
         public async Task<IActionResult> UpdatePost()
         {

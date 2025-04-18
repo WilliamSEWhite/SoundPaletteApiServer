@@ -62,16 +62,16 @@ namespace SoundPaletteApiServer.DbHelpers
                 await Context.SaveChangesAsync();
             }
         }
-        public async Task<List<PostModel>> GetPostsForFeed(int userId)
+        public async Task<List<PostModel>> GetPostsForFeed(int userId, int page)
         {
             var posts =                 (
                     from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
                     where post.UserId != userId
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync();
+            return await SelectPosts(posts, userId, page).ToListAsync();
         }
-        public async Task<List<PostModel>> GetPostsForUser(int userId)
+        public async Task<List<PostModel>> GetPostsForUser(int userId, int page)
         {
             var posts = 
                 (
@@ -83,10 +83,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     where post.UserId == userId
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync();
+            return await SelectPosts(posts, userId, page).ToListAsync();
         }
 
-        public async Task<List<PostModel>> GetPostsForUsername(int userId, string username)
+        public async Task<List<PostModel>> GetPostsForUsername(int userId, string username, int page)
         {
             var posts =  
                 (
@@ -98,10 +98,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     where post.User.Username == username
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync();
+            return await SelectPosts(posts, userId, page).ToListAsync();
         }
 
-        public async Task<List<PostModel>> GetTaggedPostsForUsername(int userId, string username)
+        public async Task<List<PostModel>> GetTaggedPostsForUsername(int userId, string username, int page)
         {
             var posts = 
                 (
@@ -115,10 +115,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     on postUserTags.PostId equals post.PostId
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync();
+            return await SelectPosts(posts, userId, page).ToListAsync();
         }
 
-        public async Task<List<PostModel>> GetSavedPostsForUser(int userId)
+        public async Task<List<PostModel>> GetSavedPostsForUser(int userId, int page)
         {
             var posts =
                 (
@@ -132,10 +132,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     on postSaves.PostId equals post.PostId
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync(); ;
+            return await SelectPosts(posts, userId, page).ToListAsync(); ;
         }
 
-        public async Task<List<PostModel>> GetTrendingPosts(int userId, string range)
+        public async Task<List<PostModel>> GetTrendingPosts(int userId, string range, int page)
         {
             int timespan = 0;
             switch (range)
@@ -152,6 +152,7 @@ namespace SoundPaletteApiServer.DbHelpers
             }
 
             var date = timespan == 0 ? DateTime.MinValue : DateTime.Now.AddDays(-timespan);
+            int pageSize = 10;
 
             var posts = await
                 (
@@ -165,12 +166,12 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     orderby post.LikeCount descending
                     select new PostModel(post, isLiked, isSaved)
-                ).ToListAsync();
+                ).Skip(page).Take(page * pageSize).ToListAsync();
             return posts;
         }
 
 
-        public async Task<List<PostModel>> GetFollowingPosts(int userId)
+        public async Task<List<PostModel>> GetFollowingPosts(int userId, int page)
         {
             var posts = 
                 (
@@ -184,9 +185,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     on userFollower.FollowingId equals post.UserId
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync(); ;
+            return await SelectPosts(posts, userId, page).ToListAsync(); ;
         }
-        public async Task<List<PostModel>> GetPostsByTag(int userId, int tagId)
+        public async Task<List<PostModel>> GetPostsByTag(int userId, int tagId, int page)
         {
             var posts =
                 (
@@ -198,10 +199,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     where post.PostTags.Any(o => o.TagId == tagId) && post.UserId != userId
                     select post
                 );
-            return await SelectPosts(posts, userId).ToListAsync(); ;
+            return await SelectPosts(posts, userId, page).ToListAsync(); ;
         }
 
-        public async Task<List<PostModel>> SearchPosts(int userId, string searchTerm)
+        public async Task<List<PostModel>> SearchPosts(int userId, string searchTerm, int page)
         {
             var posts =
             (
@@ -213,12 +214,30 @@ namespace SoundPaletteApiServer.DbHelpers
                 where post.UserId != userId && !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
                 select post
             );
-            return await SelectPosts(posts, userId).ToListAsync(); ;
+            return await SelectPosts(posts, userId, page).ToListAsync(); ;
         }
 
-        
-        private IQueryable<PostModel> SelectPosts(IQueryable<tPost> tPosts, int userId)
+        public async Task<PostModel> GetPost(int userId, int postId)
         {
+            var post = await
+            (
+                from p in Context.tPosts
+                    .Include(o => o.PostContent)
+                    .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                    .Include(o => o.User).Include(o => o.PostUserTags)
+                    .ThenInclude(o => o.User)
+                let isLiked = Context.tPostLikes.Any(o => o.PostId == p.PostId && o.UserId == userId)
+                let isSaved = Context.tPostSaves.Any(o => o.PostId == p.PostId && o.UserId == userId)
+                where p.PostId == postId
+                select new PostModel(p, isLiked, isSaved)
+            ).FirstOrDefaultAsync();
+            return post;
+        }
+
+
+        private IQueryable<PostModel> SelectPosts(IQueryable<tPost> tPosts, int userId, int page)
+        {
+            int pageSize = 10;
             var posts =
             (
                 from post in tPosts
@@ -227,7 +246,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                 orderby post.PostId descending
                 select new PostModel(post, isLiked, isSaved)
-            );
+            ).Skip(page * pageSize).Take(pageSize);
             return posts;
 
         }
