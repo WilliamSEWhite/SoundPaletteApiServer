@@ -3,9 +3,12 @@ GO
 
 
 /* ----- USERS ----- */
-
+SELECT * FROM dbo.tUsers;
 INSERT INTO dbo.tUsers (Username, Password)
 VALUES
+    ('user1', 'pass1!'),
+    ('user2', 'pass2!'),
+    ('user3', 'pass3!'),
     ('wayne34', '(7XG#fqx'),
     ('ybryant', '(7JCIBba'),
     ('teresa67', 'IDxZ%4Ek'),
@@ -18,46 +21,70 @@ VALUES
     ('devon19', '%d71kNnq'),
     ('tarasmith', 'vQ_4ARwm'),
     ('stacypitts', 'D%#6AyPF'),
-    ('user2', 'pass2!'),
     ('carol36', 'R(0ENgfW'),
-    ('user3', 'pass3!'),
     ('amber27', 'vm+$0Eit'),
     ('petersenclarence', '#Y@@9Fbn'),
     ('kellihenderson', 'f+4O7UtF'),
-    ('user1', 'pass1!'),
     ('qjohnston', '%70zSR(n');
 SELECT * FROM dbo.tUsers;
 
 
 /* ----- USER INFO ----- */
-
+SELECT * FROM dbo.tUserInfos;
 INSERT INTO dbo.tUserInfos (userId, locationId, email, phone, dOB, dateCreated)
 VALUES
-    (1, 2, 'wayne34@example.com', '555-01000', '1986-09-07', '2022-06-29T00:00:00'),
-    (2, 2, 'ybryant@example.com', '555-01001', '1983-03-15', '2021-05-03T00:00:00'),
-    (3, 2, 'teresa67@example.com', '555-01002', '1993-10-18', '2024-05-03T00:00:00'),
-    (4, 5, 'wardcynthia@example.com', '555-01003', '1992-12-11', '2023-06-19T00:00:00'),
-    (5, 1, 'manuel32@example.com', '555-01004', '2001-01-09', '2024-11-11T00:00:00'),
-    (6, 3, 'johnnywalker@example.com', '555-01005', '1998-01-20', '2022-07-12T00:00:00'),
-    (7, 5, 'jmartin@example.com', '555-01006', '2004-03-22', '2023-10-09T00:00:00'),
-    (8, 4, 'benjamin84@example.com', '555-01007', '1983-08-10', '2024-05-09T00:00:00'),
-    (9, 1, 'floydfelicia@example.com', '555-01008', '1999-05-19', '2025-02-13T00:00:00'),
-    (10, 3, 'devon19@example.com', '555-01009', '1991-03-26', '2021-02-22T00:00:00'),
-    (11, 1, 'tarasmith@example.com', '555-01010', '1990-04-08', '2024-10-12T00:00:00'),
-    (12, 5, 'stacypitts@example.com', '555-01011', '1980-12-05', '2025-04-16T00:00:00'),
-    (13, 3, 'user2@example.com', '555-01012', '2005-11-06', '2021-03-24T00:00:00'),
-    (14, 2, 'carol36@example.com', '555-01013', '2001-02-07', '2023-11-29T00:00:00'),
-    (15, 4, 'user3@example.com', '555-01014', '1992-06-23', '2022-01-07T00:00:00'),
-    (16, 5, 'amber27@example.com', '555-01015', '1999-07-21', '2024-07-24T00:00:00'),
-    (17, 4, 'petersenclarence@example.com', '555-01016', '1984-02-03', '2023-08-21T00:00:00'),
-    (18, 3, 'kellihenderson@example.com', '555-01017', '1998-04-26', '2022-11-14T00:00:00'),
-    (19, 3, 'user1@example.com', '555-01018', '1984-09-09', '2021-11-26T00:00:00'),
+    (1, 3, 'user1@example.com', '555-01018', '1984-09-09', '2021-11-26T00:00:00'),
+    (2, 3, 'user2@example.com', '555-01012', '2005-11-06', '2021-03-24T00:00:00'),
+    (3, 4, 'user3@example.com', '555-01014', '1992-06-23', '2022-01-07T00:00:00'),
+    (4, 2, 'wayne34@example.com', '555-01000', '1986-09-07', '2022-06-29T00:00:00'),
+    (5, 2, 'ybryant@example.com', '555-01001', '1983-03-15', '2021-05-03T00:00:00'),
+    (6, 2, 'teresa67@example.com', '555-01002', '1993-10-18', '2024-05-03T00:00:00'),
+    (7, 5, 'wardcynthia@example.com', '555-01003', '1992-12-11', '2023-06-19T00:00:00'),
+    (8, 1, 'manuel32@example.com', '555-01004', '2001-01-09', '2024-11-11T00:00:00'),
+    (9, 3, 'johnnywalker@example.com', '555-01005', '1998-01-20', '2022-07-12T00:00:00'),
+    (10, 5, 'jmartin@example.com', '555-01006', '2004-03-22', '2023-10-09T00:00:00'),
+    (11, 4, 'benjamin84@example.com', '555-01007', '1983-08-10', '2024-05-09T00:00:00'),
+    (12, 1, 'floydfelicia@example.com', '555-01008', '1999-05-19', '2025-02-13T00:00:00'),
+    (13, 3, 'devon19@example.com', '555-01009', '1991-03-26', '2021-02-22T00:00:00'),
+    (14, 1, 'tarasmith@example.com', '555-01010', '1990-04-08', '2024-10-12T00:00:00'),
+    (15, 5, 'stacypitts@example.com', '555-01011', '1980-12-05', '2025-04-16T00:00:00'),
+    (16, 2, 'carol36@example.com', '555-01013', '2001-02-07', '2023-11-29T00:00:00'),
+    (17, 5, 'amber27@example.com', '555-01015', '1999-07-21', '2024-07-24T00:00:00'),
+    (18, 4, 'petersenclarence@example.com', '555-01016', '1984-02-03', '2023-08-21T00:00:00'),
+    (19, 3, 'kellihenderson@example.com', '555-01017', '1998-04-26', '2022-11-14T00:00:00'),
     (20, 3, 'qjohnston@example.com', '555-01019', '1998-06-19', '2024-11-21T00:00:00');
 SELECT * FROM dbo.tUserInfos;
 
 
-/* ----- POSTS ----- */
+/* ----- USER PROFILE ----- */
+SELECT * FROM dbo.tUserProfiles;
+INSERT INTO dbo.tUserProfiles (userId, bio, picture)
+VALUES
+    (1, 'Painter | Digital Artist | Creator. Capturing moments through color & texture. Commissions open', '/my/profilePic.jpg'),
+    (2, 'Words are my canvas. Sharing stories, thoughts, and raw emotions', '/my/profilePic.jpg'),
+    (3, 'Beatmaker | Producer | Mixer. Turning ideas into tracks. Always down for collabs – hit me up!', '/my/profilePic.jpg'),
+    (4, 'Sharing my soul through sound. New single out now!', '/my/profilePic.jpg'),
+    (5, 'Illustrator with a passion for surreal art. Currently working on a graphic novel.', '/my/profilePic.jpg'),
+    (6, 'Singer-songwriter. Acoustic vibes and honest lyrics. Coffee-fueled creativity.', '/my/profilePic.jpg'),
+    (7, 'Photography and poetry lover. Capturing stories with every click.', '/my/profilePic.jpg'),
+    (8, 'Multi-instrumentalist blending jazz with lo-fi textures.', '/my/profilePic.jpg'),
+    (9, 'Urban sketcher | Muralist | Exploring identity through line and form.', '/my/profilePic.jpg'),
+    (10, 'Electronic producer. Creating atmospheres and emotions with synths.', '/my/profilePic.jpg'),
+    (11, 'Indie filmmaker and visual storyteller. DM me to collab!', '/my/profilePic.jpg'),
+    (12, 'Writing music and filming life’s little details. A creative in constant motion.', '/my/profilePic.jpg'),
+    (13, 'Painter of dreams and digital landscapes. Sometimes I sculpt.', '/my/profilePic.jpg'),
+    (14, 'Designing immersive worlds through soundscapes. Let’s build together.', '/my/profilePic.jpg'),
+    (15, 'Creative director & collage artist. Passionate about visual storytelling.', '/my/profilePic.jpg'),
+    (16, 'Aspiring author and podcast host. Sharing life, one word at a time.', '/my/profilePic.jpg'),
+    (17, 'Pop vocalist and vocal coach. Empowering others through music.', '/my/profilePic.jpg'),
+    (18, 'Sound engineer with a love for analog gear and crisp recordings.', '/my/profilePic.jpg'),
+    (19, 'Visual artist with a focus on mixed media and feminist themes.', '/my/profilePic.jpg'),
+    (20, 'Just a creative soul making noise and colour in the digital space.', '/my/profilePic.jpg');
+SELECT * FROM dbo.tUserProfiles;
 
+
+/* ----- POSTS ----- */
+SELECT * FROM dbo.tPosts;
 INSERT INTO dbo.tPosts (userId, postTypeId, Caption, IsPremium, IsMature, IsDeleted, CreatedDate, PublishDate)
 VALUES
     (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
@@ -129,7 +156,8 @@ VALUES
     (11, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
     (4, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
     (10, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
-    (14, 1, 'This one`s for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     (6, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 1, 'This one`s for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+    (6, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
     (17, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
     (16, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
     (15, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
@@ -213,108 +241,109 @@ SELECT * FROM dbo.tPosts;
 
 
 /* ----- POST CONTENT ----- */
-
+SELECT * FROM dbo.tPostContents;
 INSERT INTO dbo.tPostContents (postId, postTextContent, s3Token, backgroundColour, fontColour)
 VALUES
-    (1, 'Sound + Sketch = my Sunday ritual.', NULL, '#4414e4', '#620a14'),
-    (2, 'Taking a beat to reflect — literally.', NULL, '#9b2324', '#f21149'),
-    (3, 'Exploring new chords and colours today.', NULL, '#9dda29', '#f47017'),
-    (4, 'Exploring new chords and colours today.', NULL, '#2cc222', '#8e39b9'),
-    (5, 'Experimenting with delay and depth.', NULL, '#6c163f', '#dd4880'),
-    (6, 'Can art and sound collide more perfectly?', NULL, '#c4e2dd', '#e560cb'),
-    (7, 'In the middle of a melody and brushstroke.', NULL, '#1f8b5c', '#1a0351'),
-    (8, 'Who wants to collab on a visual album?', NULL, '#7b0e25', '#f31056'),
-    (9, 'A new riff, a new line, a new expression.', NULL, '#0eb1ef', '#8953f3'),
-    (10, 'Recording vocals and emotions together.', NULL, '#ea1bf3', '#befa86'),
-    (11, 'Spilled coffee and creativity.', NULL, '#8a36dd', '#c0fafd'),
-    (12, 'Every note and stroke tells a story.', NULL, '#d703e8', '#427f4a'),
-    (13, 'In the studio or the studio apartment?', NULL, '#78f60d', '#0a2f01'),
-    (14, 'A new riff, a new line, a new expression.', NULL, '#85d18d', '#724d6e'),
-    (15, 'Exploring new chords and colours today.', NULL, '#0a8e82', '#54ce0e'),
-    (16, 'In the studio or the studio apartment?', NULL, '#a4dba0', '#f52d35'),
-    (17, 'Every note and stroke tells a story.', NULL, '#f504fb', '#fc7f73'),
-    (18, 'Who wants to collab on a visual album?', NULL, '#935fda', '#b559bd'),
-    (19, 'Sound + Sketch = my Sunday ritual.', NULL, '#ca13f9', '#b8c096'),
-    (20, 'Just uploaded a rough draft — feedback welcome!', NULL, '#0f5de5', '#7356a7'),
-    (21, 'This ones for the late night creators.', NULL, '#740304', '#fc90a1'),
-    (22, 'Feeling inspired by the city sounds and sights.', NULL, '#a372e4', '#fbd772'),
-    (23, 'Sound + Sketch = my Sunday ritual.', NULL, '#eeee3d', '#437fd0'),
-    (24, 'Layering textures like harmonies.', NULL, '#661539', '#52f4ac'),
-    (25, 'In the studio or the studio apartment?', NULL, '#5ac4fb', '#25699c'),
-    (26, 'Just uploaded a rough draft — feedback welcome!', NULL, '#093066', '#89df7a'),
-    (27, 'Just uploaded a rough draft — feedback welcome!', NULL, '#3a112b', '#f49d41'),
-    (28, 'Every note and stroke tells a story.', NULL, '#95c8f8', '#780cb2'),
-    (29, 'Layering textures like harmonies.', NULL, '#34619e', '#c3a6e7'),
-    (30, 'Sketching ideas while looping my beat.', NULL, '#b7a74d', '#398960'),
-    (31, 'In the studio or the studio apartment?', NULL, '#2795f0', '#a1b4f2'),
-    (32, 'Looking for someone to add vocals to this.', NULL, '#19b5f9', '#5635ed'),
-    (33, 'Taking a beat to reflect — literally.', NULL, '#c5d3bf', '#4328b4'),
-    (34, 'Recording vocals and emotions together.', NULL, '#b5be2a', '#f06f16'),
-    (35, 'Exploring new chords and colours today.', NULL, '#ab61bf', '#bd00ad'),
-    (36, 'Just uploaded a rough draft — feedback welcome!', NULL, '#90c4c2', '#75bdb4'),
-    (37, 'Exploring new chords and colours today.', NULL, '#cc3d5c', '#40128c'),
-    (38, 'Spilled coffee and creativity.', NULL, '#9c2943', '#7e6557'),
-    (39, 'Who wants to collab on a visual album?', NULL, '#ad2c4a', '#69731f'),
-    (40, 'Feeling inspired by the city sounds and sights.', NULL, '#c41349', '#622b57'),
-    (41, 'Just uploaded a rough draft — feedback welcome!', NULL, '#084eb7', '#e98f29'),
-    (42, 'Looking for someone to add vocals to this.', NULL, '#8fe88f', '#ad915c'),
-    (43, 'Spilled coffee and creativity.', NULL, '#b0291b', '#8b94d8'),
-    (44, 'Exploring new chords and colours today.', NULL, '#b5e55d', '#5e1623'),
-    (45, 'Sketching ideas while looping my beat.', NULL, '#a2ef77', '#994413'),
-    (46, 'Looking for someone to add vocals to this.', NULL, '#f3fe5a', '#229e24'),
-    (47, 'Recording vocals and emotions together.', NULL, '#e4e730', '#775f7c'),
-    (48, 'Every note and stroke tells a story.', NULL, '#c825be', '#8334db'),
-    (49, 'Taking a beat to reflect — literally.', NULL, '#12e733', '#222f3c'),
-    (50, 'Sketching ideas while looping my beat.', NULL, '#7bfc1b', '#7483fa'),
-    (51, 'Recording vocals and emotions together.', NULL, '#b8dcb8', '#8e53f6'),
-    (52, 'Experimenting with delay and depth.', NULL, '#a31845', '#085168'),
-    (53, 'Feeling inspired by the city sounds and sights.', NULL, '#1049d8', '#8aeda4'),
-    (54, 'Feeling inspired by the city sounds and sights.', NULL, '#03bf0e', '#5575a5'),
-    (55, 'Every note and stroke tells a story.', NULL, '#65c156', '#d0736d'),
-    (56, 'Layering textures like harmonies.', NULL, '#de6744', '#e9f4da'),
-    (57, 'Can art and sound collide more perfectly?', NULL, '#5d8836', '#645dd3'),
-    (58, 'Sound + Sketch = my Sunday ritual.', NULL, '#6caeca', '#81e9a1'),
-    (59, 'New track, new palette, same passion.', NULL, '#bfb9d3', '#07a0c3'),
-    (60, 'A new riff, a new line, a new expression.', NULL, '#10adb1', '#c7e064'),
-    (61, 'Experimenting with delay and depth.', NULL, '#ff1e68', '#d5d53a'),
-    (62, 'Feeling inspired by the city sounds and sights.', NULL, '#c73cc9', '#a027d1'),
-    (63, 'Can art and sound collide more perfectly?', NULL, '#6038ee', '#10b948'),
-    (64, 'Posted a concept sketch. Thoughts?', NULL, '#ee74c8', '#177209'),
-    (65, 'Experimenting with delay and depth.', NULL, '#e4ceb2', '#48b643'),
-    (66, 'Feeling inspired by the city sounds and sights.', NULL, '#f44797', '#e3320f'),
-    (67, 'Feeling inspired by the city sounds and sights.', NULL, '#63af0d', '#2e5efc'),
-    (68, 'Recording vocals and emotions together.', NULL, '#81e1fb', '#df1162'),
-    (69, 'Exploring new chords and colours today.', NULL, '#82590a', '#c19b46'),
-    (70, 'This ones for the late night creators.', NULL, '#dc5353', '#2183b0'),                                                                                                                                                                                                                                                                                                                                                                                                                                                (71, 'A new riff, a new line, a new expression.', NULL, '#2465fe', '#2bcc86'),
-    (72, 'Just uploaded a rough draft — feedback welcome!', NULL, '#40a9db', '#745055'),
-    (73, 'Sound + Sketch = my Sunday ritual.', NULL, '#4a924e', '#11cb16'),
-    (74, 'Can art and sound collide more perfectly?', NULL, '#d21e8d', '#af71f9'),
-    (75, 'Feeling inspired by the city sounds and sights.', NULL, '#0f60f0', '#1f26db'),
-    (76, 'In the studio or the studio apartment?', NULL, '#5204a1', '#24c661'),
-    (77, 'Sound + Sketch = my Sunday ritual.', NULL, '#036e01', '#69f1c6'),
-    (78, 'Looking for someone to add vocals to this.', NULL, '#fb02a6', '#90e9a7'),
-    (79, 'Sound + Sketch = my Sunday ritual.', NULL, '#9f7873', '#12a0f4'),
-    (80, 'Posted a concept sketch. Thoughts?', NULL, '#990661', '#5b6dcc'),
-    (81, 'Layering textures like harmonies.', NULL, '#f0a56e', '#f935b8'),
-    (82, 'Just uploaded a rough draft — feedback welcome!', NULL, '#ba3a49', '#38a168'),
-    (83, 'Taking a beat to reflect — literally.', NULL, '#90658e', '#e94919'),
-    (84, 'New track, new palette, same passion.', NULL, '#64a8bc', '#9d1db5'),
-    (85, 'Sound + Sketch = my Sunday ritual.', NULL, '#7b2fbb', '#0e47e0'),
-    (86, 'Recording vocals and emotions together.', NULL, '#e76890', '#685a18'),
-    (87, 'Exploring new chords and colours today.', NULL, '#3954a8', '#3a4037'),
-    (88, 'Just uploaded a rough draft — feedback welcome!', NULL, '#6fdd03', '#89e068'),
-    (89, 'Spilled coffee and creativity.', NULL, '#684908', '#e3e901'),
-    (90, 'Layering textures like harmonies.', NULL, '#e092b8', '#aa0e53'),
-    (91, 'Looking for someone to add vocals to this.', NULL, '#9950e6', '#58e0ea'),
-    (92, 'Exploring new chords and colours today.', NULL, '#d852e9', '#8bff3f'),
-    (93, 'New track, new palette, same passion.', NULL, '#860286', '#51a414'),
-    (94, 'Looking for someone to add vocals to this.', NULL, '#efba87', '#f249de'),
-    (95, 'Feeling inspired by the city sounds and sights.', NULL, '#97f779', '#f06923'),
-    (96, 'Posted a concept sketch. Thoughts?', NULL, '#97efe5', '#1cf13e'),
-    (97, 'Who wants to collab on a visual album?', NULL, '#b86813', '#db2777'),
-    (98, 'New track, new palette, same passion.', NULL, '#0cd1ea', '#d4ba0f'),
-    (99, 'Feeling inspired by the city sounds and sights.', NULL, '#72e236', '#e81373'),
-    (100, 'A new riff, a new line, a new expression.', NULL, '#bf8c5f', '#fe2985'),
+(1, 'Melodies on canvas, colours in chords.', NULL, '#c527bd', '#e4154c'),
+(2, 'My brushes hum, my chords dance.', NULL, '#9d1e3f', '#9e3047'),
+(3, 'Scribbling beats between thoughts.', NULL, '#41651f', '#55fc99'),
+(4, 'Sonic stories in acrylic strokes.', NULL, '#8c493d', '#f501b2'),
+(5, 'Freestyling with ink and imagination.', NULL, '#56148a', '#25f9d5'),
+(6, 'Where rhythms meet reflections.', NULL, '#dc2800', '#2b3674'),
+(7, 'Painting silence with loops and layers.', NULL, '#4832c9', '#1cb7e4'),
+(8, 'Creative chaos: my favourite vibe.', NULL, '#a9ef45', '#fbc11a'),
+(9, 'Basslines and brushstrokes collide here.', NULL, '#6bbfc5', '#33e326'),
+(10, 'Finding harmony in hues and harmonics.', NULL, '#87f47c', '#ad3a9d'),
+(11, 'Just vibing with synths and sketchpads.', NULL, '#57591a', '#0b4b4e'),
+(12, 'Looped a melody, drafted a dream.', NULL, '#56af5d', '#ca87bf'),
+(13, 'Mixing textures like a soundboard.', NULL, '#1a1bba', '#c100f6'),
+(14, 'Each note is a new colour today.', NULL, '#7f9881', '#8ada35'),
+(15, 'Rough sketch, raw sound, real me.', NULL, '#901bd8', '#89a17c'),
+(16, 'Harmonizing paint with poetry.', NULL, '#7eb879', '#f7b418'),
+(17, 'Jamming ideas into forms and frequencies.', NULL, '#cb2f08', '#d049d9'),
+(18, 'Where vision meets revision.', NULL, '#de64d1', '#fdf6e1'),
+(19, 'My track just got a visual twin.', NULL, '#57a075', '#292f77'),
+(20, 'Layered sounds, layered meanings.', NULL, '#12f72f', '#4a494e'),
+(21, 'Recorded imperfections make the perfect take.', NULL, '#e57db6', '#414839'),
+(22, 'Collage of chords and concepts.', NULL, '#483b76', '#a863a5'),
+(23, 'Pencilling in progress, literally.', NULL, '#4b2e89', '#dca044'),
+(24, 'Musical musings meet visual vibes.', NULL, '#0b4330', '#491cf1'),
+(25, 'Brushstrokes that echo beats.', NULL, '#7bfc61', '#dc9bb5'),
+(26, 'Turning feelings into frequencies and frames.', NULL, '#e1ea5b', '#6838ad'),
+(27, 'Soundtrack of a sketchbook.', NULL, '#90f20f', '#b65d61'),
+(28, 'Improvising on both canvas and console.', NULL, '#e5a250', '#81664e'),
+(29, 'Today’s vibe: unfiltered expression.', NULL, '#a93510', '#6399b4'),
+(30, 'Freehand meets freestyle.', NULL, '#85a25e', '#e5bcc1'),
+(31, 'Making art out of mistakes.', NULL, '#600a5e', '#92ca69'),
+(32, 'Sketch. Play. Repeat.', NULL, '#ebf4b4', '#dfad9c'),
+(33, 'Textures that echo through headphones.', NULL, '#86aa00', '#d311cf'),
+(34, 'Painting with a rhythm.', NULL, '#97a2a2', '#4d9a53'),
+(35, 'Syncing strokes with soundwaves.', NULL, '#7c6791', '#6df419'),
+(36, 'No rules, just resonance.', NULL, '#093e19', '#97614e'),
+(37, 'Each layer is a lyric.', NULL, '#7630fb', '#302596'),
+(38, 'Dreams drafted in decibels and ink.', NULL, '#8a0cd9', '#9965ee'),
+(39, 'Looping through the palette of emotion.', NULL, '#8b27c9', '#130710'),
+(40, 'My workspace? Just vibes and vision.', NULL, '#435448', '#a06bea'),
+(41, 'Creativity: now in surround sound.', NULL, '#133cff', '#6af4b8'),
+(42, 'Artistic spillover in progress.', NULL, '#7093b4', '#84c097'),
+(43, 'Echoes of inspiration in every frame.', NULL, '#a220e3', '#a5f2af'),
+(44, 'Still sketching, still sampling.', NULL, '#4c217f', '#664e4e'),
+(45, 'Drawing the chorus of today.', NULL, '#08eb36', '#754a6f'),
+(46, 'Uploading inspiration in real time.', NULL, '#b9bcc7', '#b72c90'),
+(47, 'Another rough take, another real moment.', NULL, '#1abb82', '#c6c065'),
+(48, 'Colour grading my mood.', NULL, '#94a3ce', '#d39f76'),
+(49, 'Every chord finds its canvas.', NULL, '#427a51', '#79e52f'),
+(50, 'Mic check, brush check.', NULL, '#f1e640', '#c446b4'),
+(51, 'Creative fusion happening here.', NULL, '#4a3c05', '#512685'),
+(52, 'From silence to splash in seconds.', NULL, '#52ca8c', '#392877'),
+(53, 'Time to remix my sketchbook.', NULL, '#5bd21f', '#e520ee'),
+(54, 'Sound-checking my soul.', NULL, '#eb8cda', '#952304'),
+(55, 'Pitched a hue, sketched a hook.', NULL, '#c91732', '#8df6f6'),
+(56, 'No map, just melody and motion.', NULL, '#45e082', '#0b2734'),
+(57, 'Collaboration canvas is wide open.', NULL, '#dbe7b9', '#158a79'),
+(58, 'Art jams over coffee and chords.', NULL, '#8c5adf', '#1fad2d'),
+(59, 'Prepping the next track with a twist of turquoise.', NULL, '#ebbef8', '#7c4032'),
+(60, 'Doodling to the beat of my own drum.', NULL, '#c8a8b5', '#ad6ad0'),
+(61, 'Recording a vibe, not just a verse.', NULL, '#879604', '#c44f63'),
+(62, 'My gallery starts with a loop.', NULL, '#213016', '#aa7244'),
+(63, 'Late night layering session.', NULL, '#86aece', '#950a48'),
+(64, 'Brush dipped, mic flipped.', NULL, '#cf31f6', '#075b0f'),
+(65, 'Sketches of sound, whispers of paint.', NULL, '#26c1a5', '#8f9005'),
+(66, 'Post-production meets post-modernism.', NULL, '#ab632d', '#845cf7'),
+(67, 'Nothing’s finished, everything’s expressive.', NULL, '#51a6e5', '#a61ec9'),
+(68, 'Palette in one hand, passion in the other.', NULL, '#cd548c', '#cf9945'),
+(69, 'Soundtrack to my scattered thoughts.', NULL, '#4aeb03', '#f7bc9c'),
+(70, 'Tuning my canvas.', NULL, '#2dc616', '#e0957b'),
+(71, 'Vocal takes and visual breaks.', NULL, '#3c08f8', '#ac57d0'),
+(72, 'Art in draft mode. Just like me.', NULL, '#18219e', '#6deeab'),
+(73, 'Colourful chords and chaotic charm.', NULL, '#805c11', '#e6eec4'),
+(74, 'Sampling silence between strokes.', NULL, '#6c15ee', '#39f2bd'),
+(75, 'Fresh drop: feelings.', NULL, '#e3a47d', '#e84def'),
+(76, 'Shared my process, not just the product.', NULL, '#11e574', '#69d1c0'),
+(77, 'Catching creativity before it fades.', NULL, '#6aeeff', '#1a2001'),
+(78, 'Storyboarded a melody today.', NULL, '#9827ca', '#6c983d'),
+(79, 'Painting what my track can’t say.', NULL, '#e87f4c', '#c734d6'),
+(80, 'Echoed thoughts in a colourful key.', NULL, '#67818d', '#e59faf'),
+(81, 'New post. New pulse.', NULL, '#77a24f', '#646ad2'),
+(82, 'Syncing sound with sentiment.', NULL, '#36c23c', '#96016a'),
+(83, 'That moment when art makes noise.', NULL, '#1506ec', '#d800d7'),
+(84, 'Trying a new angle. Visually. Sonically.', NULL, '#b5014d', '#028309'),
+(85, 'Art doesn’t need perfection. Just honesty.', NULL, '#805fcb', '#02cf6c'),
+(86, 'Posted what I couldn’t put into words.', NULL, '#4b16a4', '#076f91'),
+(87, 'Creating the kind of noise I need to hear.', NULL, '#01c0c3', '#c470da'),
+(88, 'Brushstroke basslines incoming.', NULL, '#aa8062', '#5e40cf'),
+(89, 'Vocal scratch meets visual patch.', NULL, '#afc146', '#c8e164'),
+(90, 'Painting progress, one track at a time.', NULL, '#842675', '#89f210'),
+(91, 'Sketching soundscapes with loops.', NULL, '#61c8c3', '#ed1cd0'),
+(92, 'The overlap of art and audio.', NULL, '#1423a6', '#679b0c'),
+(93, 'Just me, the beat, and some paint splatter.', NULL, '#262c9f', '#08eb5c'),
+(94, 'Scribbled some lyrics, then sketched a vibe.', NULL, '#b4f0e7', '#145afa'),
+(95, 'Each colour tells a story in F major.', NULL, '#8b7d88', '#3e23d8'),
+(96, 'Creating beyond boundaries.', NULL, '#6ebb32', '#b6c983'),
+(97, 'A sketch turned single.', NULL, '#304b0b', '#748968'),
+(98, 'Notes and nudes (on canvas, of course).', NULL, '#333bd6', '#eab46b'),
+(99, 'Inspiration spilled everywhere again.', NULL, '#63428d', '#076ad1'),
+(100, 'From first take to first stroke.', NULL, '#800ad0', '#886532'),
     (101, 'image02.png', NULL, NULL, NULL),
     (102, 'image17.png', NULL, NULL, NULL),
     (103, 'image14.png', NULL, NULL, NULL),
@@ -368,7 +397,250 @@ VALUES
 SELECT * FROM dbo.tPostContents;
 
 
+/* ----- POST USER TAGS ----- */
+SELECT * FROM dbo.tPostUserTags;
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (1, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (1, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (3, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (3, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (4, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (4, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (4, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (4, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (5, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (5, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (5, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (8, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (9, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (9, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (9, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (9, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (10, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (10, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (12, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (13, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (13, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (13, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (13, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (14, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (16, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (16, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (17, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (17, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (17, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (17, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (18, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (18, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (19, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (20, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (20, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (21, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (22, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (24, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (25, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (25, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (25, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (25, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (26, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (26, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (26, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (27, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (27, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (27, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (30, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (32, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (32, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (33, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (34, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (34, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (36, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (36, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (37, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (37, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (38, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (39, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (39, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (40, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (40, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (40, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (40, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (41, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (43, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (44, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (44, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (44, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (45, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (45, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (47, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (47, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (47, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (47, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (52, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (52, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (53, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (55, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (56, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (58, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (58, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (58, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (59, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (61, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (61, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (63, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (64, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (64, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (64, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (65, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (65, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (66, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (66, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (67, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (67, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (69, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (69, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (72, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (72, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (72, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (73, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (73, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (75, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (75, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (77, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (78, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (78, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (78, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (78, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (79, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (79, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (80, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (81, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (81, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (81, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (81, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (82, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (82, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (83, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (83, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (83, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (84, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (84, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (84, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (86, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (86, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (87, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (87, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (87, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (88, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (89, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (89, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (89, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (90, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (92, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (92, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (93, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (93, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (94, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (94, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (94, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (96, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (97, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (98, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (98, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (99, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (99, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (99, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (100, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (100, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (100, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (101, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (101, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (102, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (102, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (102, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (103, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (103, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (103, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (104, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (104, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (104, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (104, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (107, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (111, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (111, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (112, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (113, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (114, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (114, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (114, 12);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (114, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (115, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (115, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (116, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (116, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (116, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (116, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (117, 5);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (117, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (117, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (117, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (118, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (118, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (118, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (119, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (120, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (120, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (121, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (122, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (122, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (122, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (122, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (123, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (124, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (125, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (125, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (125, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (126, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (126, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (128, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (128, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (129, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (129, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (129, 10);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (130, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (130, 9);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (131, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (131, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (131, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (133, 7);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (133, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (134, 2);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (134, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (134, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (134, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (138, 13);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (139, 11);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (139, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (139, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (143, 20);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (144, 4);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (144, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (144, 16);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (145, 1);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (145, 3);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (145, 6);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (145, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (146, 15);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (146, 17);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (146, 18);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (146, 19);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (150, 8);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (150, 14);
+INSERT INTO dbo.tPostUserTags (postId, userId) VALUES (150, 15);
+SELECT * FROM dbo.tPostUserTags;
+
+
 /* ----- POST COMMENTS ----- */
+SELECT * FROM dbo.tPostComments;
 INSERT INTO dbo.tPostComments (postId, userId, commentContent, createdDate)
 VALUES (58, 7, 'How did you make that texture/sound happen?', GETUTCDATE());
 INSERT INTO dbo.tPostComments (postId, userId, commentContent, createdDate)
@@ -1173,7 +1445,7 @@ SELECT * FROM dbo.tPostComments;
 
 
 /* ----- POST LIKES ----- */
-
+SELECT * FROM dbo.tPostLikes;
 INSERT INTO dbo.tPostLikes (PostId, UserId) VALUES (2, 5);
 INSERT INTO dbo.tPostLikes (PostId, UserId) VALUES (2, 11);
 INSERT INTO dbo.tPostLikes (PostId, UserId) VALUES (2, 6);
@@ -1678,7 +1950,7 @@ SELECT * FROM dbo.tPostLikes;
 
 
 /* ----- POST SAVES ----- */
-
+SELECT * FROM dbo.tPostSaves;
 INSERT INTO dbo.tPostSaves (PostId, UserId)
 VALUES
     (125, 1),
@@ -1730,7 +2002,7 @@ SELECT * FROM dbo.tPostSaves;
 
 
 /* ----- FOLLOWERS ----- */
-
+SELECT * FROM dbo.tUserFollowers;
 INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
 VALUES
     (1, 3),
@@ -2295,7 +2567,7 @@ SELECT * FROM dbo.tPostTags;
 
 
 /* ----- USER TAGS ----- */
-
+SELECT * FROM dbo.tUserTags;
 INSERT INTO dbo.tUserTags (UserId, TagId)
 VALUES
     (1, 5),
@@ -2326,7 +2598,7 @@ SELECT * FROM dbo.tUserTags;
 
 
 /* ----- CHATROOMS ----- */
-
+SELECT * FROM dbo.tChatrooms;
 INSERT INTO dbo.tChatrooms (ChatroomName, CreatedDate, IsGroupChat)
 VALUES
     ( '', '2024-08-21', 0),
@@ -2343,7 +2615,7 @@ SELECT * FROM dbo.tChatrooms;
 
 
 /* ----- CHATROOM MEMBERS ----- */
-
+SELECT * FROM dbo.tChatroomMembers;
 INSERT INTO dbo.tChatroomMembers (ChatroomId, UserId, IsActive)
 VALUES
     (1, 19, 1),
@@ -2390,7 +2662,7 @@ SELECT * FROM dbo.tChatroomMembers;
 
 
 /* ----- MESSAGES ----- */
-
+SELECT * FROM dbo.tMessages;
 INSERT INTO dbo.tMessages (Message, SentDate, ChatroomMemberId, IsDeleted)
 VALUES
     ('Magazine education until apply newspaper although anything.', '2024-10-14', 1, 0),
