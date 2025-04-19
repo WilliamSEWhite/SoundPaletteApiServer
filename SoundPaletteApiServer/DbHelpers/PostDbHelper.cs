@@ -166,7 +166,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     orderby post.LikeCount descending
                     select new PostModel(post, isLiked, isSaved)
-                ).Skip(page).Take(page * pageSize).ToListAsync();
+                ).Skip(page * pageSize).Take(pageSize).ToListAsync();
             return posts;
         }
 
