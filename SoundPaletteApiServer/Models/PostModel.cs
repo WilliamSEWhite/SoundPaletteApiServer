@@ -51,6 +51,8 @@ namespace SoundPaletteApiServer.Models
             LikeCount = post.LikeCount;
             IsLiked = isLiked;
             IsSaved = isSaved;
+            FileId = post.FileId;
+
             PostUserTags = post.PostUserTags.Select(o => o.User.Username).ToList();
         }
 
