@@ -18,30 +18,44 @@ namespace SoundPaletteApiServer.DbHelpers
             _configuration = configuration;
         }
 
-        public async Task UploadFile(FileModel fileModel)
+        public async Task<int> UploadFile(FileModel fileModel)
         {
             var fileToAdd = new tFile()
             {
-                FileId = fileModel.FileId,
+                FileTypeId = fileModel.FileTypeId,
+                UserId = fileModel.UserId,
+                FileName = fileModel.FileName,
+                FileUrl = fileModel.FileUrl,
+                CreatedDate = DateTime.Now,
+                PublishDate = DateTime.Now,
+                IsActive = true,
+            };
+
+            Context.tFiles.Add(fileToAdd);
+            await Context.SaveChangesAsync();
+
+            return fileToAdd.FileId;
+        }
+
+        /*public async Task UploadFile(FileModel fileModel)
+        {
+            var fileToAdd = new tFile()
+            {
+                //FileId = fileModel.FileId,
                 FileTypeId = fileModel.FileTypeId,
                 UserId = fileModel.UserId,
                 FileName = fileModel.FileName,
                 CreatedDate = DateTime.Now,
                 PublishDate = DateTime.Now,
                 IsActive = true,
-                //FileType = fileModel.FileType,
-                //User = fileModel.User
             };
             Context.tFiles.Add(fileToAdd);
             await Context.SaveChangesAsync();
-        }
+        }*/
 
         /** insert profile image metadata into the database */
         public async Task UploadProfileImage(FileModel fileModel)
         {
-            // contstruct URL from config and filename
-            //var s3BaseUrl = _configuration["AWS:S3BaseUrl"];
-            //var s3Folder = _configuration["AWS:S3ProfileImages"];
 
             // mark existing file as inactive
             var existingImage = await Context.tFiles
@@ -54,7 +68,7 @@ namespace SoundPaletteApiServer.DbHelpers
             // the new file
             var fileToAdd = new tFile()
             {
-                FileId = fileModel.FileId,
+                //FileId = fileModel.FileId,
                 FileTypeId = fileModel.FileTypeId,
                 UserId = fileModel.UserId,
                 FileName = fileModel.FileName,
@@ -94,23 +108,25 @@ namespace SoundPaletteApiServer.DbHelpers
                     FileName = "/dev/null/",
                     FileUrl = "/dev/null/",
                     CreatedDate = DateTime.Now,
-                    PublishDate= DateTime.Now,
+                    PublishDate = DateTime.Now,
                     IsActive = true
                 };
             }
-
-            return new FileModel
+            else
             {
-                FileId = fileEntity.FileId,
-                FileTypeId = fileEntity.FileId,
-                UserId = fileEntity.UserId,
-                FileName = fileEntity.FileName,
-                //FileUrl = $"{s3BaseUrl}{s3Folder}{fileEntity.FileName}",
-                FileUrl = fileEntity.FileUrl,
-                CreatedDate = fileEntity.CreatedDate,
-                PublishDate = fileEntity.PublishDate,
-                IsActive = fileEntity.IsActive,
-            };
+                // return the file metadata
+                return new FileModel
+                {
+                    FileId = fileEntity.FileId,
+                    FileTypeId = fileEntity.FileTypeId,
+                    UserId = fileEntity.UserId,
+                    FileName = fileEntity.FileName,
+                    FileUrl = fileEntity.FileUrl,
+                    CreatedDate = fileEntity.CreatedDate,
+                    PublishDate = fileEntity.PublishDate,
+                    IsActive = fileEntity.IsActive,
+                };
+            }
         }
     }
 }

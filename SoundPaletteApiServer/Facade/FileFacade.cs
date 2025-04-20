@@ -23,35 +23,22 @@ namespace SoundPaletteApiServer.Facade
             _configuration = configuration;
         }
 
-        /*public async Task<string> UploadFileAsync(IFormFile file)
-        {
-            using var stream = file.OpenReadStream();
-            var filename = file.FileName;
-
-            string fileUrl = await s3Service.UploadFileAsync(stream, filename);
-            await fileDbHelper.saveFileUrlAsync(filename, fileUrl);
-
-            return fileUrl;
-        }*/
-
+        /** uploads the profile image */
         public async Task UploadProfileImage(FileModel fileModel, IFormFile file)
         {
             // upload file to S3
             using var stream = file.OpenReadStream();
-            string url = await s3Service.UploadProfileImageAsync(stream, file.FileName);
+            string url = await s3Service.UploadFileAsync(stream, file.FileName);
             fileModel.FileName = file.FileName;
             fileModel.FileUrl = url;
-            Console.WriteLine($"[FileDbHelper] Returning FileUrl for user {fileModel.UserId}: {url}");
+            // save metadata to database
             await fileDbHelper.UploadProfileImage(fileModel);
         }
 
+        /** gets the profile image */
         public async Task<FileHelper> GetProfileImageAsync(int userId)
         {
-            // contstruct URL from config and filename
-            //var s3BaseUrl = _configuration["AWS:S3BaseUrl"];
-            //var s3Folder = _configuration["AWS:S3ProfileImages"];
             var fileRecord = await fileDbHelper.GetProfileImageMetadataAsync(userId);
-            //var fileUrl = $"{s3BaseUrl}{s3Folder}{fileRecord.FileName}";
             var fileUrl = fileRecord.FileUrl;
 
             if (fileRecord == null || string.IsNullOrEmpty(fileUrl))

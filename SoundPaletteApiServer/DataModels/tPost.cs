@@ -20,11 +20,12 @@ namespace SoundPaletteApiServer.DataModels
         public DateTime PublishDate { get; set; }
         public int CommentCount { get; set; }
         public int LikeCount { get; set; }
+        public int FileId {  get; set; }
         public virtual List<tPostComment> PostComments { get; set; } = new List<tPostComment>();
         public virtual List<tPostSave> PostSaves { get; set; } = new List<tPostSave>();
         public virtual List<tPostUserTag> PostUserTags { get; set; } = new List<tPostUserTag>();
 
-        public tPost(int userId, tUser user, int postTypeId, tPostType postType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int commentCount, int likeCount )
+        public tPost(int userId, tUser user, int postTypeId, tPostType postType, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int commentCount, int likeCount, int fileId )
         {
             UserId = userId;
             User = user;
@@ -37,7 +38,7 @@ namespace SoundPaletteApiServer.DataModels
             CreatedDate = createdDate;
             PublishDate = publishDate;
             LikeCount = likeCount;
-
+            FileId = fileId;
         }
 
         public tPost() { }

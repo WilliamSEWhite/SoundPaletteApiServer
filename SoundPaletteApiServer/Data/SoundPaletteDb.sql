@@ -340,7 +340,8 @@ CREATE TABLE [dbo].[tPosts](
 	[CreatedDate] datetime NOT NULL,
 	[PublishDate] datetime NOT NULL,
 	[CommentCount] int NOT NULL default 0,
-	[LikeCount] int NOT NULL default 0
+	[LikeCount] int NOT NULL default 0,
+	[FileId] int NOT NULL default 0
 
 CONSTRAINT [PK_tPosts] PRIMARY KEY CLUSTERED 
 (
@@ -751,8 +752,10 @@ GO
 INSERT [dbo].[tFileTypes] 
 	([FileTypeName]) 
 VALUES 
-	('Image'), 
-	('Sound')
+	('No_File'),
+	('Post_Audio'),
+	('Post_Image'),
+	('Profile_Image')
 GO
 
 /*CREATE TABLE [dbo].[tFiles] (
@@ -787,3 +790,8 @@ CREATE NONCLUSTERED INDEX [IX_tFiles_FileId] ON [dbo].[tFiles] ([FileId] ASC);
 GO
 CREATE NONCLUSTERED INDEX [IX_tFiles_UserId] ON [dbo].[tFiles] ([UserId] ASC);
 GO
+/** foreign key in tPosts to tFiles -> FileId */
+/*ALTER TABLE [dbo].[tPosts]
+ADD CONSTRAINT [FK_tPosts_tFiles_FileId] FOREIGN KEY ([FileId]) REFERENCES [dbo].[tFiles] ([FileId]);
+GO
+*/

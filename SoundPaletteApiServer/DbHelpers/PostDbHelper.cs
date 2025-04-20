@@ -21,11 +21,11 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task CreatePost(NewPostModel newPost)
         {
-
             var postToAdd = new tPost()
             {
                 UserId = newPost.UserId,
-                PostTypeId = newPost.PostTypeId,
+                //PostTypeId = newPost.PostTypeId,
+                PostTypeId = newPost.FileTypeId,
                 Caption = newPost.Caption,
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
