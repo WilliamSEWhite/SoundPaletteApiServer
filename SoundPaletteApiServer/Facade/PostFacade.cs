@@ -1,16 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoundPaletteApiServer.DbHelpers;
 using SoundPaletteApiServer.Models;
+using SoundPaletteApiServer.Services;
+using System.IO;
+using System.Text.Json;
 
 namespace SoundPaletteApiServer.Facade
 {
     public class PostFacade
     {
         private readonly PostDbHelper postDbHelper;
+        private readonly FileDbHelper fileDbHelper;
+        private readonly S3Service s3Service;
 
         public PostFacade(PostDbHelper _postDbHelper)
         {
             postDbHelper = _postDbHelper;
+        }
+
+        public PostFacade(PostDbHelper _postDbHelper, FileDbHelper _fileDbHelper, S3Service _s3Service)
+        {
+            postDbHelper = _postDbHelper;
+            fileDbHelper = _fileDbHelper;
+            s3Service = _s3Service;
+        }
+
+        /** upload post file to database and S3 */
+        public async Task CreateFilePost(IFormFile file, PostFileModel metaData)
+        {
+            if (metaData == null || metaData.FileModel == null || metaData.NewPostModel == null)
+                throw new ArgumentNullException(nameof(metaData), "MetaData, FileModel, or NewPostModel cannot be null");
+
+            var fileModel = metaData.FileModel;
+            var newPostModel = metaData.NewPostModel;
+
+            // upload to S3
+            using var stream = file.OpenReadStream();
+            string url = await s3Service.UploadFileAsync(stream, file.FileName);
+
+            fileModel.FileName = file.FileName;
+            fileModel.FileUrl = url;
+
+            // Save file, get FileId
+            int fileId = await fileDbHelper.UploadFile(fileModel);
+            newPostModel.FileId = fileId;
+
+            // Defensive programming: ensure tags lists are not null
+            newPostModel.PostTags ??= new List<TagModel>();
+            newPostModel.PostUserTags ??= new List<string>();
+
+            await postDbHelper.CreatePost(newPostModel);
         }
 
         public async Task CreatePost(NewPostModel newPost)

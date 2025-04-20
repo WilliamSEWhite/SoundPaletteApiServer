@@ -10,6 +10,8 @@
 
         public DateTime CreatedDate { get; set; }
         public DateTime PublishDate { get; set; }
+        public int FileTypeId { get; set; }
+        public int FileId { get; set; }
 
         public List<TagModel> PostTags { get; set; }
 
@@ -17,7 +19,7 @@
         public PostContentModel PostContent { get; set; }
 
 
-        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, List<TagModel> postTags, List<string> postUserTags, PostContentModel postContent)
+        public NewPostModel(int userId, int postTypeId, string caption, bool isPremium, bool isMature, bool isDeleted, DateTime createdDate, DateTime publishDate, int fileId,  List<TagModel> postTags, List<string> postUserTags, PostContentModel postContent)
         {
             UserId = userId;
             PostTypeId = postTypeId;
@@ -29,6 +31,7 @@
             PostTags = postTags;
             PostUserTags = postUserTags;
             PostContent = postContent;
+            FileId = fileId;
         }
         public NewPostModel() { }
 

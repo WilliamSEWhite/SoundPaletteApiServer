@@ -21,11 +21,11 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task CreatePost(NewPostModel newPost)
         {
-
             var postToAdd = new tPost()
             {
                 UserId = newPost.UserId,
-                PostTypeId = newPost.PostTypeId,
+                //PostTypeId = newPost.PostTypeId,
+                PostTypeId = newPost.FileTypeId,
                 Caption = newPost.Caption,
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
@@ -34,8 +34,8 @@ namespace SoundPaletteApiServer.DbHelpers
                 PostContent = CreatePostContent(newPost),
                 CreatedDate = newPost.CreatedDate,
                 PublishDate = newPost.PublishDate,
-                PostUserTags = await Context.tUsers.Where(o => newPost.PostUserTags.Contains(o.Username)).Select(o => new tPostUserTag(o.UserId)).ToListAsync()
-
+                PostUserTags = await Context.tUsers.Where(o => newPost.PostUserTags.Contains(o.Username)).Select(o => new tPostUserTag(o.UserId)).ToListAsync(),
+                FileId = newPost.FileId
             };
             Context.tPosts.Add(postToAdd);
             await Context.SaveChangesAsync();
@@ -72,7 +72,7 @@ namespace SoundPaletteApiServer.DbHelpers
 
                     where post.UserId != userId  && !post.IsDeleted
                     orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -86,7 +86,7 @@ namespace SoundPaletteApiServer.DbHelpers
 
                     where post.UserId == userId && !post.IsDeleted
                     orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -101,7 +101,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     orderby post.PostId descending
                     where post.User.Username == username && !post.IsDeleted
 
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -118,7 +118,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     where !post.IsDeleted
                     orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -134,7 +134,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     where !post.IsDeleted
                     orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -165,7 +165,7 @@ namespace SoundPaletteApiServer.DbHelpers
 
                     where !post.IsDeleted && post.CreatedDate > date
                     orderby post.LikeCount descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -182,7 +182,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     where !post.IsDeleted
                     orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -196,7 +196,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     where post.UserId == userId && !post.IsDeleted
                     orderby post.PostId descending
-                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                    select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
                 ).ToListAsync();
             return posts;
         }
@@ -210,7 +210,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                 where post.UserId != userId && !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
                 orderby post.PostId descending
-                select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.PostUserTags.Select(o => o.User.Username).ToList())
+                select new PostModel(post.PostId, post.Caption, post.PostTags.Select(o => new TagModel(o.Tag)).ToList(), new PostContentModel(post.PostContent), post.CreatedDate, post.User.Username, post.PostTypeId, post.CommentCount, post.LikeCount, isLiked, isSaved, post.FileId, post.PostUserTags.Select(o => o.User.Username).ToList())
             ).ToListAsync();
             return posts;
 

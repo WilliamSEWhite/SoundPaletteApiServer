@@ -18,12 +18,12 @@ WILL'S PATH
 /*
 JAMES'S PATH
 */
-/*ON  PRIMARY 
+ON  PRIMARY 
 ( NAME = N'[SP]', FILENAME =	N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
 LOG ON 
 ( NAME = N'SP_log', FILENAME =  N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
-*/
+
 /*
 PARTH'S PATH
 */
@@ -340,7 +340,8 @@ CREATE TABLE [dbo].[tPosts](
 	[CreatedDate] date NOT NULL,
 	[PublishDate] date NOT NULL,
 	[CommentCount] int NOT NULL default 0,
-	[LikeCount] int NOT NULL default 0
+	[LikeCount] int NOT NULL default 0,
+	[FileId] int NOT NULL default 0
 
 CONSTRAINT [PK_tPosts] PRIMARY KEY CLUSTERED 
 (
@@ -751,8 +752,10 @@ GO
 INSERT [dbo].[tFileTypes] 
 	([FileTypeName]) 
 VALUES 
-	('Image'), 
-	('Sound')
+	('No_File'),
+	('Post_Audio'),
+	('Post_Image'),
+	('Profile_Image')
 GO
 
 /*CREATE TABLE [dbo].[tFiles] (
@@ -787,7 +790,11 @@ CREATE NONCLUSTERED INDEX [IX_tFiles_FileId] ON [dbo].[tFiles] ([FileId] ASC);
 GO
 CREATE NONCLUSTERED INDEX [IX_tFiles_UserId] ON [dbo].[tFiles] ([UserId] ASC);
 GO
-
+/** foreign key in tPosts to tFiles -> FileId */
+/*ALTER TABLE [dbo].[tPosts]
+ADD CONSTRAINT [FK_tPosts_tFiles_FileId] FOREIGN KEY ([FileId]) REFERENCES [dbo].[tFiles] ([FileId]);
+GO
+*/
 --CREATE TABLE [dbo].[tUserBlocks](
 --	[UserBlockId] int IDENTITY(1,1) NOT NULL,
 --	[BlockerId] int NOT NULL,
