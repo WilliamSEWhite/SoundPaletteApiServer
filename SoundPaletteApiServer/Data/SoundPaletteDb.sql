@@ -18,12 +18,12 @@ WILL'S PATH
 /*
 JAMES'S PATH
 */
-/*ON  PRIMARY 
+ON  PRIMARY 
 ( NAME = N'[SP]', FILENAME =	N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
 LOG ON 
 ( NAME = N'SP_log', FILENAME =  N'C:\James\Courses\Brocku-Courses\COSC-4P02\SoundPaletteDB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
-*/
+
 /*
 PARTH'S PATH
 */
@@ -793,5 +793,5 @@ GO
 /** foreign key in tPosts to tFiles -> FileId */
 /*ALTER TABLE [dbo].[tPosts]
 ADD CONSTRAINT [FK_tPosts_tFiles_FileId] FOREIGN KEY ([FileId]) REFERENCES [dbo].[tFiles] ([FileId]);
-GO
-*/
+GO*/
+

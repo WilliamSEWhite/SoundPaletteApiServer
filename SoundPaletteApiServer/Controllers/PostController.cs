@@ -15,7 +15,7 @@ namespace SoundPaletteApiServer.Controllers
         {
             postFacade = _postFacade;
         }
-
+        // create a post with a file attachment
         [HttpPost("create-file-post")]
         public async Task<IActionResult> CreateFilePost(IFormFile file, [FromForm] string metaData)
         {

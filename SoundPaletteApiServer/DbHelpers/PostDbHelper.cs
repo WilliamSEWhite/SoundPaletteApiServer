@@ -24,8 +24,8 @@ namespace SoundPaletteApiServer.DbHelpers
             var postToAdd = new tPost()
             {
                 UserId = newPost.UserId,
-                //PostTypeId = newPost.PostTypeId,
-                PostTypeId = newPost.FileTypeId,
+                PostTypeId = newPost.PostTypeId,
+                //PostTypeId = newPost.FileTypeId,
                 Caption = newPost.Caption,
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
@@ -34,8 +34,8 @@ namespace SoundPaletteApiServer.DbHelpers
                 PostContent = CreatePostContent(newPost),
                 CreatedDate = DateTime.Now,
                 PublishDate = newPost.PublishDate,
+                FileId = newPost.FileId,
                 PostUserTags = await Context.tUsers.Where(o => newPost.PostUserTags.Contains(o.Username)).Select(o => new tPostUserTag(o.UserId)).ToListAsync()
-
             };
             Context.tPosts.Add(postToAdd);
             await Context.SaveChangesAsync();

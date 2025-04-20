@@ -37,22 +37,6 @@ namespace SoundPaletteApiServer.DbHelpers
             return fileToAdd.FileId;
         }
 
-        /*public async Task UploadFile(FileModel fileModel)
-        {
-            var fileToAdd = new tFile()
-            {
-                //FileId = fileModel.FileId,
-                FileTypeId = fileModel.FileTypeId,
-                UserId = fileModel.UserId,
-                FileName = fileModel.FileName,
-                CreatedDate = DateTime.Now,
-                PublishDate = DateTime.Now,
-                IsActive = true,
-            };
-            Context.tFiles.Add(fileToAdd);
-            await Context.SaveChangesAsync();
-        }*/
-
         /** insert profile image metadata into the database */
         public async Task UploadProfileImage(FileModel fileModel)
         {
