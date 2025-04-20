@@ -20,6 +20,7 @@ namespace SoundPaletteApiServer.Controllers
             s3Service = _s3Service;
         }
 
+        /** uploads an image */
         [HttpPost("upload-image")]
         public async Task<IActionResult> UploadProfileImage([FromForm] int FileTypeId,
             [FromForm] int UserId,
@@ -45,10 +46,19 @@ namespace SoundPaletteApiServer.Controllers
             return Ok(fileModel.FileId);
         }
 
+        /** returns the user profile image */
         [HttpGet("get-profile-image/{userId}")]
         public async Task<IActionResult> GetProfileImageAsync(int userId)
         {
             var fileData = await fileFacade.GetProfileImageAsync(userId);
+            return Ok(fileData);
+        }
+
+        /** returns a file for the post */
+        [HttpGet("get-post-file/{fileId}")]
+        public async Task<IActionResult> GetPostFileAsync(int fileId)
+        {
+            var fileData = await fileFacade.GetPostFileAsync(fileId);
             return Ok(fileData);
         }
     }

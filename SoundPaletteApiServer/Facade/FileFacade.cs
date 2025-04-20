@@ -47,5 +47,18 @@ namespace SoundPaletteApiServer.Facade
             }
             return await s3Service.DownloadFileAsync(fileUrl);
         }
+
+        /** gets the post file */
+        public async Task<FileHelper> GetPostFileAsync(int fileId)
+        {
+            var fileRecord = await fileDbHelper.GetPostFileMetadataAsync(fileId);
+            var fileUrl = fileRecord.FileUrl;
+
+            if (fileRecord == null || string.IsNullOrEmpty(fileUrl))
+            {
+                return null;
+            }
+            return await s3Service.DownloadFileAsync(fileUrl);
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace SoundPaletteApiServer.DbHelpers
             _configuration = configuration;
         }
 
+        /** upload file metadata to the database */
         public async Task<int> UploadFile(FileModel fileModel)
         {
             var fileToAdd = new tFile()
@@ -43,7 +44,7 @@ namespace SoundPaletteApiServer.DbHelpers
 
             // mark existing file as inactive
             var existingImage = await Context.tFiles
-                .Where(f => f.UserId == fileModel.UserId && f.FileTypeId == 1 && f.IsActive)
+                .Where(f => f.UserId == fileModel.UserId && f.FileTypeId == 4 && f.IsActive)
                 .FirstOrDefaultAsync();
             if (existingImage != null)
             {
@@ -74,11 +75,12 @@ namespace SoundPaletteApiServer.DbHelpers
             }
         }
 
+        /** get metadata for user profile image */
         public async Task<FileModel> GetProfileImageMetadataAsync(int userId)
         {
             var fileEntity = await Context.tFiles
                 .AsNoTracking()
-                .Where(f => f.UserId == userId && f.FileTypeId == 1 && f.IsActive)
+                .Where(f => f.UserId == userId && f.FileTypeId == 4 && f.IsActive)
                 .FirstOrDefaultAsync(f => f.UserId == userId);
 
             if (fileEntity == null)
@@ -87,7 +89,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 return new FileModel
                 {
                     FileId = 0,
-                    FileTypeId = 1,
+                    FileTypeId = 4,
                     UserId = userId,
                     FileName = "/dev/null/",
                     FileUrl = "/dev/null/",
@@ -96,21 +98,53 @@ namespace SoundPaletteApiServer.DbHelpers
                     IsActive = true
                 };
             }
-            else
+            // return the file metadata
+            return new FileModel
             {
-                // return the file metadata
+                FileId = fileEntity.FileId,
+                FileTypeId = fileEntity.FileTypeId,
+                UserId = fileEntity.UserId,
+                FileName = fileEntity.FileName,
+                FileUrl = fileEntity.FileUrl,
+                CreatedDate = fileEntity.CreatedDate,
+                PublishDate = fileEntity.PublishDate,
+                IsActive = fileEntity.IsActive,
+            };
+        }
+
+        /** get metadata for post file */
+        public async Task<FileModel> GetPostFileMetadataAsync(int fileId)
+        {
+            var fileEntity = await Context.tFiles
+                .AsNoTracking()
+                .Where(f => f.FileId == fileId && (f.FileTypeId == 2 || f.FileTypeId == 3) && f.IsActive)
+                .FirstOrDefaultAsync();
+
+            if (fileEntity == null)
+            {
                 return new FileModel
                 {
-                    FileId = fileEntity.FileId,
-                    FileTypeId = fileEntity.FileTypeId,
-                    UserId = fileEntity.UserId,
-                    FileName = fileEntity.FileName,
-                    FileUrl = fileEntity.FileUrl,
-                    CreatedDate = fileEntity.CreatedDate,
-                    PublishDate = fileEntity.PublishDate,
-                    IsActive = fileEntity.IsActive,
+                    FileId = 0,
+                    FileTypeId = 4,
+                    UserId = 0,
+                    FileName = "/dev/null/",
+                    FileUrl = "/dev/null/",
+                    CreatedDate = DateTime.Now,
+                    PublishDate = DateTime.Now,
+                    IsActive = true
                 };
             }
+            return new FileModel
+            {
+                FileId = fileEntity.FileId,
+                FileTypeId = fileEntity.FileTypeId,
+                UserId = fileEntity.UserId,
+                FileName = fileEntity.FileName,
+                FileUrl = fileEntity.FileUrl,
+                CreatedDate = fileEntity.CreatedDate,
+                PublishDate = fileEntity.PublishDate,
+                IsActive = fileEntity.IsActive
+            };
         }
     }
 }
