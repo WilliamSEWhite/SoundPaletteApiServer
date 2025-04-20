@@ -88,7 +88,7 @@ SELECT * FROM dbo.tUserFollowers;
 SELECT * FROM dbo.tPosts;
 INSERT INTO dbo.tPosts (userId, postTypeId, caption, isPremium, isMature, isDeleted, createdDate, publishDate)
 VALUES
-    (1, 1, 'Exploring new sounds!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 1, 'Exploring new sounds!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
     (2, 3, 'new lyrics in the works! just need some good vocals...', 1, 0, 0, GETUTCDATE(), GETUTCDATE()),
     (3, 2, 'This beat is just tooooo sick!', 0, 0, 0, GETUTCDATE(), GETUTCDATE()),
     (4, 1, 'Finished my latest track!', 0, 0, 0, GETUTCDATE(), GETUTCDATE()),

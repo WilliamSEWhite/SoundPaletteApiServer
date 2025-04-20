@@ -1,4 +1,6 @@
-﻿namespace SoundPaletteApiServer.Models
+﻿using SoundPaletteApiServer.DataModels;
+
+namespace SoundPaletteApiServer.Models
 {
     public class PostModel
     {
@@ -35,6 +37,21 @@
             IsSaved = isSaved;
             PostUserTags = postUserTags;
             FileId = fileId;
+        }
+        public PostModel(tPost post, bool isLiked, bool isSaved)
+        {
+            PostId = post.PostId;
+            PostCaption = post.Caption;
+            PostTags = post.PostTags.Select(o => new TagModel(o.Tag)).ToList();
+            PostContent = new PostContentModel(post.PostContent);
+            CreatedDate = post.CreatedDate;
+            CreatedByUsername = post.User.Username;
+            PostType = post.PostTypeId;
+            CommentCount = post.CommentCount;
+            LikeCount = post.CommentCount;
+            IsLiked = isLiked;
+            IsSaved = isSaved;
+            PostUserTags = post.PostUserTags.Select(o => o.User.Username).ToList();
         }
     }
 }

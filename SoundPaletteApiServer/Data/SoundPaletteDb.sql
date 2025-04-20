@@ -234,7 +234,7 @@ CREATE TABLE [dbo].[tUserInfos](
 	[Email] nvarchar(50) NOT NULL,
 	[Phone] nvarchar(50) NULL,
 	[DOB] date NOT NULL,
-	[DateCreated] date NOT NULL
+	[DateCreated] datetime NOT NULL
 CONSTRAINT [PK_tUserInfos] PRIMARY KEY CLUSTERED 
 (
 	[UserInfoId] ASC
@@ -337,8 +337,8 @@ CREATE TABLE [dbo].[tPosts](
 	[IsPremium] bit NOT NULL default 0,
 	[IsMature] bit NOT NULL default 0,
 	[IsDeleted] bit NOT NULL default 0,
-	[CreatedDate] date NOT NULL,
-	[PublishDate] date NOT NULL,
+	[CreatedDate] datetime NOT NULL,
+	[PublishDate] datetime NOT NULL,
 	[CommentCount] int NOT NULL default 0,
 	[LikeCount] int NOT NULL default 0,
 	[FileId] int NOT NULL default 0
@@ -452,7 +452,7 @@ CREATE TABLE [dbo].[tPostComments](
 	[PostId] int NOT NULL,
 	[UserId] int NOT NULL,
 	[CommentContent] nvarchar(MAX) NULL,
-	[CreatedDate] date NOT NULL,
+	[CreatedDate] datetime NOT NULL,
 
 
 CONSTRAINT [PK_tPostComments] PRIMARY KEY CLUSTERED 
@@ -662,7 +662,7 @@ GO
 CREATE TABLE [dbo].[tChatrooms](
 	[ChatroomId] int IDENTITY(1,1) NOT NULL,
 	[ChatroomName] nvarchar(100) NULL,
-	[CreatedDate] date NOT NULL,
+	[CreatedDate] datetime NOT NULL,
 	[IsGroupChat] bit NOT NULL
 
 CONSTRAINT [PK_tChatrooms] PRIMARY KEY CLUSTERED 
@@ -714,7 +714,7 @@ GO
 CREATE TABLE [dbo].[tMessages](
 	[MessageId] int IDENTITY(1,1) NOT NULL,
 	[Message] nvarchar(max) NOT NULL,
-	[SentDate] date NOT NULL,
+	[SentDate] datetime NOT NULL,
 	[ChatroomMemberId] int NOT NULL,
 	[IsDeleted] bit NOT NULL
 
@@ -795,25 +795,3 @@ GO
 ADD CONSTRAINT [FK_tPosts_tFiles_FileId] FOREIGN KEY ([FileId]) REFERENCES [dbo].[tFiles] ([FileId]);
 GO
 */
---CREATE TABLE [dbo].[tUserBlocks](
---	[UserBlockId] int IDENTITY(1,1) NOT NULL,
---	[BlockerId] int NOT NULL,
---	[BlockedId] int NOT NULL,
-
---CONSTRAINT [PK_tUserBlocks] PRIMARY KEY CLUSTERED 
---(
---	[UserBlockId] ASC
---)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
---) ON [PRIMARY]
---GO
---CREATE NONCLUSTERED INDEX [IX_tUserBlocks_UserBlockId] ON [dbo].[tUserBlocks]
---(
---	[UserBlockId] ASC
---)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
---GO
---ALTER TABLE [dbo].[tUserBlocks] WITH CHECK ADD CONSTRAINT [FK_tUserBlocks_tUsers_BlockerId] FOREIGN KEY([BlockerId])
---REFERENCES [dbo].[tUsers] ([UserId])
---GO
---ALTER TABLE [dbo].[tUserBlocks] WITH CHECK ADD CONSTRAINT [FK_tUserBlocks_tUsers_BlockedId] FOREIGN KEY([BlockedId])
---REFERENCES [dbo].[tUsers] ([UserId])
---GO
