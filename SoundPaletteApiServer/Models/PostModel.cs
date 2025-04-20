@@ -46,10 +46,11 @@ namespace SoundPaletteApiServer.Models
             CreatedByUsername = post.User.Username;
             PostType = post.PostTypeId;
             CommentCount = post.CommentCount;
-            LikeCount = post.CommentCount;
+            LikeCount = post.LikeCount;
             IsLiked = isLiked;
             IsSaved = isSaved;
             PostUserTags = post.PostUserTags.Select(o => o.User.Username).ToList();
         }
+
     }
 }
