@@ -21,11 +21,11 @@ namespace SoundPaletteApiServer.DbHelpers
 
         public async Task CreatePost(NewPostModel newPost)
         {
-
             var postToAdd = new tPost()
             {
                 UserId = newPost.UserId,
                 PostTypeId = newPost.PostTypeId,
+                //PostTypeId = newPost.FileTypeId,
                 Caption = newPost.Caption,
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
@@ -34,8 +34,8 @@ namespace SoundPaletteApiServer.DbHelpers
                 PostContent = CreatePostContent(newPost),
                 CreatedDate = DateTime.Now,
                 PublishDate = newPost.PublishDate,
+                FileId = newPost.FileId,
                 PostUserTags = await Context.tUsers.Where(o => newPost.PostUserTags.Contains(o.Username)).Select(o => new tPostUserTag(o.UserId)).ToListAsync()
-
             };
             Context.tPosts.Add(postToAdd);
             await Context.SaveChangesAsync();
@@ -64,12 +64,43 @@ namespace SoundPaletteApiServer.DbHelpers
         }
         public async Task<List<PostModel>> GetPostsForFeed(int userId, int page)
         {
-            var posts =                 (
-                    from post in Context.tPosts.Include(o => o.PostContent).Include(o => o.PostTags).ThenInclude(o => o.Tag).Include(o => o.User).Include(o => o.PostUserTags).ThenInclude(o => o.User)
-                    where post.UserId != userId
-                    select post
-                );
-            return await SelectPosts(posts, userId, page).ToListAsync();
+            int tagPageSize = 8;
+            var usersPosts =await
+            (
+                from post in Context.tPosts
+                    .Include(o => o.PostContent)
+                            .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                            .Include(o => o.User)
+                            .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                let userTags = Context.tUserTags.Where(o => o.UserId == userId).Select(o => o.TagId).ToList()
+                where post.PostTags.Any(o => userTags.Contains(o.TagId)) && post.UserId != userId && !post.IsDeleted
+                let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                orderby post.CreatedDate descending
+                select new { post, isLiked, isSaved }
+            ).Distinct().Skip(page * tagPageSize).Take(tagPageSize).ToListAsync();
+
+            int newPageSize = 2;
+            var newPosts = await
+            (
+                from post in Context.tPosts
+                    .Include(o => o.PostContent)
+                    .Include(o => o.PostTags).ThenInclude(o => o.Tag)
+                    .Include(o => o.User)
+                    .Include(o => o.PostUserTags).ThenInclude(o => o.User)
+                let userTags = Context.tUserTags.Where(o => o.UserId == userId).Select(o => o.TagId).ToList()
+                where !post.PostTags.Any(o => userTags.Contains(o.TagId)) && post.UserId != userId && !post.IsDeleted
+                let isLiked = Context.tPostLikes.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
+                orderby post.CreatedDate descending
+                select new { post, isLiked, isSaved }
+            ).Distinct().Skip(page * newPageSize).Take(newPageSize).ToListAsync();
+
+            var rawPosts = usersPosts.Union(newPosts).ToList();
+
+            var posts = rawPosts.Select(post => new PostModel(post.post, post.isLiked, post.isSaved)).OrderByDescending(o => o.CreatedDate).ToList();
+
+            return posts;
         }
         public async Task<List<PostModel>> GetPostsForUser(int userId, int page)
         {
@@ -166,7 +197,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     let isSaved = Context.tPostSaves.Any(o => o.PostId == post.PostId && o.UserId == userId)
                     orderby post.LikeCount descending
                     select new PostModel(post, isLiked, isSaved)
-                ).Skip(page).Take(page * pageSize).ToListAsync();
+                ).Skip(page * pageSize).Take(pageSize).ToListAsync();
             return posts;
         }
 

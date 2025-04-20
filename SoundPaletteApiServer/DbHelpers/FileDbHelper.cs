@@ -18,34 +18,33 @@ namespace SoundPaletteApiServer.DbHelpers
             _configuration = configuration;
         }
 
-        public async Task UploadFile(FileModel fileModel)
+        /** upload file metadata to the database */
+        public async Task<int> UploadFile(FileModel fileModel)
         {
             var fileToAdd = new tFile()
             {
-                FileId = fileModel.FileId,
                 FileTypeId = fileModel.FileTypeId,
                 UserId = fileModel.UserId,
                 FileName = fileModel.FileName,
+                FileUrl = fileModel.FileUrl,
                 CreatedDate = DateTime.Now,
                 PublishDate = DateTime.Now,
                 IsActive = true,
-                //FileType = fileModel.FileType,
-                //User = fileModel.User
             };
+
             Context.tFiles.Add(fileToAdd);
             await Context.SaveChangesAsync();
+
+            return fileToAdd.FileId;
         }
 
         /** insert profile image metadata into the database */
         public async Task UploadProfileImage(FileModel fileModel)
         {
-            // contstruct URL from config and filename
-            //var s3BaseUrl = _configuration["AWS:S3BaseUrl"];
-            //var s3Folder = _configuration["AWS:S3ProfileImages"];
 
             // mark existing file as inactive
             var existingImage = await Context.tFiles
-                .Where(f => f.UserId == fileModel.UserId && f.FileTypeId == 1 && f.IsActive)
+                .Where(f => f.UserId == fileModel.UserId && f.FileTypeId == 4 && f.IsActive)
                 .FirstOrDefaultAsync();
             if (existingImage != null)
             {
@@ -54,7 +53,7 @@ namespace SoundPaletteApiServer.DbHelpers
             // the new file
             var fileToAdd = new tFile()
             {
-                FileId = fileModel.FileId,
+                //FileId = fileModel.FileId,
                 FileTypeId = fileModel.FileTypeId,
                 UserId = fileModel.UserId,
                 FileName = fileModel.FileName,
@@ -76,11 +75,12 @@ namespace SoundPaletteApiServer.DbHelpers
             }
         }
 
+        /** get metadata for user profile image */
         public async Task<FileModel> GetProfileImageMetadataAsync(int userId)
         {
             var fileEntity = await Context.tFiles
                 .AsNoTracking()
-                .Where(f => f.UserId == userId && f.FileTypeId == 1 && f.IsActive)
+                .Where(f => f.UserId == userId && f.FileTypeId == 4 && f.IsActive)
                 .FirstOrDefaultAsync(f => f.UserId == userId);
 
             if (fileEntity == null)
@@ -89,27 +89,61 @@ namespace SoundPaletteApiServer.DbHelpers
                 return new FileModel
                 {
                     FileId = 0,
-                    FileTypeId = 1,
+                    FileTypeId = 4,
                     UserId = userId,
                     FileName = "/dev/null/",
                     FileUrl = "/dev/null/",
                     CreatedDate = DateTime.Now,
-                    PublishDate= DateTime.Now,
+                    PublishDate = DateTime.Now,
                     IsActive = true
                 };
             }
-
+            // return the file metadata
             return new FileModel
             {
                 FileId = fileEntity.FileId,
-                FileTypeId = fileEntity.FileId,
+                FileTypeId = fileEntity.FileTypeId,
                 UserId = fileEntity.UserId,
                 FileName = fileEntity.FileName,
-                //FileUrl = $"{s3BaseUrl}{s3Folder}{fileEntity.FileName}",
                 FileUrl = fileEntity.FileUrl,
                 CreatedDate = fileEntity.CreatedDate,
                 PublishDate = fileEntity.PublishDate,
                 IsActive = fileEntity.IsActive,
+            };
+        }
+
+        /** get metadata for post file */
+        public async Task<FileModel> GetPostFileMetadataAsync(int fileId)
+        {
+            var fileEntity = await Context.tFiles
+                .AsNoTracking()
+                .Where(f => f.FileId == fileId && (f.FileTypeId == 2 || f.FileTypeId == 3) && f.IsActive)
+                .FirstOrDefaultAsync();
+
+            if (fileEntity == null)
+            {
+                return new FileModel
+                {
+                    FileId = 0,
+                    FileTypeId = 4,
+                    UserId = 0,
+                    FileName = "/dev/null/",
+                    FileUrl = "/dev/null/",
+                    CreatedDate = DateTime.Now,
+                    PublishDate = DateTime.Now,
+                    IsActive = true
+                };
+            }
+            return new FileModel
+            {
+                FileId = fileEntity.FileId,
+                FileTypeId = fileEntity.FileTypeId,
+                UserId = fileEntity.UserId,
+                FileName = fileEntity.FileName,
+                FileUrl = fileEntity.FileUrl,
+                CreatedDate = fileEntity.CreatedDate,
+                PublishDate = fileEntity.PublishDate,
+                IsActive = fileEntity.IsActive
             };
         }
     }

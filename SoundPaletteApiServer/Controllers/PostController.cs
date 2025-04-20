@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using SoundPaletteApiServer.Facade;
 using SoundPaletteApiServer.Models;
+using SoundPaletteApiServer.Services;
 
 namespace SoundPaletteApiServer.Controllers
 {
@@ -13,8 +15,37 @@ namespace SoundPaletteApiServer.Controllers
         {
             postFacade = _postFacade;
         }
+        // create a post with a file attachment
+        [HttpPost("create-file-post")]
+        public async Task<IActionResult> CreateFilePost(IFormFile file, [FromForm] string metaData)
+        {
+            Console.WriteLine("Raw metadata String: ");
+            Console.WriteLine("Metadata: " + metaData);
 
-        //returns a list of posts to be displayed in Home/Explore
+            if (file == null || string.IsNullOrWhiteSpace(metaData))
+                return BadRequest("Missing file or metadata.");
+
+            PostFileModel parsedMetaData;
+            try
+            {
+                parsedMetaData = JsonSerializer.Deserialize<PostFileModel>(metaData, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
+                if (parsedMetaData == null || parsedMetaData.FileModel == null || parsedMetaData.NewPostModel == null)
+                    return BadRequest("Metadata is incomplete.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid metadata: " + ex.Message);
+            }
+
+            await postFacade.CreateFilePost(file, parsedMetaData);
+            return Ok(1);
+        }
+
         [HttpGet("get-feed")]
         public async Task<IActionResult> GetPostsForFeed([FromQuery] int userId, [FromQuery] int page)
         {

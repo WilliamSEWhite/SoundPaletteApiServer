@@ -87,156 +87,156 @@ SELECT * FROM dbo.tUserProfiles;
 SELECT * FROM dbo.tPosts;
 INSERT INTO dbo.tPosts (userId, postTypeId, Caption, IsPremium, IsMature, IsDeleted, CreatedDate, PublishDate)
 VALUES
-    (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (13, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'In the middle of a melody and brushstroke.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (9, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (1, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (10, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (9, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (1, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (1, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 1, 'This one`s for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (1, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (11, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (11, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (8, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 1, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (9, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (9, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 1, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (1, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (10, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (12, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (12, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 1, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (12, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (11, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (10, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 1, 'This one`s for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-    (6, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (11, 1, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (11, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (12, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (9, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 1, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 3, 'new lyrics in the works! just need some good vocals...', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 3, 'I`ll travel to all the places inspired by this gallary one day', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 3, 'Sunday Funday!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 3, 'Attempting to learn the guitar, looking for some help! DM me please', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 3, 'This position is wayyy more comfortable than it looks', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (13, 3, 'in the recording studio! recording studio aka my bedroom', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 3, 'dorothy was right, there is truly no place like home', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (10, 3, 'The concert was a blur, just like this photo haha!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (2, 3, 'he`s such a good doggoooo :)', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 3, 'There may or may not be a new song. Share like and comment for an early release!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 3, 'just my morning commute guys…', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 3, 'I cant wait to share this melody with you guys! Just needs some lyrics… HMU!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 3, 'inspiration.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 3, 'they call this position the birds eye view I believe', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 3, 'its incredible how someone`s art can just hold your mind hostage like this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 3, 'working on some new album artwork!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 3, 'the barista just gave be a whole sleeve of napkins shortly after this was taken.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (10, 3, 'Art class schedule will be release on Sunday! Thank you for your patiences', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 3, 'tbt. Also hbd mom!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (13, 3, 'SOUND CHECK! SEE YOU GUYS TONITE!!!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 3, 'yes mom, this is work.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 3, 'had requests on how to write music so i thought id share an easy graph :)', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (7, 3, 'mic drop but  literalllyyyy???', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (15, 3, 'How could I not be inspired from this sunlight?!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 3, 'Brenda`s work in progress.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (19, 3, 'a picture of me taking a picture', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 3, 'writing. dreaming. thinking.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (1, 3, 'concentrating on not spilling my discharge water', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (12, 3, 'What my Friday nights are looking like..', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (8, 3, 'This concert has officially completed my life. No need to wake up tmr.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (4, 2, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (8, 2, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 2, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (11, 2, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 2, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (5, 2, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 2, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 2, 'This ones for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (3, 2, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 2, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (16, 2, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (17, 2, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (8, 2, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (12, 2, 'In the middle of a melody and brushstroke.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (18, 2, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 2, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (6, 2, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (14, 2, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 2, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME)),
-    (20, 2, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATETIME), CAST(GETUTCDATE() AS DATETIME));
+    (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (13, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'In the middle of a melody and brushstroke.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (9, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (10, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (9, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 1, 'This one`s for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (11, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (11, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (8, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 1, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (9, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (9, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 1, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (10, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 1, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (12, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (12, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 1, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (12, 1, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (11, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (10, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 1, 'This one`s for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+    (6, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 1, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 1, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (11, 1, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (11, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (12, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 1, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (9, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 1, 'Sound + Sketch = my Sunday ritual.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 1, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 1, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 1, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 1, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'Exploring new chords and colours today.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 1, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 1, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 1, 'Who wants to collab on a visual album?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 1, 'New track, new palette, same passion.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 1, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 1, 'A new riff, a new line, a new expression.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 3, 'new lyrics in the works! just need some good vocals...', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 3, 'I`ll travel to all the places inspired by this gallary one day', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 3, 'Sunday Funday!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 3, 'Attempting to learn the guitar, looking for some help! DM me please', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 3, 'This position is wayyy more comfortable than it looks', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (13, 3, 'in the recording studio! recording studio aka my bedroom', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 3, 'dorothy was right, there is truly no place like home', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (10, 3, 'The concert was a blur, just like this photo haha!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (2, 3, 'he`s such a good doggoooo :)', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 3, 'There may or may not be a new song. Share like and comment for an early release!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 3, 'just my morning commute guys…', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 3, 'I cant wait to share this melody with you guys! Just needs some lyrics… HMU!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 3, 'inspiration.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 3, 'they call this position the birds eye view I believe', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 3, 'its incredible how someone`s art can just hold your mind hostage like this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 3, 'working on some new album artwork!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 3, 'the barista just gave be a whole sleeve of napkins shortly after this was taken.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (10, 3, 'Art class schedule will be release on Sunday! Thank you for your patiences', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 3, 'tbt. Also hbd mom!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (13, 3, 'SOUND CHECK! SEE YOU GUYS TONITE!!!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 3, 'yes mom, this is work.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 3, 'had requests on how to write music so i thought id share an easy graph :)', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (7, 3, 'mic drop but  literalllyyyy???', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (15, 3, 'How could I not be inspired from this sunlight?!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 3, 'Brenda`s work in progress.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (19, 3, 'a picture of me taking a picture', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 3, 'writing. dreaming. thinking.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (1, 3, 'concentrating on not spilling my discharge water', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (12, 3, 'What my Friday nights are looking like..', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (8, 3, 'This concert has officially completed my life. No need to wake up tmr.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (4, 2, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (8, 2, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 2, 'Sketching ideas while looping my beat.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (11, 2, 'Recording vocals and emotions together.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 2, 'Spilled coffee and creativity.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (5, 2, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 2, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 2, 'This ones for the late night creators.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (3, 2, 'Looking for someone to add vocals to this.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 2, 'Just uploaded a rough draft — feedback welcome!', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (16, 2, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (17, 2, 'Posted a concept sketch. Thoughts?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (8, 2, 'Taking a beat to reflect — literally.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (12, 2, 'In the middle of a melody and brushstroke.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (18, 2, 'Experimenting with delay and depth.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 2, 'Every note and stroke tells a story.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (6, 2, 'Can art and sound collide more perfectly?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (14, 2, 'Feeling inspired by the city sounds and sights.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 2, 'Layering textures like harmonies.', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE)),
+    (20, 2, 'In the studio or the studio apartment?', 0, 0, 0, CAST(GETUTCDATE() AS DATE), CAST(GETUTCDATE() AS DATE));
 SELECT * FROM dbo.tPosts;
 
 
@@ -2002,251 +2002,494 @@ SELECT * FROM dbo.tPostSaves;
 
 
 /* ----- FOLLOWERS ----- */
+DELETE FROM dbo.tUserFollowers;
+DBCC CHECKIDENT ('dbo.tUserFollowers', RESEED, 0);
+
 SELECT * FROM dbo.tUserFollowers;
 INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
-VALUES
-    (1, 3),
-    (1, 4),
-    (1, 5),
-    (1, 6),
-    (1, 8),
-    (1, 9),
-    (1, 12),
-    (1, 13),
-    (1, 14),
-    (1, 15),
-    (1, 17),
-    (1, 18),
-    (1, 19),
-    (2, 1),
-    (2, 3),
-    (2, 5),
-    (2, 6),
-    (2, 8),
-    (2, 12),
-    (2, 13),
-    (2, 15),
-    (2, 16),
-    (2, 17),
-    (2, 18),
-    (2, 19),
-    (2, 20),
-    (3, 1),
-    (3, 2),
-    (3, 5),
-    (3, 6),
-    (3, 8),
-    (3, 9),
-    (3, 12),
-    (3, 13),
-    (3, 15),
-    (3, 16),
-    (3, 17),
-    (3, 18),
-    (3, 20),
-    (4, 1),
-    (4, 3),
-    (4, 7),
-    (4, 8),
-    (4, 9),
-    (4, 10),
-    (4, 11),
-    (4, 14),
-    (4, 15),
-    (4, 17),
-    (4, 19),
-    (5, 2),
-    (5, 3),
-    (5, 4),
-    (5, 7),
-    (5, 9),
-    (5, 11),
-    (5, 13),
-    (5, 15),
-    (5, 16),
-    (5, 17),
-    (5, 18),
-    (5, 19),
-    (5, 20),
-    (6, 2),
-    (6, 4),
-    (6, 5),
-    (6, 7),
-    (6, 8),
-    (6, 9),
-    (6, 11),
-    (6, 12),
-    (6, 14),
-    (6, 15),
-    (6, 18),
-    (6, 19),
-    (6, 20),
-    (7, 1),
-    (7, 2),
-    (7, 3),
-    (7, 8),
-    (7, 9),
-    (7, 10),
-    (7, 12),
-    (7, 13),
-    (7, 14),
-    (7, 15),
-    (7, 16),
-    (7, 20),
-    (8, 1),
-    (8, 4),
-    (8, 6),
-    (8, 9),
-    (8, 10),
-    (8, 11),
-    (8, 12),
-    (8, 15),
-    (8, 17),
-    (8, 18),
-    (9, 2),
-    (9, 3),
-    (9, 4),
-    (9, 5),
-    (9, 10),
-    (9, 11),
-    (9, 12),
-    (9, 13),
-    (9, 14),
-    (9, 17),
-    (9, 19),
-    (9, 20),
-    (10, 1),
-    (10, 2),
-    (10, 6),
-    (10, 7),
-    (10, 14),
-    (10, 16),
-    (10, 17),
-    (10, 18),
-    (10, 19),
-    (10, 20),
-    (11, 2),
-    (11, 3),
-    (11, 4),
-    (11, 5),
-    (11, 7),
-    (11, 10),
-    (11, 12),
-    (11, 16),
-    (11, 17),
-    (11, 18),
-    (11, 19),
-    (11, 20),
-    (12, 3),
-    (12, 4),
-    (12, 6),
-    (12, 7),
-    (12, 9),
-    (12, 11),
-    (12, 13),
-    (12, 14),
-    (12, 15),
-    (12, 16),
-    (12, 17),
-    (13, 1),
-    (13, 2),
-    (13, 4),
-    (13, 5),
-    (13, 6),
-    (13, 8),
-    (13, 10),
-    (13, 11),
-    (13, 12),
-    (13, 15),
-    (13, 18),
-    (14, 1),
-    (14, 2),
-    (14, 3),
-    (14, 5),
-    (14, 6),
-    (14, 7),
-    (14, 8),
-    (14, 9),
-    (14, 10),
-    (14, 11),
-    (14, 12),
-    (14, 13),
-    (14, 15),
-    (14, 16),
-    (14, 17),
-    (14, 18),
-    (14, 20),
-    (15, 2),
-    (15, 4),
-    (15, 9),
-    (15, 10),
-    (15, 12),
-    (15, 13),
-    (15, 14),
-    (15, 16),
-    (15, 17),
-    (15, 18),
-    (15, 20),
-    (16, 2),
-    (16, 5),
-    (16, 8),
-    (16, 9),
-    (16, 10),
-    (16, 15),
-    (16, 18),
-    (16, 19),
-    (17, 2),
-    (17, 5),
-    (17, 6),
-    (17, 7),
-    (17, 8),
-    (17, 9),
-    (17, 12),
-    (17, 14),
-    (17, 15),
-    (17, 16),
-    (17, 20),
-    (18, 1),
-    (18, 2),
-    (18, 3),
-    (18, 4),
-    (18, 5),
-    (18, 6),
-    (18, 7),
-    (18, 8),
-    (18, 9),
-    (18, 10),
-    (18, 11),
-    (18, 13),
-    (18, 14),
-    (18, 16),
-    (18, 17),
-    (18, 19),
-    (19, 2),
-    (19, 3),
-    (19, 5),
-    (19, 8),
-    (19, 9),
-    (19, 10),
-    (19, 12),
-    (19, 13),
-    (19, 16),
-    (19, 17),
-    (19, 18),
-    (19, 20),
-    (20, 1),
-    (20, 2),
-    (20, 3),
-    (20, 5),
-    (20, 7),
-    (20, 10),
-    (20, 11),
-    (20, 12),
-    (20, 13),
-    (20, 14),
-    (20, 15),
-    (20, 17),
-    (20, 19);
+VALUES(1, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(1, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(2, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(3, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(4, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(5, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(6, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(7, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(8, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(9, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(10, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(11, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(12, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(13, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(14, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(15, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(16, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(17, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 4);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 6);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(18, 19);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 8);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 9);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 16);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 18);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(19, 20);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 1);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 2);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 3);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 5);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 7);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 10);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 11);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 12);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 13);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 14);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 15);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 17);
+INSERT INTO dbo.tUserFollowers (FollowerId, FollowingId)
+VALUES(20, 19);
 SELECT * FROM dbo.tUserFollowers;
 
 

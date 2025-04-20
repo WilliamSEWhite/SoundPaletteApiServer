@@ -37,11 +37,11 @@ namespace SoundPaletteApiServer.Services
         }
 
         /** uploads profile image to S3 */
-        public async Task<string> UploadProfileImageAsync(Stream inputStream, string fileName)
+        public async Task<string> UploadFileAsync(Stream inputStream, string fileName)
         {
             // contstruct URL from config and filename
             var s3BaseUrl = _configuration["AWS:S3BaseUrl"];
-            var s3Folder = _configuration["AWS:S3ProfileImages"];
+            var s3Folder = _configuration["AWS:S3Files"];
             var uploadRequest = new TransferUtilityUploadRequest
             {
                 InputStream = inputStream,
@@ -56,6 +56,10 @@ namespace SoundPaletteApiServer.Services
         /** returns a file from S3 */
         public async Task<FileHelper> DownloadFileAsync(string fileUrl)
         {
+            if (string.IsNullOrWhiteSpace(fileUrl) || fileUrl == "/dev/null/")
+            {
+                return null;
+            }
             var key = GetKeyFromUrl(fileUrl);
             var request = new GetObjectRequest
             {
@@ -77,10 +81,23 @@ namespace SoundPaletteApiServer.Services
         }
 
         /** returns the absolute path to the object without bucket information */
-        private string GetKeyFromUrl(string url)
+        private string? GetKeyFromUrl(string url)
         {
-            var uri = new Uri(url);
+            if (string.IsNullOrWhiteSpace(url) || url == "/dev/null/")
+                return null;
+
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+                return null; // or throw if truly unexpected
+
             return uri.AbsolutePath.TrimStart('/');
+            /*if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("URL cannot be null or empty", nameof(url));
+            }
+            Console.WriteLine($"[DEBUG] GetKeyFromUrl received: {url}");
+
+            var uri = new Uri(url);
+            return uri.AbsolutePath.TrimStart('/');*/
         }
     }
 }
