@@ -27,11 +27,11 @@ GO
 /*
 PARTH'S PATH
 */
---ON  PRIMARY 
---( NAME = N'[SP]', FILENAME =	N'D:\documents\Final year\Winter\COSC 4P02\Database\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
---LOG ON 
---( NAME = N'SP_log', FILENAME =  N'D:\documents\Final year\Winter\COSC 4P02\Database\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
---GO
+ON  PRIMARY 
+( NAME = N'[SP]', FILENAME =	N'D:\documents\Final year\Winter\COSC 4P02\Database\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+LOG ON 
+( NAME = N'SP_log', FILENAME =  N'D:\documents\Final year\Winter\COSC 4P02\Database\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
 
 
 ALTER DATABASE [SP] SET COMPATIBILITY_LEVEL = 130
