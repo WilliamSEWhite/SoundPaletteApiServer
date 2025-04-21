@@ -33,5 +33,16 @@ namespace SoundPaletteApiServer.Controllers
             return Ok();
         }
 
+        [HttpGet("has-notification")]
+        public async Task<IActionResult> HasNotification([FromQuery] int userId)
+        {
+            return Ok(await notificationFacade.HasNotification(userId));
+        }
+        [HttpGet("has-message")]
+        public async Task<IActionResult> HasMessage([FromQuery] int userId)
+        {
+            return Ok(await notificationFacade.HasMessage(userId));
+        }
+
     }
 }

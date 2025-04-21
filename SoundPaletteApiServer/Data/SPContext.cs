@@ -187,6 +187,11 @@ namespace SoundPaletteApiServer.Data
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tNotificationType>().ToTable("tNotificationTypes");
             modelBuilder.Entity<tNotificationSetting>().ToTable("tNotificationSettings");
+            modelBuilder.Entity<tNotification>()
+                .HasOne(e => e.NotificationType)
+                .WithMany(e => e.Notifications)
+                .HasForeignKey(e => e.NotificationTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tNotification>().ToTable("tNotifications");
 
         }

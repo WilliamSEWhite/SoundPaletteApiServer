@@ -63,5 +63,15 @@ namespace SoundPaletteApiServer.DbHelpers
             Context.tNotificationSettings.UpdateRange(newSettings);
             await Context.SaveChangesAsync();
         }
+        public async Task<bool> HasNotification(int userId)
+        {
+            return await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description != "Message").AnyAsync();
+        }
+
+        public async Task<bool> HasMessage(int userId)
+        {
+            return await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description == "Message").AnyAsync();
+        }
+
     }
 }

@@ -14,6 +14,7 @@ namespace SoundPaletteApiServer.DataModels
         public bool DeviceIsActive { get; set; }
         public bool AppIsActive { get; set; }
         public DateTime CreatedDate { get; set; }
+        public tNotificationType NotificationType { get; set; }
         public tNotification() { }
         public tNotification(int notificationId, int notificationTypeId, int userId, string message, int? referenceId, string? referenceName, bool deviceIsActive, bool appIsActive, DateTime createdDate)
         {

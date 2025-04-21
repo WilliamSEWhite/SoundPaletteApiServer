@@ -28,5 +28,14 @@ namespace SoundPaletteApiServer.Facade
         {
             await notificationDbHelper.SetNotificationSettings(settings);
         }
+
+        public async Task<bool> HasNotification(int userId)
+        {
+            return await notificationDbHelper.HasNotification(userId);
+        }
+        public async Task<bool> HasMessage(int userId)
+        {
+            return await notificationDbHelper.HasMessage(userId);
+        }
     }
 }
