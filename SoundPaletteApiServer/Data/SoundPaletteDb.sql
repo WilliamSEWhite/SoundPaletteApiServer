@@ -9,11 +9,11 @@ CONTAINMENT = NONE
 /*
 WILL'S PATH
 */
---ON  PRIMARY 
---( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
---LOG ON 
---( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
---GO
+ON  PRIMARY 
+( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+LOG ON 
+( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
 
 /*
 JAMES'S PATH
@@ -809,7 +809,7 @@ CREATE NONCLUSTERED INDEX [IX_tNotificationTypes_NotificationTypeId] ON [dbo].[t
 GO
 
 INSERT [dbo].[tNotificationTypes]
-([TagName])
+([Description])
 VALUES
 	('Message'),
 	('Follow'),
