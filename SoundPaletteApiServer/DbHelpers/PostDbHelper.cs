@@ -1,4 +1,5 @@
 ﻿
+using Amazon.S3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -80,6 +81,34 @@ namespace SoundPaletteApiServer.DbHelpers
             };
             Context.tPosts.Add(postToAdd);
             await Context.SaveChangesAsync();
+
+            if (newPost.PostUserTags != null && newPost.PostUserTags.Any())
+            {
+                var userIds = postToAdd.PostUserTags.Select(o => o.UserId).ToList();
+                var notifications = 
+                (
+                    from setting in Context.tNotificationSettings.Include(o => o.NotificationType)
+                    where userIds.Contains(setting.UserId) && setting.NotificationType.Description == "Tag"
+                    let username = Context.tUsers.Where(o => o.UserId == newPost.UserId).Select(o => o.Username).FirstOrDefault()
+                    where setting.SendNotification
+
+                    select new tNotification
+                    {
+                        NotificationTypeId = setting.NotificationTypeId,
+                        UserId = setting.UserId,
+                        Message = "tagged you in a post",
+                        ReferenceId = postToAdd.PostId,
+                        ReferenceName = username,
+                        CreatedDate = DateTime.Now
+                    }).ToList();
+                if (notifications != null && notifications.Any())
+                {
+                    Context.tNotifications.AddRange(notifications);
+                    await Context.SaveChangesAsync();
+                }
+
+            }
+
         }
 
         private tPostContent CreatePostContent(NewPostModel newPost)

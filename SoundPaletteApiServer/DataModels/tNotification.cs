@@ -9,13 +9,13 @@ namespace SoundPaletteApiServer.DataModels
         public int NotificationTypeId { get; set; }
         public int UserId { get; set; }
         public string Message { get; set; } 
-        public int ReferenceId { get; set; }
-        public string ReferenceName { get; set; }
+        public int? ReferenceId { get; set; }
+        public string? ReferenceName { get; set; }
         public bool DeviceIsActive { get; set; }
         public bool AppIsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public tNotification() { }
-        public tNotification(int notificationId, int notificationTypeId, int userId, string message, int referenceId, string referenceName, bool deviceIsActive, bool appIsActive, DateTime createdDate)
+        public tNotification(int notificationId, int notificationTypeId, int userId, string message, int? referenceId, string? referenceName, bool deviceIsActive, bool appIsActive, DateTime createdDate)
         {
             NotificationId = notificationId;
             NotificationTypeId = notificationTypeId;

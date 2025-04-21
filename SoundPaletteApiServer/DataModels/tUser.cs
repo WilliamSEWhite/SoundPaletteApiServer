@@ -18,11 +18,19 @@ namespace SoundPaletteApiServer.DataModels
         public virtual List<tUserFollower>? UserFollowings { get; } = new List<tUserFollower>();
         public virtual List<tChatroomMember>? ChatroomMembers { get; } = new List<tChatroomMember>();
         public virtual List<tPostUserTag>? PostUserTags { get; } = new List<tPostUserTag>();
+        public virtual List<tNotificationSetting>? NotificationSettings { get; } = new List<tNotificationSetting>();
+
 
         public tUser(string username, string password)
         {
             Username = username;
             Password = password;
+        }
+        public tUser(string username, string password, List<tNotificationSetting>? notificationSettings)
+        {
+            Username = username;
+            Password = password;
+            NotificationSettings = notificationSettings;
         }
         public tUser()
         {

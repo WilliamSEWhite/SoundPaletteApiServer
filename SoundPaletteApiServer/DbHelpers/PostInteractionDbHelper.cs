@@ -19,6 +19,27 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             var comment = new tPostComment(newComment.PostId, newComment.UserId, newComment.CommentContent, DateTime.Now);
             await Context.tPostComments.AddAsync(comment);
+
+            var notification = await
+            (
+                from notificationSetting in Context.tNotificationSettings.Include(o => o.NotificationType)
+                where notificationSetting.NotificationType.Description == "Comment" && notificationSetting.SendNotification
+                let username = Context.tUsers.Where(o => o.UserId == newComment.UserId).Select(o => o.Username).FirstOrDefault()
+                let postUserId = Context.tPosts.Where(o => o.PostId == newComment.PostId).Select(o => o.UserId).FirstOrDefault()
+                select new tNotification
+                {
+                    NotificationTypeId = notificationSetting.NotificationTypeId,
+                    UserId = postUserId,
+                    Message = "commented on your post",
+                    ReferenceId = newComment.PostId,
+                    ReferenceName = username,
+                    CreatedDate = DateTime.Now
+                }
+            ).FirstOrDefaultAsync();
+
+            if (notification != null)
+                Context.tNotifications.AddRange(notification);
+
             await Context.SaveChangesAsync();
         }
 
@@ -32,6 +53,27 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             var like = new tPostLike(postId, userId);
             await Context.tPostLikes.AddAsync(like);
+
+            var notification = await
+            (
+                from notificationSetting in Context.tNotificationSettings.Include(o => o.NotificationType)
+                where notificationSetting.NotificationType.Description == "Like" && notificationSetting.SendNotification
+                let username = Context.tUsers.Where(o => o.UserId == userId).Select(o => o.Username).FirstOrDefault()
+                let postUserId = Context.tPosts.Where(o => o.PostId == postId).Select(o => o.UserId).FirstOrDefault()
+                select new tNotification
+                {
+                    NotificationTypeId = notificationSetting.NotificationTypeId,
+                    UserId = postUserId,
+                    Message = "liked your post",
+                    ReferenceId = userId,
+                    ReferenceName = username,
+                    CreatedDate = DateTime.Now
+                }
+            ).FirstOrDefaultAsync();
+
+            if (notification != null)
+                Context.tNotifications.AddRange(notification);
+
             await Context.SaveChangesAsync();
         }
 

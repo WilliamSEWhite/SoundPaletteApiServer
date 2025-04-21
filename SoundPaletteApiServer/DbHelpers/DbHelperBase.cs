@@ -1,4 +1,5 @@
-﻿using SoundPaletteApiServer.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using SoundPaletteApiServer.Data;
 using SoundPaletteApiServer.Models;
 
 namespace SoundPaletteApiServer.DbHelpers

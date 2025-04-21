@@ -97,6 +97,11 @@ namespace SoundPaletteApiServer.Data
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade); modelBuilder.Entity<tUser>().ToTable("tUsers");
+            modelBuilder.Entity<tUser>()
+                .HasMany(u => u.NotificationSettings)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade); modelBuilder.Entity<tUser>().ToTable("tUsers");
             modelBuilder.Entity<tUserInfo>().ToTable("tUserInfos");
             modelBuilder.Entity<tUserProfile>().ToTable("tUserProfiles");
             modelBuilder.Entity<tTag>().ToTable("tTags");
@@ -175,6 +180,11 @@ namespace SoundPaletteApiServer.Data
                 entity.HasIndex(e => e.FileId).HasDatabaseName("IX_tFiles_FileId");
                 entity.HasIndex(e => e.UserId).HasDatabaseName("IX_tFiles_UserId");
             });
+            modelBuilder.Entity<tNotificationType>()
+                .HasMany(e => e.NotificationSettings)
+                .WithOne(e => e.NotificationType)
+                .HasForeignKey(e => e.NotificationTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<tNotificationType>().ToTable("tNotificationTypes");
             modelBuilder.Entity<tNotificationSetting>().ToTable("tNotificationSettings");
             modelBuilder.Entity<tNotification>().ToTable("tNotifications");

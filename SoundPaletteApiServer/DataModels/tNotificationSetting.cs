@@ -9,6 +9,8 @@ namespace SoundPaletteApiServer.DataModels
         public int NotificationTypeId { get; set; }
         public int UserId { get; set; }
         public bool SendNotification { get; set; }
+        public tUser? User { get; } = null!;
+        public tNotificationType? NotificationType { get; } = null;
         public tNotificationSetting() { }
         public tNotificationSetting(int notificationSettingId, int notificationTypeId, int userId, bool sendNotification)
         {

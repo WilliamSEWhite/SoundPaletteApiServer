@@ -42,7 +42,9 @@ namespace SoundPaletteApiServer.DbHelpers
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            var newUser = new tUser(username, password);
+            var notificationSettings = await Context.tNotificationTypes.Select(o => new tNotificationSetting { NotificationTypeId = o.NotificationTypeId }).ToListAsync();
+
+            var newUser = new tUser(username, password, notificationSettings);
             Context.tUsers.Add(newUser);
             await Context.SaveChangesAsync();
             var user = await Context.tUsers.Where(o => o.Username == username).FirstOrDefaultAsync();

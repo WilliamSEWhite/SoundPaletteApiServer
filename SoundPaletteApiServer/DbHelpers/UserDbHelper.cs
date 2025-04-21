@@ -106,6 +106,9 @@ namespace SoundPaletteApiServer.DbHelpers
             {
                 var newUserProfile = new tUserProfile(userProfile.UserId, userProfile.Bio, userProfile.Picture);
                 Context.tUserProfile.Add(newUserProfile);
+
+
+
                 await Context.SaveChangesAsync();
                 return new UserProfileModel(await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync());
             }
@@ -116,6 +119,26 @@ namespace SoundPaletteApiServer.DbHelpers
             int followingId = await Context.tUsers.Where(o => o.Username == followingUsername).Select(o => o.UserId).FirstOrDefaultAsync();
             var follow = new tUserFollower(followerId, followingId);
             await Context.tUserFollowers.AddAsync(follow);
+
+            var notification = await
+            (
+                from notificationSetting in Context.tNotificationSettings.Include(o => o.NotificationType).Where(o => o.UserId == follow.FollowingId)
+                where notificationSetting.NotificationType.Description == "Follow" && notificationSetting.SendNotification
+                let username = Context.tUsers.Where(o => o.UserId == followerId).Select(o => o.Username).FirstOrDefault()
+                select new tNotification
+                {
+                    NotificationTypeId = notificationSetting.NotificationTypeId,
+                    UserId = followingId,
+                    Message = "followed you",
+                    ReferenceId = null,
+                    ReferenceName = username,
+                    CreatedDate = DateTime.Now
+                }
+            ).FirstOrDefaultAsync();
+
+            if (notification != null)
+                Context.tNotifications.AddRange(notification);
+
             await Context.SaveChangesAsync();
         }
 
