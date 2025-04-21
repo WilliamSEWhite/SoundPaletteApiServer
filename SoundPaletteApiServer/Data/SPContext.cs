@@ -33,6 +33,9 @@ namespace SoundPaletteApiServer.Data
         public DbSet<tPostUserTag> tPostUserTags { get; set; } = null!;
         public DbSet<tFileType> tFileTypes { get; set; } = null!;
         public DbSet<tFile> tFiles { get; set; } = null!;
+        public DbSet<tNotificationType> tNotificationTypes { get; set; } = null!;
+        public DbSet<tNotificationSetting> tNotificationSettings { get; set; } = null!;
+        public DbSet<tNotification> tNotifications { get; set; } = null!;
 
 
 
@@ -172,6 +175,10 @@ namespace SoundPaletteApiServer.Data
                 entity.HasIndex(e => e.FileId).HasDatabaseName("IX_tFiles_FileId");
                 entity.HasIndex(e => e.UserId).HasDatabaseName("IX_tFiles_UserId");
             });
+            modelBuilder.Entity<tNotificationType>().ToTable("tNotificationTypes");
+            modelBuilder.Entity<tNotificationSetting>().ToTable("tNotificationSettings");
+            modelBuilder.Entity<tNotification>().ToTable("tNotifications");
+
         }
     }
 

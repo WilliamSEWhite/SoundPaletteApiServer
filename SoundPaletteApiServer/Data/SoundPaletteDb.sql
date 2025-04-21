@@ -9,11 +9,11 @@ CONTAINMENT = NONE
 /*
 WILL'S PATH
 */
---ON  PRIMARY 
---( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
---LOG ON 
---( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
---GO
+ON  PRIMARY 
+( NAME = N'[SP]', FILENAME =	N'C:\Users\WillS\source\DB\SP.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+LOG ON 
+( NAME = N'SP_log', FILENAME =  N'C:\Users\WillS\source\DB\SP_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
 
 /*
 JAMES'S PATH
@@ -792,4 +792,79 @@ GO
 CREATE NONCLUSTERED INDEX [IX_tFiles_UserId] ON [dbo].[tFiles] ([UserId] ASC);
 GO
 
+CREATE TABLE [dbo].[tNotificationTypes](
+	[NotificationTypeId] int IDENTITY(1,1) NOT NULL,
+	[Description] nvarchar(100) NOT NULL
 
+CONSTRAINT [PK_tNotificationType] PRIMARY KEY CLUSTERED 
+(
+	[NotificationTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tNotificationTypes_NotificationTypeId] ON [dbo].[tNotificationTypes]
+(
+	[NotificationTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[tNotificationSettings](
+	[NotificationSettingId] int IDENTITY(1,1) NOT NULL,
+	[NotificationTypeId] int NOT NULL,
+	[UserId] int NOT NULL,
+	[SendNotification] bit NOT NULL
+
+CONSTRAINT [PK_tNotificationSettings] PRIMARY KEY CLUSTERED 
+(
+	[NotificationSettingId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tNotificationSettings_NotificationSettingId] ON [dbo].[tNotificationSettings]
+(
+	[NotificationSettingId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tNotificationSettings_UserId] ON [dbo].[tNotificationSettings]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[tNotificationSettings] WITH CHECK ADD CONSTRAINT [FK_tNotificationSettings_tUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[tUsers] (UserId)
+GO
+ALTER TABLE [dbo].[tNotificationSettings] WITH CHECK ADD CONSTRAINT [FK_tNotificationSettings_tNotificationType_NotificationTypeId] FOREIGN KEY([NotificationTypeId])
+REFERENCES [dbo].[tNotificationTypes] (NotificationTypeId)
+GO
+
+CREATE TABLE [dbo].[tNotifications](
+	[NotificationId] int IDENTITY(1,1) NOT NULL,
+	[NotificationTypeId] int NOT NULL,
+	[UserId] int NOT NULL,
+	[Message] nvarchar(max) NOT NULL,
+	[ReferenceId] int NULL,
+	[ReferenceName] nvarchar(100) NULL,
+	[DeviceIsActive] bit NOT NULL DEFAULT 1,
+	[AppIsActive] bit NOT NULL DEFAULT 1,
+	[CreatedDate] datetime NOT NULL
+
+
+CONSTRAINT [PK_tNotification] PRIMARY KEY CLUSTERED 
+(
+	[NotificationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tNotifications_NotificationId] ON [dbo].[tNotifications]
+(
+	[NotificationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_tNotifications_UserId] ON [dbo].[tNotifications]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[tNotifications] WITH CHECK ADD CONSTRAINT [FK_tNotifications_tUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[tUsers] (UserId)
+GO
