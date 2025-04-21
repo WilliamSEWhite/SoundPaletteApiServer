@@ -6,9 +6,9 @@ GO
 SELECT * FROM dbo.tUsers;
 INSERT INTO dbo.tUsers (Username, Password)
 VALUES
-    ('user1', 'pass1!'),
-    ('user2', 'pass2!'),
-    ('user3', 'pass3!'),
+    ('user1', 'password1!'),
+    ('user2', 'password2!'),
+    ('user3', 'password3!'),
     ('wayne34', '(7XG#fqx'),
     ('ybryant', '(7JCIBba'),
     ('teresa67', 'IDxZ%4Ek'),
