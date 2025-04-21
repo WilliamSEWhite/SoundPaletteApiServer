@@ -52,6 +52,11 @@ namespace SoundPaletteApiServer.Facade
             await postDbHelper.CreatePost(newPostModel);
         }
 
+        public async Task UpdatePost(PostModel postModel)
+        {
+            await postDbHelper.UpdatePost(postModel);
+        }
+
         public async Task CreatePost(NewPostModel newPost)
         {
             await postDbHelper.CreatePost(newPost);

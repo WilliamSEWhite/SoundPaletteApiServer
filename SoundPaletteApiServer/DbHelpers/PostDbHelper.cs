@@ -19,6 +19,47 @@ namespace SoundPaletteApiServer.DbHelpers
 
         }
 
+        public async Task UpdatePost(PostModel postModel)
+        {
+            var post = await Context.tPosts
+                .Include(p => p.PostTags)
+                .Include(p => p.PostUserTags)
+                .Include(p => p.PostContent)
+                .FirstOrDefaultAsync(p => p.PostId == postModel.PostId);
+
+            if (post == null)
+                return;
+
+            // Update fields using PostModel properties
+            post.Caption = postModel.PostCaption;
+            post.PostTypeId = postModel.PostType;
+            post.FileId = postModel.FileId;
+
+            // Update PostTags
+            post.PostTags.Clear();
+            post.PostTags = postModel.PostTags
+                ?.Select(tag => new tPostTag(tag.TagId))
+                .ToList() ?? new List<tPostTag>();
+
+            // Update PostUserTags
+            post.PostUserTags.Clear();
+            var userTags = await Context.tUsers
+                .Where(u => postModel.PostUserTags.Contains(u.Username))
+                .Select(u => new tPostUserTag(u.UserId))
+                .ToListAsync();
+            post.PostUserTags.AddRange(userTags);
+
+            // Update PostContent
+            if (post.PostContent != null && postModel.PostContent != null)
+            {
+                post.PostContent.PostTextContent = postModel.PostContent.PostTextContent;
+                post.PostContent.BackgroundColour = postModel.PostContent.BackgroundColour;
+                post.PostContent.FontColour = postModel.PostContent.FontColour;
+            }
+
+            await Context.SaveChangesAsync();
+        }
+
         public async Task CreatePost(NewPostModel newPost)
         {
             var postToAdd = new tPost()
