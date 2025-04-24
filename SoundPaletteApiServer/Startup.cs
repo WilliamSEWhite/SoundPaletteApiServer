@@ -89,6 +89,8 @@ namespace SoundPaletteApiServer
             services.AddScoped<FileDbHelper>();
             services.AddScoped<FileFacade>();
             services.AddSingleton<S3Service>();
+            services.AddScoped<NotificationDbHelper>();
+            services.AddScoped<NotificationFacade>();
 
         }
 

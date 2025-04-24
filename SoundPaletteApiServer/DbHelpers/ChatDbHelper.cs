@@ -102,8 +102,8 @@ namespace SoundPaletteApiServer.DbHelpers
                     (
                         from user in Context.tChatroomMembers.Include(o => o.User).Include(o => o.Chatroom).ThenInclude(o => o.ChatroomMembers).ThenInclude(o => o.User)
                         where user.ChatroomId == chatRoomMember.ChatroomId
-                        let notificationSetting = Context.tNotificationSettings.Include(o => o.NotificationType).Where(o => o.NotificationType.Description == "Messages").FirstOrDefault()
-                        where notificationSetting.SendNotification && user.IsActive
+                        let notificationSetting = Context.tNotificationSettings.Include(o => o.NotificationType).Where(o => o.NotificationType.Description == "Message" && o.UserId == user.UserId).FirstOrDefault()
+                        where notificationSetting.SendNotification && user.IsActive && notificationSetting.UserId != newMessage.UserId
                         let name = string.IsNullOrEmpty(user.Chatroom.ChatroomName) ? string.Join(", ", user.Chatroom.ChatroomMembers.Where(o => o.UserId != newMessage.UserId && o.IsActive).Select(o => o.User.Username))
                                                         : user.Chatroom.ChatroomName
                         select new tNotification
@@ -113,7 +113,9 @@ namespace SoundPaletteApiServer.DbHelpers
                             Message = newMessage.Message,
                             ReferenceId = user.ChatroomId,
                             ReferenceName = name,
-                            CreatedDate = DateTime.Now
+                            CreatedDate = DateTime.Now,
+                            AppIsActive = true,
+                            DeviceIsActive = true
                         }
                     ).ToListAsync();
 

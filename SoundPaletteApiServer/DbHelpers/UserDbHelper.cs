@@ -132,7 +132,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     Message = "followed you",
                     ReferenceId = null,
                     ReferenceName = username,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    AppIsActive = true,
+                    DeviceIsActive = true
+
                 }
             ).FirstOrDefaultAsync();
 

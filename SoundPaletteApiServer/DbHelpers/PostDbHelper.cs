@@ -99,7 +99,10 @@ namespace SoundPaletteApiServer.DbHelpers
                         Message = "tagged you in a post",
                         ReferenceId = postToAdd.PostId,
                         ReferenceName = username,
-                        CreatedDate = DateTime.Now
+                        CreatedDate = DateTime.Now,
+                        AppIsActive = true,
+                        DeviceIsActive = true
+
                     }).ToList();
                 if (notifications != null && notifications.Any())
                 {

@@ -33,7 +33,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     Message = "commented on your post",
                     ReferenceId = newComment.PostId,
                     ReferenceName = username,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    AppIsActive = true,
+                    DeviceIsActive = true
+
                 }
             ).FirstOrDefaultAsync();
 
@@ -67,7 +70,10 @@ namespace SoundPaletteApiServer.DbHelpers
                     Message = "liked your post",
                     ReferenceId = userId,
                     ReferenceName = username,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    AppIsActive = true,
+                    DeviceIsActive = true
+
                 }
             ).FirstOrDefaultAsync();
 

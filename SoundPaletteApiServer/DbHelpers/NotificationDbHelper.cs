@@ -65,12 +65,14 @@ namespace SoundPaletteApiServer.DbHelpers
         }
         public async Task<bool> HasNotification(int userId)
         {
-            return await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description != "Message").AnyAsync();
+            var hasNotification = await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description != "Message").AnyAsync();
+                return hasNotification;
         }
 
-        public async Task<bool> HasMessage(int userId)
+        public async Task<Boolean> HasMessage(int userId)
         {
-            return await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description == "Message").AnyAsync();
+                var hasMessage = await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description == "Message").AnyAsync();
+                return hasMessage;
         }
 
     }
