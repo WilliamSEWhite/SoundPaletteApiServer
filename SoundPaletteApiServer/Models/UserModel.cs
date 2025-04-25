@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.Models
 {
+    //class represents a single user in database
     public class UserModel
     {
         public int UserId { get; set; }
@@ -10,6 +11,7 @@ namespace SoundPaletteApiServer.Models
 
         public UserInfoModel UserInfo { get; set; }
 
+        //constructor to initialize all values, used to serialize/deserialize JSON
         public UserModel(int userId, string username, string password, UserInfoModel userInfo)
         {
             UserId = userId;
@@ -17,6 +19,9 @@ namespace SoundPaletteApiServer.Models
             Password = password;
             UserInfo = userInfo;
         }
+
+
+        //constructor to initialize primitive data types, used to serialize/deserialize JSON
         public UserModel(int userId, string username, string password)
         {
             UserId = userId;
@@ -24,6 +29,8 @@ namespace SoundPaletteApiServer.Models
             Password = password;
             UserInfo = null;
         }
+
+        //constructor used to manifest model from database
         public UserModel(tUser user)
         {
             UserId = user.UserId;

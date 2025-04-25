@@ -22,25 +22,29 @@ namespace SoundPaletteApiServer.DbHelpers
         public async Task<UserModel> GetUser(int id)
         {
             return new UserModel(await Context.tUsers.Where(o => o.UserId == id).Include(o => o.UserInfo).FirstOrDefaultAsync());
-        }
+        }//end GetUser
+
         /** return full UserModel by name */
         public async Task<UserModel> GetUserByName(string userName)
         {
             return new UserModel(await Context.tUsers.Where(o => o.Username == userName).Include(o => o.UserInfo).FirstOrDefaultAsync());
-        }
+        }//end GetUserByName
 
+        //get user profile by userId
         public async Task<UserModel> GetUserProfile(int id)
         {
             var user = await Context.tUsers.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserModel(user.UserId, user.Username, user.Password);
-        }
+        }//end GetUserProfile
 
         /** UserInfo */
         public async Task<UserInfoModel> GetUserInfo(int id)
         {
             var userInfo = await Context.tUserInfo.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserInfoModel(userInfo.UserId, userInfo.LocationId, userInfo.Email, userInfo.Phone, userInfo.DOB);
-        }
+        }//end GetUserInfo
+
+        //update user info in database
         public async Task<UserInfoModel> UpdateUserInfo(UserInfoModel userInfo)
         {
             var existingInfo = await Context.tUserInfo.Where(o => o.UserId == userInfo.UserId).FirstOrDefaultAsync();
@@ -67,14 +71,16 @@ namespace SoundPaletteApiServer.DbHelpers
                 await Context.SaveChangesAsync();
                 return new UserInfoModel(newUserInfo.UserId, newUserInfo.LocationId, newUserInfo.Email, newUserInfo.Phone, newUserInfo.DOB);
             }
-        }
+        }//end UpdateUserInfo
 
         /** UserProfile */
         public async Task<UserProfileModel> GetUserProfileInfo(int id)
         {
             var userProfile = await Context.tUserProfile.Where(o => o.UserId == id).FirstOrDefaultAsync();
             return new UserProfileModel(userProfile.UserId, userProfile.Bio, userProfile.Picture, userProfile.FollowerCount, userProfile.FollowingCount);
-        }
+        }//end GetUserProfileInfo
+
+        //get user profile by username, used when viewing another users profile
         public async Task<UserProfileModelLite> GetUserProfileByUsername(int userId, string username)
         {
             var userProfile = await
@@ -85,7 +91,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select new UserProfileModelLite(profile.User.Username, profile.Bio, profile.Picture, profile.FollowerCount, profile.FollowingCount, isFollowing, profile.User.UserTags.Select(o => new TagModel(o.Tag)).ToList())
                 ).FirstOrDefaultAsync();
             return userProfile;
-        }
+        }//end GetUserProfileByUsername
+
+        //update profile in database
         public async Task<UserProfileModel> UpdateUserProfileInfo(UserProfileModel userProfile)
         {
             var existingInfo = await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync();
@@ -112,14 +120,18 @@ namespace SoundPaletteApiServer.DbHelpers
                 await Context.SaveChangesAsync();
                 return new UserProfileModel(await Context.tUserProfile.Where(o => o.UserId == userProfile.UserId).FirstOrDefaultAsync());
             }
-        }
+        }//end UpdateUserProfileInfo
 
+        //create follow relation where followerId is following folloingUsername
         public async Task FollowUser(int followerId, string followingUsername)
         {
+            //get userId of user by username
             int followingId = await Context.tUsers.Where(o => o.Username == followingUsername).Select(o => o.UserId).FirstOrDefaultAsync();
+            //create follow relation and insert in database
             var follow = new tUserFollower(followerId, followingId);
             await Context.tUserFollowers.AddAsync(follow);
 
+            //create notification for new follower based on notification settings
             var notification = await
             (
                 from notificationSetting in Context.tNotificationSettings.Include(o => o.NotificationType).Where(o => o.UserId == follow.FollowingId)
@@ -139,28 +151,36 @@ namespace SoundPaletteApiServer.DbHelpers
                 }
             ).FirstOrDefaultAsync();
 
+
             if (notification != null)
-                Context.tNotifications.AddRange(notification);
+                Context.tNotifications.Add(notification);
 
             await Context.SaveChangesAsync();
-        }
+        }//end FollowUser
 
+        //delete follow relation where followerId is following folloingUsername
         public async Task UnfollowUser(int followerId, string followingUsername)
         {
+            //get id of following user
             int followingId = await Context.tUsers.Where(o => o.Username == followingUsername).Select(o => o.UserId).FirstOrDefaultAsync();
+            //get relation entry
             var follow = await Context.tUserFollowers.Where(o => o.FollowerId == followerId && o.FollowingId == followingId).FirstOrDefaultAsync();
+            //delete relation if it exists
             if (follow != null)
             {
                 Context.tUserFollowers.Remove(follow);
                 await Context.SaveChangesAsync();
             }
-        }
-        
+        }//end UnfollowUser
+
+        //get usernames that contain search term
         public async Task<List<string>> SearchUsersLite(int userId, string searchTerm)
         {
             var users = await Context.tUsers.Where(o => o.UserId != userId && o.Username.ToLower().Contains(searchTerm.ToLower())).Select(o => o.Username).ToListAsync();
             return users;
-        }
+        }//end SearchUsersLite
+
+        //get list of users whos username contains searchTerm
         public async Task<List<UserSearchModel>> SearchUsers(int userId, string searchTerm)
         {
             var userProfile = await
@@ -171,6 +191,6 @@ namespace SoundPaletteApiServer.DbHelpers
                     select new UserSearchModel(profile.User.Username, profile.FollowerCount, isFollowing)
                 ).ToListAsync();
             return userProfile;
-        }
+        }//end SearchUsers
     }
 }

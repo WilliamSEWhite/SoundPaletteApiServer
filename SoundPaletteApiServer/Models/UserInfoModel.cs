@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.Models
 {
+    //class represents all data collected during registration
     public class UserInfoModel
     {
         public int UserInfoId { get; set; }
@@ -16,6 +17,7 @@ namespace SoundPaletteApiServer.Models
         public DateTime DOB { get; set; }
         public DateTime DateCreated { get; set; }
 
+        //constructor to initialize all values, used to serialize/deserialize JSON
         public UserInfoModel(int userInfoId, int userId, int locationId, string email, string phone, DateTime dOB, DateTime dateCreated)
         {
             UserInfoId = userInfoId;
@@ -26,6 +28,8 @@ namespace SoundPaletteApiServer.Models
             DOB = dOB;
             DateCreated = dateCreated;
         }
+
+        //constructor used to manifest model from database
         public UserInfoModel(tUserInfo userInfo)
         {
             UserInfoId = userInfo.UserInfoId;
@@ -37,6 +41,7 @@ namespace SoundPaletteApiServer.Models
             DateCreated = userInfo.DateCreated;
         }
 
+        //constructor used to create new info model
         public UserInfoModel(int userId, int locationId, string email, string phone, DateTime dOB)
         {
             UserId = userId;
@@ -45,6 +50,8 @@ namespace SoundPaletteApiServer.Models
             Phone = phone;
             DOB = dOB;
         }
+
+        //default constructor
         public UserInfoModel() { }
     }
 }

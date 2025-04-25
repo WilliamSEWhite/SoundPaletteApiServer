@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.Models
 {
+    //class represents a single notification 
     public class NotificationModel
     {
         public int NotificationTypeId { get; set; }
@@ -10,6 +11,7 @@ namespace SoundPaletteApiServer.Models
         public string Message { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        //constructor to initialize all values, used to serialize/deserialize JSON
         public NotificationModel(int notificationIdType, int? referenceId, string referenceName, string message, DateTime createdDate)
         {
             NotificationTypeId = notificationIdType;
@@ -18,6 +20,8 @@ namespace SoundPaletteApiServer.Models
             Message = message;
             CreatedDate = createdDate;
         }
+
+        //constructor used to manifest notification from database
         public NotificationModel(tNotification n)
         {
             NotificationTypeId = n.NotificationTypeId;

@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.Models
 {
+    //class represents all information seen when viewing someone elses profile
     public class UserProfileModelLite
     {
         public string Username { get; set; }
@@ -12,6 +13,7 @@ namespace SoundPaletteApiServer.Models
         public bool IsFollowing { get; set; }
         public List<TagModel> UserTags { get; set; }
 
+        //constructor to initialize all values, used to serialize/deserialize JSON
         public UserProfileModelLite(string username, string bio, string picture, int followerCount, int followingCount, bool isFollowing, List<TagModel> userTags)
         {
             Username = username;
@@ -23,6 +25,7 @@ namespace SoundPaletteApiServer.Models
             UserTags = userTags;
         }
 
+        //default constructor
         public UserProfileModelLite() { }
     }
 }

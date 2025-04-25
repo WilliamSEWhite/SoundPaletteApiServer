@@ -20,8 +20,8 @@ namespace SoundPaletteApiServer.DbHelpers
         /** global tag list */
         public async Task<List<TagModel>> GetTags()
         {
-            return await Context.tTags.Select(o => new TagModel(o)).ToListAsync(); 
-        }
+            return await Context.tTags.Select(o => new TagModel(o)).ToListAsync();
+        }//end GetTags
 
         /** user tags */
         public async Task<List<TagModel>> GetUserTags(int id)
@@ -31,7 +31,9 @@ namespace SoundPaletteApiServer.DbHelpers
                 .Join(Context.tTags, ut => ut.TagId, t => t.TagId,
                     (ut, t) => new TagModel(t))
                 .ToListAsync();
-        }
+        }//end GetUserTags
+
+        //update tags that user follows in database
         public async Task<List<TagModel>> UpdateUserTags(int userId, List<TagModel> userTags)
         {
             // get exisiting tags
@@ -57,12 +59,14 @@ namespace SoundPaletteApiServer.DbHelpers
             return await Context.tUserTags.Where(ut => ut.UserId == userId)
                 .Select(ut => new TagModel { TagId = ut.TagId})
                 .ToListAsync();
-        }
+        }//end UpdateUserTags
+
+        //return tags whos description contains searchTerm
         public async Task<List<TagModel>> SearchTags(string searchTerm)
         {
             return await Context.tTags
                 .Where(o => o.TagName.ToLower().Contains(searchTerm.ToLower())).Select(o => new TagModel(o))
                 .ToListAsync();
-        }
+        }//end SearchTags
     }
 }

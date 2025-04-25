@@ -14,6 +14,7 @@ namespace SoundPaletteApiServer.DbHelpers
             _configuration = configuration;
         }
 
+        //retieve all locations from database
         public async Task<List<LocationModel>> GetLocations()
         {
             // get locations and return them in order by name

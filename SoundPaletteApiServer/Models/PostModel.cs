@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.Models
 {
+    //class contains all of the data to display posts to users
     public class PostModel
     {
         public int PostId { get; set; }
@@ -18,10 +19,13 @@ namespace SoundPaletteApiServer.Models
         public int FileId { get; set; }
         public List<string> PostUserTags { get; set; }
 
+        //default constructor
         public PostModel()
         {
 
         }
+
+        //constructor to initialize all values, used to serialize/deserialize JSON
         public PostModel(int postId, string postCaption, List<TagModel> postTags, PostContentModel postContent, DateTime createdDate, string createdByUsername, int postType, int commentCount, int likeCount, bool isLiked, bool isSaved, int fileId, List<string> postUserTags)
         {
             PostId = postId;
@@ -38,6 +42,8 @@ namespace SoundPaletteApiServer.Models
             PostUserTags = postUserTags;
             FileId = fileId;
         }
+        
+        //constructor used to manifest post from database
         public PostModel(tPost post, bool isLiked, bool isSaved)
         {
             PostId = post.PostId;

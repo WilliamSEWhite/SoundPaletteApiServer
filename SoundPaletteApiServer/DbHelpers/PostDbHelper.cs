@@ -59,8 +59,9 @@ namespace SoundPaletteApiServer.DbHelpers
             }
 
             await Context.SaveChangesAsync();
-        }
+        }//end UpdatePost
 
+        //create post in database
         public async Task CreatePost(NewPostModel newPost)
         {
             var postToAdd = new tPost()
@@ -72,20 +73,24 @@ namespace SoundPaletteApiServer.DbHelpers
                 IsPremium = newPost.IsPremium,
                 IsMature = newPost.IsMature,
                 IsDeleted = false,
+                //create post tags to insert in database
                 PostTags = newPost.PostTags.Select(o => new tPostTag(o.TagId)).ToList(),
                 PostContent = CreatePostContent(newPost),
                 CreatedDate = DateTime.Now,
                 PublishDate = newPost.PublishDate,
                 FileId = newPost.FileId,
+                //create post user tags to insert in database
                 PostUserTags = await Context.tUsers.Where(o => newPost.PostUserTags.Contains(o.Username)).Select(o => new tPostUserTag(o.UserId)).ToListAsync()
             };
             Context.tPosts.Add(postToAdd);
             await Context.SaveChangesAsync();
 
+            //if the post contains any user tags
             if (newPost.PostUserTags != null && newPost.PostUserTags.Any())
             {
+                //create notifications for post user tags
                 var userIds = postToAdd.PostUserTags.Select(o => o.UserId).ToList();
-                var notifications = 
+                var notifications = await
                 (
                     from setting in Context.tNotificationSettings.Include(o => o.NotificationType)
                     where userIds.Contains(setting.UserId) && setting.NotificationType.Description == "Tag"
@@ -103,7 +108,8 @@ namespace SoundPaletteApiServer.DbHelpers
                         AppIsActive = true,
                         DeviceIsActive = true
 
-                    }).ToList();
+                    }).ToListAsync();
+                //if there are any notifications, insert them
                 if (notifications != null && notifications.Any())
                 {
                     Context.tNotifications.AddRange(notifications);
@@ -112,7 +118,8 @@ namespace SoundPaletteApiServer.DbHelpers
 
             }
 
-        }
+        }//end CreatePost
+
 
         private tPostContent CreatePostContent(NewPostModel newPost)
         {
@@ -124,8 +131,9 @@ namespace SoundPaletteApiServer.DbHelpers
                         break;
             }
             return content;
-        }
+        }//end CreatePostContent
 
+        //mark post as deleted
         public async Task DeletePost(int postId, int userId)
         {
             var postToDelete = Context.tPosts.Where(o => o.PostId == postId).FirstOrDefault();
@@ -134,9 +142,12 @@ namespace SoundPaletteApiServer.DbHelpers
                 postToDelete.IsDeleted = true;
                 await Context.SaveChangesAsync();
             }
-        }
+        }//end DeletePost
+
+        //return next 10 posts for users explore page
         public async Task<List<PostModel>> GetPostsForFeed(int userId, int page)
         {
+            //get 8 posts that include a tag that a user is following
             int tagPageSize = 8;
             var usersPosts =await
             (
@@ -153,6 +164,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 select new { post, isLiked, isSaved }
             ).Distinct().Skip(page * tagPageSize).Take(tagPageSize).ToListAsync();
 
+            //get 2 posts that are outside of a users followed tags
             int newPageSize = 2;
             var newPosts = await
             (
@@ -169,12 +181,15 @@ namespace SoundPaletteApiServer.DbHelpers
                 select new { post, isLiked, isSaved }
             ).Distinct().Skip(page * newPageSize).Take(newPageSize).ToListAsync();
 
+            //join posts
             var rawPosts = usersPosts.Union(newPosts).ToList();
 
             var posts = rawPosts.Select(post => new PostModel(post.post, post.isLiked, post.isSaved)).OrderByDescending(o => o.CreatedDate).ToList();
 
             return posts;
-        }
+        }//end GetPostsForFeed
+
+        //return all posts created by a user by userId
         public async Task<List<PostModel>> GetPostsForUser(int userId, int page)
         {
             var posts = 
@@ -188,8 +203,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select post
                 );
             return await SelectPosts(posts, userId, page).ToListAsync();
-        }
+        }//end GetPostsForUser
 
+        //return all posts created by a user by username
         public async Task<List<PostModel>> GetPostsForUsername(int userId, string username, int page)
         {
             var posts =  
@@ -203,8 +219,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select post
                 );
             return await SelectPosts(posts, userId, page).ToListAsync();
-        }
+        }//end GetPostsForUsername
 
+        //get posts that a user is tagged in by username
         public async Task<List<PostModel>> GetTaggedPostsForUsername(int userId, string username, int page)
         {
             var posts = 
@@ -220,8 +237,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select post
                 );
             return await SelectPosts(posts, userId, page).ToListAsync();
-        }
+        }//end GetTaggedPostsForUsername
 
+        //get posts that a user has saved
         public async Task<List<PostModel>> GetSavedPostsForUser(int userId, int page)
         {
             var posts =
@@ -237,8 +255,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select post
                 );
             return await SelectPosts(posts, userId, page).ToListAsync(); ;
-        }
+        }//end GetSavedPostsForUser
 
+        //get top posts that were created with range
         public async Task<List<PostModel>> GetTrendingPosts(int userId, string range, int page)
         {
             int timespan = 0;
@@ -272,9 +291,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select new PostModel(post, isLiked, isSaved)
                 ).Skip(page * pageSize).Take(pageSize).ToListAsync();
             return posts;
-        }
+        }//end GetTrendingPosts
 
-
+        //get posts from users that a user is following
         public async Task<List<PostModel>> GetFollowingPosts(int userId, int page)
         {
             var posts = 
@@ -290,7 +309,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select post
                 );
             return await SelectPosts(posts, userId, page).ToListAsync(); ;
-        }
+        }//end GetFollowingPosts
+
+        //get posts by tag
         public async Task<List<PostModel>> GetPostsByTag(int userId, int tagId, int page)
         {
             var posts =
@@ -304,8 +325,9 @@ namespace SoundPaletteApiServer.DbHelpers
                     select post
                 );
             return await SelectPosts(posts, userId, page).ToListAsync(); ;
-        }
+        }//end GetPostsByTag
 
+        //get posts whos caption contian searchTerm
         public async Task<List<PostModel>> SearchPosts(int userId, string searchTerm, int page)
         {
             var posts =
@@ -319,8 +341,9 @@ namespace SoundPaletteApiServer.DbHelpers
                 select post
             );
             return await SelectPosts(posts, userId, page).ToListAsync(); ;
-        }
+        }//end SearchPosts
 
+        //return all posts
         public async Task<PostModel> GetPost(int userId, int postId)
         {
             var post = await
@@ -336,9 +359,9 @@ namespace SoundPaletteApiServer.DbHelpers
                 select new PostModel(p, isLiked, isSaved)
             ).FirstOrDefaultAsync();
             return post;
-        }
+        }//end GetPost
 
-
+        //manifest next 10 posts from query into post models
         private IQueryable<PostModel> SelectPosts(IQueryable<tPost> tPosts, int userId, int page)
         {
             int pageSize = 10;
@@ -353,6 +376,6 @@ namespace SoundPaletteApiServer.DbHelpers
             ).Skip(page * pageSize).Take(pageSize);
             return posts;
 
-        }
+        }//end SelectPosts
     }
 }

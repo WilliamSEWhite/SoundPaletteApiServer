@@ -15,11 +15,15 @@ namespace SoundPaletteApiServer.DbHelpers
             _configuration = configuration;
 
         }
+
+        //create new comment on post in database
         public async Task CreateComment(NewPostCommentModel newComment)
         {
+            //make comment
             var comment = new tPostComment(newComment.PostId, newComment.UserId, newComment.CommentContent, DateTime.Now);
             await Context.tPostComments.AddAsync(comment);
 
+            //make notification for comment
             var notification = await
             (
                 from notificationSetting in Context.tNotificationSettings.Include(o => o.NotificationType)
@@ -40,23 +44,27 @@ namespace SoundPaletteApiServer.DbHelpers
                 }
             ).FirstOrDefaultAsync();
 
+            //if the notification is not null, insert in database
             if (notification != null)
-                Context.tNotifications.AddRange(notification);
+                Context.tNotifications.Add(notification);
 
             await Context.SaveChangesAsync();
-        }
+        }//end CreateComment
 
+        //return all comments for one post
         public async Task<List<CommentModel>> GetCommentsForPost(int postId)
         {
             var comments = await Context.tPostComments.Include(o => o.User).Where(o => o.PostId == postId).Select(o => new CommentModel(o)).ToListAsync();
             return comments;
-        }
+        }//end GetCommentsForPost
 
+        //mark post as liked by user in database
         public async Task LikePost(int postId, int userId)
         {
             var like = new tPostLike(postId, userId);
             await Context.tPostLikes.AddAsync(like);
 
+            //make notification for liked post based on notification settings
             var notification = await
             (
                 from notificationSetting in Context.tNotificationSettings.Include(o => o.NotificationType)
@@ -77,12 +85,14 @@ namespace SoundPaletteApiServer.DbHelpers
                 }
             ).FirstOrDefaultAsync();
 
+            //if notification is not null, insert
             if (notification != null)
-                Context.tNotifications.AddRange(notification);
+                Context.tNotifications.Add(notification);
 
             await Context.SaveChangesAsync();
-        }
+        }//end LikePost
 
+        //unlike post in database
         public async Task UnlikePost(int postId, int userId)
         {
             var like = await Context.tPostLikes.Where(o => o.PostId == postId && o.UserId == userId).FirstOrDefaultAsync();
@@ -91,15 +101,17 @@ namespace SoundPaletteApiServer.DbHelpers
                 Context.tPostLikes.Remove(like);
                 await Context.SaveChangesAsync();
             }
-        }
+        }//end UnlikePost
 
+        //save post for user
         public async Task SavePost(int postId, int userId)
         {
             var save = new tPostSave(postId, userId);
             await Context.tPostSaves.AddAsync(save);
             await Context.SaveChangesAsync();
-        }
+        }//end SavePost
 
+        //unsave post for user
         public async Task UnsavePost(int postId, int userId)
         {
             var save = await Context.tPostSaves.Where(o => o.PostId == postId && o.UserId == userId).FirstOrDefaultAsync();
@@ -108,7 +120,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 Context.tPostSaves.Remove(save);
                 await Context.SaveChangesAsync();
             }
-        }
+        }//end UnsavePost
 
     }
 }
