@@ -599,37 +599,37 @@ GO
 SET IDENTITY_INSERT [dbo].[tNotificationSettings] ON 
 
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (1, 1, 1, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (1, 1, 1, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (2, 2, 1, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (2, 2, 1, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (3, 3, 1, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (3, 3, 1, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (4, 4, 1, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (4, 4, 1, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (5, 5, 1, 0)
-GO
-
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (6, 1, 2, 0)
-GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (7, 2, 2, 0)
-GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (8, 3, 2, 0)
-GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (9, 4, 2, 0)
-GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (10, 5, 2, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (5, 5, 1, 1)
 GO
 
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (11, 1, 3, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (6, 1, 2, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (12, 2, 3, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (7, 2, 2, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (13, 3, 3, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (8, 3, 2, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (14, 4, 3, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (9, 4, 2, 1)
 GO
-INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (15, 5, 3, 0)
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (10, 5, 2, 1)
+GO
+
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (11, 1, 3, 1)
+GO
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (12, 2, 3, 1)
+GO
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (13, 3, 3, 1)
+GO
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (14, 4, 3, 1)
+GO
+INSERT [dbo].[tNotificationSettings] ([NotificationSettingId], [NotificationTypeId], [UserId], [SendNotification]) VALUES (15, 5, 3, 1)
 GO
 SET IDENTITY_INSERT [dbo].[tNotificationSettings] OFF
 GO
