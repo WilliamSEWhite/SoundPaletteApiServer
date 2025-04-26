@@ -338,7 +338,7 @@ namespace SoundPaletteApiServer.DbHelpers
                     .Include(o => o.PostTags).ThenInclude(o => o.Tag)
                     .Include(o => o.User).Include(o => o.PostUserTags)
                     .ThenInclude(o => o.User)
-                where post.UserId != userId && !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
+                where !post.IsDeleted && post.Caption.ToLower().Contains(searchTerm.ToLower())
                 select post
             );
             return await SelectPosts(posts, userId, page).ToListAsync(); ;

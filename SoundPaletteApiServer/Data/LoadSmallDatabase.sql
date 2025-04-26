@@ -1197,3 +1197,88 @@ USE [master]
 GO
 ALTER DATABASE [SP] SET  READ_WRITE 
 GO
+
+CREATE TRIGGER Increment_Post_Comments
+ON tPostComments
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tPosts
+    SET CommentCount = CommentCount + 1
+    FROM tPosts
+    INNER JOIN inserted i ON tPosts.PostId = i.PostId;
+END;
+GO
+
+CREATE TRIGGER Decrement_Post_Comments
+ON tPostComments
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tPosts
+    SET CommentCount = CommentCount - 1
+    FROM tPosts
+    INNER JOIN deleted d ON tPosts.PostId = d.PostId;
+END;
+GO
+
+CREATE TRIGGER Increment_User_Followers
+ON tUserFollowers
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfiles
+    SET FollowerCount = FollowerCount + 1
+    FROM tUserProfiles
+    INNER JOIN inserted i ON tUserProfiles.UserId = i.FollowingId;
+END;
+GO
+
+CREATE TRIGGER Decrement_User_Followers
+ON tUserFollowers
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfiles
+    SET FollowerCount = FollowerCount - 1
+    FROM tUserProfiles
+    INNER JOIN deleted i ON tUserProfiles.UserId = i.FollowingId;
+END;
+GO
+
+
+CREATE TRIGGER Increment_User_Following
+ON tUserFollowers
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfiles
+    SET FollowingCount = FollowingCount + 1
+    FROM tUserProfiles
+    INNER JOIN inserted i ON tUserProfiles.UserId = i.FollowerId;
+END;
+GO
+
+CREATE TRIGGER Decrement_User_Following
+ON tUserFollowers
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    UPDATE tUserProfiles
+    SET FollowingCount = FollowingCount - 1
+    FROM tUserProfiles
+    INNER JOIN deleted i ON tUserProfiles.UserId = i.FollowerId;
+END;
+GO
