@@ -135,7 +135,7 @@ namespace SoundPaletteApiServer.Controllers
         }//end GetPost
 
         // updates posts
-        [HttpPost]
+        [HttpPost("update-post")]
         public async Task<IActionResult> UpdatePost([FromBody] PostModel postModel)
         {
             await postFacade.UpdatePost(postModel);
