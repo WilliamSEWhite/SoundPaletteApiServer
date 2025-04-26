@@ -22,5 +22,3 @@ This is the GitHub repo for SoundPalette's API Server (Back-End). Please see the
 
 ## License
 SoundPalette is licensed under the [Apache 2.0 License](LICENSE).
-
-This means you are free to use, modify, and distribute the project, even commercially, as long as you provide proper attribution and include a copy of the license.
