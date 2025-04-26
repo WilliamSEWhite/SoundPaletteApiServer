@@ -68,7 +68,7 @@ namespace SoundPaletteApiServer.DbHelpers
             // update tUserProfiles
             var userProfile = await Context.tUserProfile
                 .FirstOrDefaultAsync(u => u.UserId == fileModel.UserId);
-            if(userProfile != null)
+            if (userProfile != null)
             {
                 userProfile.Picture = fileModel.FileUrl;
                 await Context.SaveChangesAsync();

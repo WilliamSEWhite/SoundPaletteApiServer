@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.DataModels
 {
+    //this class is used to insert and manifest entries in tUserInfo
     public class tUserInfo
     {
         [Key]

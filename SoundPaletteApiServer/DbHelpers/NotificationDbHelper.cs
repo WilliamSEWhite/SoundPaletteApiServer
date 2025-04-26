@@ -46,10 +46,10 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             var settings = await Context.tNotificationSettings.Include(o => o.NotificationType).Where(o => o.UserId == userId).Select(o => new NotificationSettingModel
             {
-               NotificationSettingId = o.NotificationSettingId,
-               SettingName = o.NotificationType.Description,
-               Value = o.SendNotification,
-               NotificationTypeId = o.NotificationTypeId,
+                NotificationSettingId = o.NotificationSettingId,
+                SettingName = o.NotificationType.Description,
+                Value = o.SendNotification,
+                NotificationTypeId = o.NotificationTypeId,
             }).ToListAsync();
 
             return settings;
@@ -73,14 +73,14 @@ namespace SoundPaletteApiServer.DbHelpers
         public async Task<bool> HasNotification(int userId)
         {
             var hasNotification = await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description != "Message").AnyAsync();
-                return hasNotification;
+            return hasNotification;
         }//end HasNotification
 
         //check if user has message notification
         public async Task<bool> HasMessage(int userId)
         {
-                var hasMessage = await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description == "Message").AnyAsync();
-                return hasMessage;
+            var hasMessage = await Context.tNotifications.Include(o => o.NotificationType).Where(o => o.UserId == userId && o.AppIsActive && o.NotificationType.Description == "Message").AnyAsync();
+            return hasMessage;
         }//end HasMessage
 
     }

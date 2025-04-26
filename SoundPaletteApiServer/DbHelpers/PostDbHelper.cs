@@ -58,6 +58,7 @@ namespace SoundPaletteApiServer.DbHelpers
                 post.PostContent.FontColour = postModel.PostContent.FontColour;
             }
 
+            Context.tPosts.Update(post);
             await Context.SaveChangesAsync();
         }//end UpdatePost
 
@@ -128,7 +129,7 @@ namespace SoundPaletteApiServer.DbHelpers
             {
                 case 1:
                     return new tPostContent(newPost.PostContent);
-                        break;
+                    break;
             }
             return content;
         }//end CreatePostContent
@@ -137,7 +138,7 @@ namespace SoundPaletteApiServer.DbHelpers
         public async Task DeletePost(int postId, int userId)
         {
             var postToDelete = Context.tPosts.Where(o => o.PostId == postId).FirstOrDefault();
-            if(postToDelete != null && userId == postToDelete.UserId)
+            if (postToDelete != null && userId == postToDelete.UserId)
             {
                 postToDelete.IsDeleted = true;
                 await Context.SaveChangesAsync();
@@ -149,7 +150,7 @@ namespace SoundPaletteApiServer.DbHelpers
         {
             //get 8 posts that include a tag that a user is following
             int tagPageSize = 8;
-            var usersPosts =await
+            var usersPosts = await
             (
                 from post in Context.tPosts
                     .Include(o => o.PostContent)
@@ -192,7 +193,7 @@ namespace SoundPaletteApiServer.DbHelpers
         //return all posts created by a user by userId
         public async Task<List<PostModel>> GetPostsForUser(int userId, int page)
         {
-            var posts = 
+            var posts =
                 (
                     from post in Context.tPosts
                         .Include(o => o.PostContent)
@@ -208,7 +209,7 @@ namespace SoundPaletteApiServer.DbHelpers
         //return all posts created by a user by username
         public async Task<List<PostModel>> GetPostsForUsername(int userId, string username, int page)
         {
-            var posts =  
+            var posts =
                 (
                     from post in Context.tPosts
                         .Include(o => o.PostContent)
@@ -224,7 +225,7 @@ namespace SoundPaletteApiServer.DbHelpers
         //get posts that a user is tagged in by username
         public async Task<List<PostModel>> GetTaggedPostsForUsername(int userId, string username, int page)
         {
-            var posts = 
+            var posts =
                 (
                     from postUserTags in Context.tPostUserTags.Include(o => o.User)
                     where postUserTags.User.Username == username
@@ -296,7 +297,7 @@ namespace SoundPaletteApiServer.DbHelpers
         //get posts from users that a user is following
         public async Task<List<PostModel>> GetFollowingPosts(int userId, int page)
         {
-            var posts = 
+            var posts =
                 (
                     from userFollower in Context.tUserFollowers
                     where userFollower.FollowerId == userId

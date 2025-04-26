@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore; 
+﻿using Microsoft.EntityFrameworkCore;
 using SoundPaletteApiServer.Data;
 using SoundPaletteApiServer.DataModels;
 using SoundPaletteApiServer.Models;
@@ -27,11 +27,12 @@ namespace SoundPaletteApiServer.DbHelpers
                         let lastMessage = Context.tMessages.Include(o => o.ChatroomMember).ThenInclude(o => o.User)
                                                            .Where(o => o.ChatroomMember.ChatroomId == chatroom.ChatroomId)
                                                            .OrderByDescending(o => o.MessageId).FirstOrDefault()
-                        let name =  string.IsNullOrEmpty(chatroom.ChatroomName) ? string.Join(", ", chatroom.ChatroomMembers.Where(o => o.UserId != userId && o.IsActive).Select(o => o.User.Username))
+                        let name = string.IsNullOrEmpty(chatroom.ChatroomName) ? string.Join(", ", chatroom.ChatroomMembers.Where(o => o.UserId != userId && o.IsActive).Select(o => o.User.Username))
                                                                                 : chatroom.ChatroomName
-                        select new ChatroomModel(chatroom.ChatroomId, name, 
+                        orderby lastMessage.SentDate descending
+                        select new ChatroomModel(chatroom.ChatroomId, name,
                                                  lastMessage != null ? lastMessage.Message : string.Empty,
-                                                 lastMessage != null ? lastMessage.SentDate : chatroom.CreatedDate, 
+                                                 lastMessage != null ? lastMessage.SentDate : chatroom.CreatedDate,
                                                  lastMessage != null ? lastMessage.ChatroomMember.User.Username : string.Empty,
                                                  chatroom.IsGroupChat)
 
@@ -58,16 +59,16 @@ namespace SoundPaletteApiServer.DbHelpers
                         where chatroom.ChatroomMembers.Any(o => o.UserId == userId) && chatroom.ChatroomMembers.Any(o => o.User.Username == username) && chatroom.ChatroomMembers.Count == 2
                         orderby chatroom.ChatroomId descending
                         select chatroom
-                ).FirstOrDefaultAsync(); 
+                ).FirstOrDefaultAsync();
 
             //if the chatroom does not exist
-            if(privateChatroom == null)
+            if (privateChatroom == null)
             {
                 //create new members and chatroom in database
-                var members = new List<tChatroomMember>() 
-                { 
-                    new tChatroomMember(userId, true), 
-                    new tChatroomMember(await Context.tUsers.Where(o => o.Username == username).Select(o => o.UserId).FirstOrDefaultAsync(), true) 
+                var members = new List<tChatroomMember>()
+                {
+                    new tChatroomMember(userId, true),
+                    new tChatroomMember(await Context.tUsers.Where(o => o.Username == username).Select(o => o.UserId).FirstOrDefaultAsync(), true)
                 };
                 privateChatroom = new tChatroom(members, DateTime.Now, false);
                 Context.tChatrooms.Add(privateChatroom);
@@ -77,7 +78,7 @@ namespace SoundPaletteApiServer.DbHelpers
             else if (privateChatroom.ChatroomMembers.Any(o => !o.IsActive))
             {
                 //set each member active in database
-                foreach(tChatroomMember m in privateChatroom.ChatroomMembers)
+                foreach (tChatroomMember m in privateChatroom.ChatroomMembers)
                 {
                     m.IsActive = true;
                 }
@@ -86,33 +87,33 @@ namespace SoundPaletteApiServer.DbHelpers
 
             }
             //return either new chatroom or existing chatroom
-            return new ChatroomModelLite(privateChatroom.ChatroomId, string.IsNullOrEmpty(privateChatroom.ChatroomName) ? username: privateChatroom.ChatroomName);
+            return new ChatroomModelLite(privateChatroom.ChatroomId, string.IsNullOrEmpty(privateChatroom.ChatroomName) ? username : privateChatroom.ChatroomName);
 
         }//end GetPrivateChatroom
 
         //create chatroom and chatroom members in database
         public async Task<ChatroomModelLite> CreateChatRoom(NewChatroomModel newChatRoom)
         {
-            var members = await Context.tUsers.Where(o => newChatRoom.Users.Contains(o.Username)).Select(o => new tChatroomMember(o.UserId, true)).ToListAsync();
-            var chatroom = new tChatroom(newChatRoom.Name, members, DateTime.Now, true);
+            var membersRaw = await Context.tUsers.Where(o => newChatRoom.Users.Contains(o.Username)).ToListAsync();
+            var chatroom = new tChatroom(newChatRoom.Name, membersRaw.Select(o => new tChatroomMember(o.UserId, true)).ToList(), DateTime.Now, true);
             Context.tChatrooms.Add(chatroom);
             await Context.SaveChangesAsync();
-            return new ChatroomModelLite(chatroom.ChatroomId, string.IsNullOrEmpty(chatroom.ChatroomName) ? chatroom.ChatroomName : string.Join(", ", newChatRoom.Users));
+            return new ChatroomModelLite(chatroom.ChatroomId, string.IsNullOrEmpty(chatroom.ChatroomName) ? chatroom.ChatroomName : string.Join(", ", membersRaw.Where(o => o.UserId != newChatRoom.CreatedById).Select(o => o.Username)));
         }//end 
-        
+
         //create message and notification in database
         public async Task SendMessage(NewMessageModel newMessage)
         {
             //get memberId of message sender
             var chatRoomMember = await Context.tChatroomMembers.Where(o => o.ChatroomId == newMessage.ChatRoomId && o.UserId == newMessage.UserId).FirstOrDefaultAsync();
-            if(chatRoomMember != null)
+            if (chatRoomMember != null)
             {
                 //create and add new message to database
                 var message = new tMessage(newMessage.Message, DateTime.Now, chatRoomMember.ChatroomMemberId, false);
                 Context.tMessages.Add(message);
 
                 //create new notification for each chatroom member if they have message notifications on
-                var notifications = await 
+                var notifications = await
                     (
                         from user in Context.tChatroomMembers.Include(o => o.User).Include(o => o.Chatroom).ThenInclude(o => o.ChatroomMembers).ThenInclude(o => o.User)
                         where user.ChatroomId == chatRoomMember.ChatroomId

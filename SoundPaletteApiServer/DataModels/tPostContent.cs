@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SoundPaletteApiServer.DataModels
 {
+    //this class is used to insert and manifest entries in tPostContent
     public class tPostContent
     {
         [Key]

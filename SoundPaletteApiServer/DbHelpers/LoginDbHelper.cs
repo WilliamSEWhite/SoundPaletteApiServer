@@ -27,13 +27,13 @@ namespace SoundPaletteApiServer.DbHelpers
             //get user that matches username
             var user = await Context.tUsers.Where(o => o.Username == username).Include(o => o.UserInfo).FirstOrDefaultAsync();
             //if user exists
-            if(user != null)
+            if (user != null)
             {
                 //check if user password matches param password
                 if (user.Password == password)
                 {
                     //if userinfo does not exist, return empty user info, otherwise return info with user
-                    if(user.UserInfo == null)
+                    if (user.UserInfo == null)
                         return new UserModel(user.UserId, user.Username, user.Password);
                     else
                         return new UserModel(user.UserId, user.Username, user.Password, new UserInfoModel(user.UserInfo));

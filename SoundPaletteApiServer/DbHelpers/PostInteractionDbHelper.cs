@@ -96,7 +96,7 @@ namespace SoundPaletteApiServer.DbHelpers
         public async Task UnlikePost(int postId, int userId)
         {
             var like = await Context.tPostLikes.Where(o => o.PostId == postId && o.UserId == userId).FirstOrDefaultAsync();
-            if(like != null)
+            if (like != null)
             {
                 Context.tPostLikes.Remove(like);
                 await Context.SaveChangesAsync();

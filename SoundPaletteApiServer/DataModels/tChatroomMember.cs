@@ -2,6 +2,7 @@
 
 namespace SoundPaletteApiServer.DataModels
 {
+    //this class is used to insert and manifest entries in tChatroomMember
     public class tChatroomMember
     {
         [Key]
